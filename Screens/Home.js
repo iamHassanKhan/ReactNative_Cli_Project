@@ -160,7 +160,7 @@ const Home = ({navigation,item}) => {
 
    
    // setLike("red");
-    alert("like",setLike("red"));
+    alert("liked",setLike("red"));
 
    }
 
