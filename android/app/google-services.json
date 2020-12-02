@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "294028485331",
+    "firebase_url": "https://carfinder-2a672.firebaseio.com",
+    "project_id": "carfinder-2a672",
+    "storage_bucket": "carfinder-2a672.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294028485331:android:a21397a35b9b2445322a26",
+        "android_client_info": {
+          "package_name": "com.carfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294028485331-18o1o2a6m91eoashkl0c54tbm4ipujdq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXlKzTh7vZTS4hB98QWYP7koX8AgLX6f0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294028485331-18o1o2a6m91eoashkl0c54tbm4ipujdq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
