@@ -25,15 +25,12 @@ export const AuthProviders = ({children}) => {
           }
         },
         //Register with Email 
-        register: async (email, password) => {
+        register: async (email, password ,displayName) => {
 
           try {
-            await auth().createUserWithEmailAndPassword(email, password)
-            .then(({user})=>{
-              user.updateProfile({displayName:user});
-              firebase.database().ref().child('users/').child(user.uid).set({user, email,password})
-              
-            })
+            await auth().createUserWithEmailAndPassword(email, password);
+        
+            
            
           } catch (e) {
             alert("Use valid Email and Passowrd")
