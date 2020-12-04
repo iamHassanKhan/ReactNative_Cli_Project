@@ -19,6 +19,8 @@ import FlatButton from '../SharedFunctions/button';
 
 export default class SearchResult extends React.Component {
 
+  
+
   render() {
 
     return (

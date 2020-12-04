@@ -16,30 +16,27 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import FlatButton from '../SharedFunctions/button';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 import ImagePicker from 'react-native-image-picker';
+import { PostAd } from '../Navigation/FirebaseDB';
 
 // Add your Post data in here  ....
 
  const  MakeAdd = ({navigation}) =>{
-
-  const [make,setMake] = useState('');
-  const [price,setPrice] = useState(null);
-  const [year,setYear] = useState(null);
-  const [driven,setDriven] = useState(null);
-  const [condition,setCondition] = useState('');
-  const [discrip,setDiscrip] = useState('');
-
-  const [filePath, setFilePath] = useState({});
-  const [image,setImage] = useState();
+   
+  const [Id,setId] = useState();
+  const [Make,setMake] = useState('');
+  const [Price,setPrice] = useState();
+  const [Year,setYear] = useState();
+  const [Driven,setDriven] = useState('');
+  const [Condition,setCondition] = useState('');
+  const [Discrip,setDiscrip] = useState('');
+  const [image,setImage] = useState({});
+  
+  
 
   const chooseFile = () => {
     let options = {
       title: 'Select Image',
-      customButtons: [
-        {
-          name: 'customOptionKey',
-          title: 'Choose Photo from Custom Option'
-        },
-      ],
+      
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -49,29 +46,38 @@ import ImagePicker from 'react-native-image-picker';
       console.log('Response = ', response);
 
       if (response.didCancel) {
-        console.log('User cancelled image picker');
+        alert('Cancelled Image');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log(
-          'User tapped custom button: ',
-          response.customButton
-        );
-        alert(response.customButton);
-      } else {
+        alert('Error : ', response.error)
+      }
+       else {
         let source = response;
-        // You can also display the image using data:
-        // let source = {
-        //   uri: 'data:image/jpeg;base64,' + response.data
-        // };
-        setFilePath(source);
+        setImage(source);
       }
     });
   };
 
   const submitAd = () =>{
 
-  };
+  PostAd(Id,Make,Price,Year,Condition,Driven,Discrip)
+  .then(result=>{
+
+    setId(null);
+    setMake('');
+    setPrice(null);
+    setYear(null);
+    setCondition('');
+    setDriven('');
+    setDiscrip('');
+    
+
+     alert("Your Ad is Submmited !")
+  })
+  .catch(error=>{
+    alert("Error");
+  })
+
+};
 
 return(
   <ScrollView>
@@ -84,12 +90,12 @@ return(
 
   <View  >
    
-   <TextInput placeholder="Make i.e Honda"  value={make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Price "   value={price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year 2000"   value={year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / kilometers"   value={driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Condition i.e Used or New "   value={condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput multiline placeholder="Detail Discription" value={discrip} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput multiline placeholder="Detail Discription" value={Discrip} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
   </View>
@@ -99,16 +105,10 @@ return(
   <View style={globalStyles.Adimagecontainer}>
        
         <Image
-          source={{uri: filePath.uri}}
+          source={{uri:image.uri}}
           style={globalStyles.AdimageStyle}
         />
-
-
-        {/* for Showing File Path this is not compalsory */}
-
-        {/* <Text style={globalStyles.AdtextStyle}>
-          {filePath.uri}
-        </Text> */}
+       
        
         
       </View>
@@ -118,7 +118,7 @@ return(
 
     <FlatButton title="Post Ad" 
      
-     onPress={()=>alert("Post Added in database")}
+     onPress={submitAd}
      
      //this.submitAd
      //Send file and ad data in database

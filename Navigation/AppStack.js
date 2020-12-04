@@ -14,11 +14,12 @@ import FeedItems from '../Screens/FeedItems';
 import Category from '../Screens/Category';
 
 
+
 // Objects  for Navigations
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const Feed = createStackNavigator();
+// const Feed = createStackNavigator();
 
 const AppStack = () => {
   return (
