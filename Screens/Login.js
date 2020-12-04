@@ -19,12 +19,16 @@ import LinkButton from '../SharedFunctions/linkButton';
 import Forminput from '../SharedFunctions/Forminput';
 import {AuthContext} from '../Navigation/AuthProviders';
 
+
+
+
 const Login = ({navigation}) => {
+
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const {login, guestuser} = useContext(AuthContext);
+  const {login, guestuser ,googleLogin} = useContext(AuthContext);
  
   //If Email and Password hasn't wrriten by user
   
@@ -83,25 +87,24 @@ const Login = ({navigation}) => {
 
       <LinkButton
         title="Forget Password ?"
-        onPress={() => {
-          alert('go for recover password');
-        }}
+        onPress={() => {alert('Sign In function clicked');} 
+          
+        }
+      />
+
+      <FlatButton2
+        btnType="chevron-right"
+        title="Sign In with Gmail"
+        onPress={() => googleLogin()
+        
+        }
       />
 
       {/* <FlatButton2
         btnType="chevron-right"
-        title="Sign In with Gmail"
-        onPress={() => {
-          alert('Sign In function clicked');
-        }}
-      />
-      <FlatButton2
-        btnType="chevron-right"
         title="Sign In with Phone No"
-        onPress={() => navi
-          
-          gation.navigate("LoginPhoneNo")}
-      /> */}
+        onPress={() => navigation.navigate("LoginPhoneNo")}
+      />  */}
       
       <FlatButton2
         btnType="chevron-right"

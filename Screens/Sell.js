@@ -14,8 +14,15 @@ import {
 import {globalStyles} from '../SharedFunctions/global';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import FlatButton from '../SharedFunctions/button';
+import Login from '../Screens/Login';
+
 
 const Sell = ({navigation}) => {
+
+  
+
+
+
   return (
     <View
       style={{
@@ -26,7 +33,8 @@ const Sell = ({navigation}) => {
       <Text style={globalStyles.text}>Sell Something</Text>
       <FlatButton
         title="Make Add"
-        onPress={() => navigation.navigate('MakeAdd')}
+        
+         onPress={() => navigation.navigate('MakeAdd')}
       />
     </View>
   );

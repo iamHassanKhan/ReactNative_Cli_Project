@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
 import { firebase } from '@react-native-firebase/database';
-
+import { GoogleSignin } from '@react-native-community/google-signin';
 export const AuthContext = createContext();
 
 
@@ -36,6 +36,22 @@ export const AuthProviders = ({children}) => {
             alert("Use valid Email and Passowrd")
           }
         },
+        //Google login 
+         googleLogin: async () =>{
+           try{
+            const { idToken } = await GoogleSignin.signIn();
+
+            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+          
+            
+            await auth().signInWithCredential(googleCredential);
+           }catch(e){
+            alert("Use valid Email and Passowrd")
+           }
+
+         },
+
+
        // Logout function
         logout: async () => {
           try {

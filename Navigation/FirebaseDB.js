@@ -4,7 +4,7 @@ import Firestore from '@react-native-firebase/firestore';
 
 //==== Function to Ad Post in Database =====//
 
-export const PostAd =(Id,Make,Year,Driven,Discrip,Condition,Price) =>{
+export const PostAd =(Id,Make,Price,Year,Driven,Condition,Discription,image) =>{
     return new Promise(function(resolve ,reject) {
     let key;
     if(Id!=null){
@@ -18,16 +18,17 @@ export const PostAd =(Id,Make,Year,Driven,Discrip,Condition,Price) =>{
     let Addata={
         Id:key,
         Make:Make,
+        Price:Price,
         Year:Year,
         Driven:Driven,
-        Discription:Discrip,
         Condition:Condition,
-        Price:Price,
+        Discription:Discription,
+        pictures:image,
         
     };
     database()
     .ref('Ads/' + key)
-    .update(Addata)
+    .push(Addata)
     .then(snapshot=>{
     resolve(snapshot);
     })

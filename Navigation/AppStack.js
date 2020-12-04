@@ -12,6 +12,7 @@ import UserSetting from '../Screens/UserSetting';
 import SearchResult from '../Screens/SearchResult';
 import FeedItems from '../Screens/FeedItems';
 import Category from '../Screens/Category';
+import Login from '../Screens/Login';
 
 
 
@@ -31,6 +32,7 @@ const AppStack = () => {
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="UserSetting" component={UserSetting} />
+      <Stack.Screen name="Login" component={Login} />
      
     </Stack.Navigator>
   );

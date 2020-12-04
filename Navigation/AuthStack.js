@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import firstScreen from '../Screens/firstScreen';
 import Login from '../Screens/Login';
 import Signup from '../Screens/Signup';
+import { GoogleSignin } from '@react-native-community/google-signin';
 
 
 const Stack = createStackNavigator();
@@ -35,6 +36,9 @@ const AuthStack = () => {
       } else {
         setisfirstlaunch(false);
       }
+    });
+    GoogleSignin.configure({
+      webClientId: '294028485331-18o1o2a6m91eoashkl0c54tbm4ipujdq.apps.googleusercontent.com',
     });
   });
   if (isfirstlaunch == null) {

@@ -24,11 +24,11 @@ import { PostAd } from '../Navigation/FirebaseDB';
    
   const [Id,setId] = useState();
   const [Make,setMake] = useState('');
-  const [Price,setPrice] = useState();
-  const [Year,setYear] = useState();
+  const [Price,setPrice] = useState(null);
+  const [Year,setYear] = useState(null);
   const [Driven,setDriven] = useState('');
   const [Condition,setCondition] = useState('');
-  const [Discrip,setDiscrip] = useState('');
+  const [Discription,setDiscrip] = useState('');
   const [image,setImage] = useState({});
   
   
@@ -57,18 +57,25 @@ import { PostAd } from '../Navigation/FirebaseDB';
     });
   };
 
+ 
+
+
+
+  //======//
+
   const submitAd = () =>{
 
-  PostAd(Id,Make,Price,Year,Condition,Driven,Discrip)
+  PostAd(Id,Make,Price,Year,Condition,Driven,Discription,image)
   .then(result=>{
 
     setId(null);
     setMake('');
     setPrice(null);
-    setYear(null);
-    setCondition('');
+    setYear(null); 
     setDriven('');
+    setCondition('');
     setDiscrip('');
+    setImage({});
     
 
      alert("Your Ad is Submmited !")
@@ -90,12 +97,12 @@ return(
 
   <View  >
    
-   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput multiline placeholder="Detail Discription" value={Discrip} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(Make)=>setMake(Make)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Price "   value={Price} onChangeText={(Price)=>setPrice(Price)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(Year)=>setYear(Year)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(Driven)=>setDriven(Driven)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(Condition)=>setCondition(Condition)} style={globalStyles.Formtxtinput}/>
+   <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(Discription)=>setDiscrip(Discription)} style={globalStyles.Formtxtinput}/>
 
 
   </View>
@@ -112,6 +119,8 @@ return(
        
         
       </View>
+     
+    
       <FlatButton title="Add Image"  onPress={chooseFile}/>
      <View style={{flexDirection:"row" ,justifyContent:"center"}}>
       
@@ -119,8 +128,6 @@ return(
     <FlatButton title="Post Ad" 
      
      onPress={submitAd}
-     
-     //this.submitAd
      //Send file and ad data in database
      />
     </View>  
