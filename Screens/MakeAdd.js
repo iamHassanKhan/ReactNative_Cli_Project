@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Button,
+  Button,Alert,
   Image,
   TextInput,
   ActivityIndicator,
@@ -57,32 +57,64 @@ import { PostAd } from '../Navigation/FirebaseDB';
     });
   };
 
- 
+ //==========//
 
 
-
-  //======//
+  //==/=======//
 
   const submitAd = () =>{
 
-  PostAd(Id,Make,Price,Year,Condition,Driven,Discription,image)
-  .then(result=>{
-
-    setId(null);
-    setMake('');
-    setPrice(null);
-    setYear(null); 
-    setDriven('');
-    setCondition('');
-    setDiscrip('');
-    setImage({});
+    if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription=='')
+    {
+      Alert.alert(
+        "Unable to Submit Ad",
+        "Please Fill All required Fields !",
+        [
+          
+          { text: "OK",  }
+        ],
+        //{ cancelable: false }
+      );
+    } else{
+      PostAd(Id,Make,Price,Year,Condition,Driven,Discription)
+      .then(result=>{
     
-
-     alert("Your Ad is Submmited !")
-  })
-  .catch(error=>{
-    alert("Error");
-  })
+        setId(null);
+        setMake('');
+        setPrice();
+        setYear(); 
+        setDriven('');
+        setCondition('');
+        setDiscrip('');
+        //setImage({});
+    
+        Alert.alert(
+          "Ad Posted",
+          "Your Ad is Submmited !",
+          [
+            
+            { text: "OK",  }
+          ],
+          //{ cancelable: false }
+        );
+    
+      })
+      .catch(error=>{
+        Alert.alert(
+          "Permission Denied",
+          "Please Login with Email To Submit Post !",
+          [
+            {
+              text: "Cancel",
+            },
+            { text: "OK",  }
+          ],
+          //{ cancelable: false }
+        );
+        
+      })
+    }
+  
 
 };
 

@@ -1,6 +1,9 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
+import {
+  Alert,
+  
+} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import { firebase } from '@react-native-firebase/database';
 import { GoogleSignin } from '@react-native-community/google-signin';
 export const AuthContext = createContext();
 
@@ -21,7 +24,15 @@ export const AuthProviders = ({children}) => {
             await auth().signInWithEmailAndPassword(email, password);
 
           } catch (e) {
-            alert("Email and Password are Incorrect");
+            Alert.alert(
+              "Login Failed",
+              "Please Enter Valid Email and Password !!",
+              [
+                
+                { text: "OK",  }
+              ],
+              //{ cancelable: false }
+            );
           }
         },
         //Register with Email 
@@ -33,7 +44,15 @@ export const AuthProviders = ({children}) => {
             
            
           } catch (e) {
-            alert("Use valid Email and Passowrd")
+            Alert.alert(
+              "Registration Failed",
+              "Please Use Vaalid Email and Password !!",
+              [
+                
+                { text: "OK",  }
+              ],
+              //{ cancelable: false }
+            );
           }
         },
         //Google login 
@@ -46,7 +65,15 @@ export const AuthProviders = ({children}) => {
             
             await auth().signInWithCredential(googleCredential);
            }catch(e){
-            alert("Use valid Email and Passowrd")
+            Alert.alert(
+              "Login Failed",
+              "Please Enter Email and Password Correctly !!",
+              [
+                
+                { text: "OK",  }
+              ],
+              //{ cancelable: false }
+            );
            }
 
          },
@@ -58,7 +85,15 @@ export const AuthProviders = ({children}) => {
             await auth().signOut();
 
           } catch (e) {
-            console.log(e);
+            Alert.alert(
+              "Signout Failed",
+              "Database Error!!",
+              [
+                
+                { text: "OK",  }
+              ],
+              //{ cancelable: false }
+            );
           }
         },
         // login for Guest User 
@@ -67,7 +102,15 @@ export const AuthProviders = ({children}) => {
             await auth().signInAnonymously();
             
           } catch (e) {
-            console.log(e);
+            Alert.alert(
+              "Login Failed",
+              "Database Error",
+              [
+                
+                { text: "OK",  }
+              ],
+              //{ cancelable: false }
+            );
           }
         },
       }}>

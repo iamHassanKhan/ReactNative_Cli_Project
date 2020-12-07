@@ -114,7 +114,7 @@ const UserSetting = ({navigation}) => {
 
             justifyContent: 'center',
           }}>
-          <Text style={globalStyles.usertext}>{user.uid} </Text>
+          <Text style={globalStyles.usertext}>Login as   {user.email} </Text>
         </View>
       </View>
     </View>

@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  View,
+  View,Alert,
   Text,
   StatusBar,
   Button,
@@ -25,9 +25,17 @@ const Setting = ({navigation}) => {
 
   const Signout= ()=>{
 
-    alert("Signout Sucessfully" , logout())
+    Alert.alert(
+      "Signout",
+      "Signout Sucessfully!!",
+      [
+        
+        logout()
+      ],
+      //{ cancelable: false }
+    );
+    //alert("Signout Sucessfully" , logout())
   }
-
 
 
 
@@ -46,18 +54,19 @@ const Setting = ({navigation}) => {
       />
       <Text style={globalStyles.text}>Settings</Text>
 
-      <TouchableOpacity onPress={() => navigation.navigate('UserSetting')}>
+     {/* <TouchableOpacity onPress={() => navigation.navigate('UserSetting')}> */}
+       <TouchableOpacity>
         <View style={globalStyles.userView}>
           <Image
             style={globalStyles.userlogo}
-            source={require('../assets/car1.jpg')}
+            source={require('../assets/defaultImg.png')}
           />
-
-          <Text style={globalStyles.usertext}>{user.uid} </Text>
+          <Text style={globalStyles.usertext}>Login as  {user.email} </Text>
+          
         </View>
       </TouchableOpacity>
       
-      <TouchableOpacity onPress={()=>alert("More Settings")}>
+      <TouchableOpacity >
       <View style={globalStyles.userView}>
         <Text style={globalStyles.text2}>More Settings</Text>
       </View>
@@ -67,6 +76,12 @@ const Setting = ({navigation}) => {
       <View style={globalStyles.userView}>
         <FlatButton title="Sign out" onPress={() => Signout()} />
       </View>
+
+      <TouchableOpacity >
+      <View style={globalStyles.userView}>
+        <Text style={globalStyles.text2}>CarFinder</Text>
+      </View>
+      </TouchableOpacity>
     </View>
   );
 };

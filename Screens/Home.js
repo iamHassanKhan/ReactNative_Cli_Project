@@ -18,6 +18,9 @@ import {Card,Title,Paragraph} from 'react-native-paper';
 import FlatButton from '../SharedFunctions/button';
 import LinkButton from '../SharedFunctions/linkButton';
 
+import Feed from './Feed';
+
+import database, { firebase } from '@react-native-firebase/database';
 
 
 
@@ -150,10 +153,20 @@ const posts = [
   },
 ];
 
+
+
+
+
+
+
 //Dummy Post data  Above
 
 const Home = ({navigation,item}) => {
+ 
+
+  
     
+
   const [like , setLike] = useState("white");
 
  const Liked = () => {
@@ -169,14 +182,14 @@ const Home = ({navigation,item}) => {
       style={{
         flex: 1,
       }}>
+      
       <Header
         title="Home"
         icon="home"
         coler="white"
         onPress={() => navigation.jumpTo('Setting')}
       />
-      {/* <Text style={globalStyles.text}>Home Screen</Text> */}
-
+     
       <View style={globalStyles.SearcView}>
         <SearchButton
           title="Search Cars"
@@ -185,6 +198,7 @@ const Home = ({navigation,item}) => {
       </View>
 
       {/* //Go For categories */}
+      
       <View style={{flexDirection:"row" ,justifyContent:"space-around",}}>
         
       <Text style={globalStyles.text2}>
@@ -200,7 +214,7 @@ const Home = ({navigation,item}) => {
       {/* //feed  */}
 
       <View style={globalStyles.feed}>
-       
+        
        
 
        {/* Feed data showing Below */}
@@ -209,9 +223,7 @@ const Home = ({navigation,item}) => {
        <FlatList
        scrollEnabled
        data={posts}
-       keyExtractor={(item) => {
-        return `${item.id} `
-      }}
+       keyExtractor={item => item.id}
       renderItem={({item})=>(
        
    <TouchableOpacity 
@@ -231,7 +243,7 @@ const Home = ({navigation,item}) => {
       </Card.Actions>
     </View>
     
-      <Card.Cover  source={item.addimage} style={globalStyles.Postimage} />
+      {/* <Card.Cover  source={item.addimage} style={globalStyles.Postimage} /> */}
       <Card.Content>
       <Title>{item.price}</Title>
       <Paragraph style={globalStyles.postdetail}>{item.make}</Paragraph>

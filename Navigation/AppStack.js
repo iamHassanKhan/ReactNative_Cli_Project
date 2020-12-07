@@ -8,7 +8,7 @@ import Ads from '../Screens/Ads';
 import Setting from '../Screens/Setting';
 import MakeAdd from '../Screens/MakeAdd';
 import Search from '../Screens/Search';
-import UserSetting from '../Screens/UserSetting';
+// import UserSetting from '../Screens/UserSetting';
 import SearchResult from '../Screens/SearchResult';
 import FeedItems from '../Screens/FeedItems';
 import Category from '../Screens/Category';
@@ -20,18 +20,19 @@ import Login from '../Screens/Login';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-// const Feed = createStackNavigator();
+const Feed = createStackNavigator();
 
 const AppStack = () => {
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Hometabs" component={HomeTabs} />
+      <Stack.Screen name="Feedtabs" component={FeedTabs} />
       <Stack.Screen name="FeedItems" component={FeedItems}/>
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="SearchResult" component={SearchResult} />
-      <Stack.Screen name="UserSetting" component={UserSetting} />
+      {/* <Stack.Screen name="UserSetting" component={UserSetting} /> */}
       <Stack.Screen name="Login" component={Login} />
      
     </Stack.Navigator>
@@ -98,3 +99,25 @@ function HomeTabs() {
 // ========================================//
 
 //Feed items and Item Detaail function 
+function FeedTabs() {
+  return (
+    <Feed.Navigator>
+       <Tab.Screen
+        name="Feeds"
+        component={Feed}
+        options={{
+         
+          
+        }}
+      />
+       <Tab.Screen
+        name="Item Detail"
+        component={FeedItems}
+        options={{
+         
+        }}
+      />
+
+    </Feed.Navigator>
+  );
+}

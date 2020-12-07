@@ -3,7 +3,7 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  View,
+  View,Alert,
   Text,TextInput,
   StatusBar,
   Button,
@@ -28,7 +28,7 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const {login, guestuser ,googleLogin} = useContext(AuthContext);
+  const {user,login, guestuser ,googleLogin} = useContext(AuthContext);
  
   //If Email and Password hasn't wrriten by user
   
@@ -36,10 +36,20 @@ const Login = ({navigation}) => {
 
     if(email==''||password=='')
     {
-     alert("Please Enter Email and Password Correctly !!");
+      Alert.alert(
+        "Login Failed",
+        "Please Enter Email and Password Correctly !!",
+        [
+          
+          { text: "OK",  }
+        ],
+        //{ cancelable: false }
+      );
+     
     }else
     {
-      alert("Well come back !! Again",login(email, password));
+      
+     alert("Well come back Again!!",login(email, password));
       
     }
   }
