@@ -22,11 +22,16 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Feed = createStackNavigator();
 
+
+
 const AppStack = () => {
+ 
+  
+
   return (
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Hometabs" component={HomeTabs} />
-      <Stack.Screen name="Feedtabs" component={FeedTabs} />
+      <Stack.Screen name="Feed" children={FeedTabs} />
       <Stack.Screen name="FeedItems" component={FeedItems}/>
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
@@ -99,6 +104,7 @@ function HomeTabs() {
 // ========================================//
 
 //Feed items and Item Detaail function 
+
 function FeedTabs() {
   return (
     <Feed.Navigator>

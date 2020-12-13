@@ -277,31 +277,45 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  //Feeds adds Styles from database
+  
 
-  feedPosts: {
-    flex:1,
-    marginTop:10,
-    marginHorizontal:10,
-      
-  },
+  //CardStyles in Feed from database
+
   cardStyles: {
-    borderColor:"grey",
+
+    
     borderWidth:1,
     borderRadius:10,
-    backgroundColor:"lightblue" 
+    marginBottom:5,
+    marginHorizontal:8,
+    backgroundColor:"lightblue",
+    justifyContent:"space-around"
+    
   },
-  PostLike: {
-    alignItems:"flex-end",
-  },
+
   //=============//
-  postdetail:{
-   fontSize:20
+
+  postdetailStyles:{
+
+    
+    justifyContent:"center", 
+    width:200,
+    height:200,
+    
+    
   },
+  posttext:{
+
+    fontSize:16,
+    fontWeight:"bold",
+    
+   },
+
+
   Postimage:{
-  marginHorizontal:10,
-  borderRadius:10,
-  width:350,
+  
+  borderRadius:5,
+  width:200,
   height:200,
 
   },

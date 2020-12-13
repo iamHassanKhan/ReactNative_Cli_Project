@@ -79,7 +79,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
       PostAd(Id,Make,Price,Year,Condition,Driven,Discription)
       .then(result=>{
     
-        setId(null);
+        // setId(null);
         setMake('');
         setPrice();
         setYear(); 

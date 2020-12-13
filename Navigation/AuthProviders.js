@@ -17,7 +17,7 @@ export const AuthProviders = ({children}) => {
       value={{
         user,
         setUser,
-        //Login with Email and Password
+        // Login with Email and Password
         login: async (email, password) => {
           
           try {
@@ -72,7 +72,7 @@ export const AuthProviders = ({children}) => {
                 
                 { text: "OK",  }
               ],
-              //{ cancelable: false }
+              
             );
            }
 
@@ -80,6 +80,7 @@ export const AuthProviders = ({children}) => {
 
 
        // Logout function
+
         logout: async () => {
           try {
             await auth().signOut();
@@ -92,7 +93,7 @@ export const AuthProviders = ({children}) => {
                 
                 { text: "OK",  }
               ],
-              //{ cancelable: false }
+              
             );
           }
         },
@@ -109,7 +110,7 @@ export const AuthProviders = ({children}) => {
                 
                 { text: "OK",  }
               ],
-              //{ cancelable: false }
+              
             );
           }
         },

@@ -1,7 +1,7 @@
 import database, { firebase } from '@react-native-firebase/database';
 import Storage from '@react-native-firebase/storage';
 import Firestore from '@react-native-firebase/firestore';
-import { exp } from 'react-native/Libraries/Animated/src/Easing';
+
 
 //==== Function to Ad Post in Database =====//
 
@@ -18,7 +18,7 @@ export const PostAd =(Id,Make,Price,Year,Driven,Condition,Discription) => {
         
     }
     let Addata={
-        Id:key,
+        //Id:key,
         Make:Make,
         Price:Price,
         Year:Year,
@@ -55,12 +55,9 @@ export const DellAllAds =() =>{
 };
 
 //==== Function to fetch data and show in feed ====//
+
+
+//====================================================//
+
   
-export async function getAds(foodRetrevied){
 
-var DATAsnapshot = await firebase.database()
-.ref('Ads')
-
-
-
-}
