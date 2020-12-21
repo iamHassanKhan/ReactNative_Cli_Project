@@ -21,6 +21,7 @@ import FlatButton from '../SharedFunctions/button';
 
 import {globalStyles} from '../SharedFunctions/global';
 import FlatButton2 from '../SharedFunctions/button2';
+import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 
 
 //=====================================//
@@ -156,16 +157,30 @@ const posts = [
 const Category = ({navigation}) => {
   return (
     <View
-      style={{
-        flex: 1,
-        alignItems:"center",
-        alignContent:"center",
-        justifyContent:"center"
-      }}>
+      style={globalStyles.ContainerStyle}>
+     <HeaderButtonsTab icon="angle-left" coler="blue"  title1="Home" 
+    onPress={()=>{
+      navigation.goBack()
+    }}/>
      <Text style={globalStyles.text2}>
        Car Categories will shown here
      </Text>
-     <FlatButton  title="Cancel" onPress={() => navigation.goBack()}/>
+
+    <ScrollView>
+
+    <TouchableOpacity>
+     
+    <Image source={require('../assets/car.jpg')} style={globalStyles.ImageCategoriestyles}/>
+    <Image source={require('../assets/car1.jpg')} style={globalStyles.ImageCategoriestyles}/>
+    <Image source={require('../assets/car2.png')} style={globalStyles.ImageCategoriestyles}/>
+    <Image source={require('../assets/car3.jpg')} style={globalStyles.ImageCategoriestyles}/>
+    <Image source={require('../assets/car4.jpg')} style={globalStyles.ImageCategoriestyles}/>
+
+    </TouchableOpacity>
+
+    </ScrollView>
+    
+
     </View>
   );
 };

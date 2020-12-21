@@ -371,24 +371,47 @@ export const globalStyles = StyleSheet.create({
   AdPostScreen:{
 
     flex:1,
-    marginBottom:5,
+   // marginBottom:5,
     alignItems:"center"
     
   },
   AdimageStyle: {
-    width: 400,
-    height: 200,
-    margin: 5,
+    width: "100%",
+    height: "100%",
+    
   },
+  // 
   Adimagecontainer: {
-    flex: 1,
-    padding: 10,
-    alignItems: 'center',
+    flex:1,
+   marginTop:5,
+   backgroundColor:"grey",
+   height:150,
+   width:"100%",
   },
   AdtextStyle: {
     padding: 10,
     color: 'black'
   },
+  // Page styles
+  ContainerStyle: {
+   flex:1,
+   justifyContent:"center",
+   alignItems:"center",
+   alignContent:"center",
+   backgroundColor:"grey",
+   
+   
+  },
+///
+ImageCategoriestyles:{
+  
+  borderRadius:5,
+  width:300,
+  height:100,
+  marginBottom:5,
+  marginTop:5,
+  marginHorizontal:5,
 
+  },
 
 });

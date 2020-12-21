@@ -23,159 +23,8 @@ import Feed from './Feed';
 import database, { firebase } from '@react-native-firebase/database';
 
 
-// const posts = [ 
-//   {
-//     id: '1',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it ',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'Used',
-//     year: '2012',
-//     avatar: require('../assets/car2.png'),
-//     addimage: require('../assets/car4.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '2',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'Used',
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '3',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used',
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '4',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '5',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '6',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '7',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '8',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '9',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'used', 
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-// ];
-
-
-
-
-
-
-
-//Dummy Post data  Above
-
-const Home = ({navigation,item}) => {
+const Home = ({navigation}) => {
   
-
-  const [like , setLike] = useState("white");
-
- const Liked = () => {
-
-   
-   // setLike("red");
-    alert("liked",setLike("red"));
-
-   }
-//==================================//
-
-
- 
 
   return (
     <View
@@ -191,6 +40,7 @@ const Home = ({navigation,item}) => {
       />
      
         <View style={globalStyles.SearcView}>
+          
            <SearchButton
              title="Search Cars"
              onPress={() => navigation.navigate('Search')}
@@ -208,18 +58,16 @@ const Home = ({navigation,item}) => {
             <LinkButton title="See more" onPress={()=>navigation.push("Category")}/>
 
            </View>
+       
+      {/* caling Feed class in Home */}
 
            <View>
-             <Feed/>
+
+           {/* <Feed/> */}
+
            </View>
 
-
-          
-       
-       
-
-    
-      
+  
      </View>
        );
 };

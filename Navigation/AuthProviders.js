@@ -14,16 +14,20 @@ export const AuthProviders = ({children}) => {
 
   return (
     <AuthContext.Provider
+    
       value={{
         user,
         setUser,
+
         // Login with Email and Password
+
         login: async (email, password) => {
           
           try {
             await auth().signInWithEmailAndPassword(email, password);
 
           } catch (e) {
+
             Alert.alert(
               "Login Failed",
               "Please Enter Valid Email and Password !!",
@@ -31,11 +35,13 @@ export const AuthProviders = ({children}) => {
                 
                 { text: "OK",  }
               ],
-              //{ cancelable: false }
+              
             );
           }
         },
+
         //Register with Email 
+
         register: async (email, password ,displayName) => {
 
           try {
@@ -51,11 +57,13 @@ export const AuthProviders = ({children}) => {
                 
                 { text: "OK",  }
               ],
-              //{ cancelable: false }
+              
             );
           }
         },
-        //Google login 
+
+        //Google login
+
          googleLogin: async () =>{
            try{
             const { idToken } = await GoogleSignin.signIn();
@@ -115,10 +123,12 @@ export const AuthProviders = ({children}) => {
           }
         },
       }}>
+
       {children}
+
     </AuthContext.Provider>
   );
 };
 
-//  database Functions below
+
 

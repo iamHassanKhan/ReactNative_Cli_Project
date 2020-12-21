@@ -4,31 +4,35 @@ import {
   View,
   Text,
   Alert,
-  TextInput,
   ActivityIndicator,
-  TouchableOpacity,
+  
 } from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
+
+import { GoogleSignin } from '@react-native-community/google-signin';
 //Libararies above
 
 //Screens Below
+
 import firstScreen from '../Screens/firstScreen';
 import Login from '../Screens/Login';
 import Signup from '../Screens/Signup';
-import { GoogleSignin } from '@react-native-community/google-signin';
+
 
 
 const Stack = createStackNavigator();
 
+
 const AuthStack = () => {
+
   const [isfirstlaunch, setisfirstlaunch] = React.useState(null);
   let routeName;
 
   useEffect(() => {
+
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
       if (value == null) {
         AsyncStorage.setItem('alreadyLaunched', 'true');
@@ -51,6 +55,7 @@ const AuthStack = () => {
 
   return (
     <Stack.Navigator initialRouteName={routeName}>
+
       <Stack.Screen
         name="firstScreen"
         component={firstScreen}
@@ -67,6 +72,7 @@ const AuthStack = () => {
         component={Signup}
         options={{header: () => null}}
      />
+
     </Stack.Navigator>
   );
 };

@@ -97,7 +97,7 @@ const Login = ({navigation}) => {
 
       <LinkButton
         title="Forget Password ?"
-        onPress={() => {alert('Sign In function clicked');} 
+        onPress={() => {alert('Forget Password function clicked');} 
           
         }
       />

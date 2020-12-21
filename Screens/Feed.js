@@ -1,18 +1,18 @@
 import React, { useContext, useState,Component } from 'react';
 import {
   SafeAreaView,
-  FlatList,
+  FlatList,Alert,
   View,Image,
   ActivityIndicator,
   TextInput,TouchableOpacity,Button,
 } from 'react-native';
 import { globalStyles } from '../SharedFunctions/global';
-import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
-import FlatButton from '../SharedFunctions/button';
-import {Paragraph} from 'react-native-paper';
+
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
+
 import database, { firebase } from '@react-native-firebase/database';
+
 import Share from 'react-native-share';
 
 // const posts = [ 
@@ -75,13 +75,23 @@ export default class Feed extends Component {
      MyAdsList:[]
     
    }
+   //////////////////////////
+
+  
+    
+
    
    //Shared Function 
+
    
   ShareAd =() => {
+
     alert("Shared");
   }
+  LikeAd =() => {
 
+    this.setState({Like: "red"});   
+  }
   
    componentDidMount(){
    
@@ -102,6 +112,7 @@ export default class Feed extends Component {
   
     
   }
+
   
   render() {
 
@@ -116,19 +127,25 @@ export default class Feed extends Component {
 
   ////////////////////////////////////////
 
+  /////      Condition Below if There is a ( UserAds ) data in Database or Else
+
+
      return this.state.MyAdsList.length > 0 ?
 
      <SafeAreaView style={{backgroundColor:"ightgrey"}}>
+
                <FlatList
                 data={this.state.MyAdsList}
-               
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => {
 
      
-       
-        
        return(
+
+        <TouchableOpacity onPress={()=>{
+          
+        }}
+      >
 
         <CardItem style={globalStyles.cardStyles}>
         
@@ -138,7 +155,7 @@ export default class Feed extends Component {
         <Right style={globalStyles.postdetailStyles}>
 
         
-        <Icon active name="heart" size={30} color={this.state.Like} onPress={this.ShareAd} />
+        <Icon active name="heart" size={30} color={this.state.Like} onPress={this.LikeAd} />
         
       
         
@@ -149,13 +166,17 @@ export default class Feed extends Component {
         <Text >{item.Condition}</Text>
 
          <Text >{item.Discription}</Text>
-
+         
          <Text >{item.Driven}</Text>
+         
+         
+         <Text style={{color:"black",fontSize:12}}>{new Date(item.Time).toDateString()}</Text>
 
-         </Right>      
-       
+        </Right>     
+        
       </CardItem>
-                 
+
+      </TouchableOpacity>          
            
   )
   
@@ -164,8 +185,7 @@ export default class Feed extends Component {
   }
   />
   
-
-    {/* ); */}
+    {/* ); FlatList Closed above */}
   
     </SafeAreaView>  :
 

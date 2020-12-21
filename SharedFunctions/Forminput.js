@@ -2,7 +2,11 @@ import React from 'react';
 import {TextInput, View} from 'react-native';
 import {globalStyles} from './global';
 import Icon from 'react-native-vector-icons/AntDesign';
-export default function FlatButton({
+
+export default function Forminput({
+
+// Objects for InputText below
+
   valuetxt,
   placeholdertxt,
   iconType,
@@ -11,12 +15,17 @@ export default function FlatButton({
   autoCorr,
   ontextChnage,
   secureTxtEntry,
-}) {
+
+})    {
   return (
     <View style={globalStyles.formtxtinputView}>
+
       <View style={globalStyles.formiconstyle}>
+
         <Icon name={iconType} size={25} color="grey" />
+
       </View>
+
       <TextInput
     
         value={valuetxt}
@@ -29,6 +38,7 @@ export default function FlatButton({
         autoCapitalize={autoCap}
         autoCorrect={autoCorr}
         secureTextEntry={secureTxtEntry}
+
       />
     </View>
   );

@@ -29,7 +29,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
   const [Driven,setDriven] = useState('');
   const [Condition,setCondition] = useState('');
   const [Discription,setDiscrip] = useState('');
-  const [image,setImage] = useState({});
+  const [image,setImage] = useState(null);
   
   
 
@@ -52,7 +52,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
       }
        else {
         let source = response;
-        setImage(source);
+        setImage({uri:source.uri});
       }
     });
   };
@@ -72,21 +72,22 @@ import { PostAd } from '../Navigation/FirebaseDB';
         [
           
           { text: "OK",  }
+
         ],
-        //{ cancelable: false }
+        
       );
     } else{
       PostAd(Id,Make,Price,Year,Condition,Driven,Discription)
       .then(result=>{
     
-        // setId(null);
+        setId(null);
         setMake('');
         setPrice();
         setYear(); 
         setDriven('');
         setCondition('');
         setDiscrip('');
-        //setImage({});
+        //setImage(null);
     
         Alert.alert(
           "Ad Posted",
@@ -95,22 +96,25 @@ import { PostAd } from '../Navigation/FirebaseDB';
             
             { text: "OK",  }
           ],
-          //{ cancelable: false }
+          
         );
     
       })
       .catch(error=>{
-        Alert.alert(
-          "Permission Denied",
-          "Please Login with Email To Submit Post !",
-          [
-            {
-              text: "Cancel",
-            },
-            { text: "OK",  }
-          ],
-          //{ cancelable: false }
-        );
+
+        console.log(error)
+        
+        // Alert.alert(
+        //   "Permission Denied",
+        //   "Please Login with Email To Submit Post !",
+        //   [
+        //     {
+        //       text: "Cancel",
+        //     },
+        //     { text: "OK",  }
+        //   ],
+          
+        // );
         
       })
     }
@@ -119,7 +123,9 @@ import { PostAd } from '../Navigation/FirebaseDB';
 };
 
 return(
+
   <ScrollView>
+
   <View style={globalStyles.AdPostScreen}>
   <HeaderButtonsTab  icon="angle-left"
         coler="blue"  onPress={()=> navigation.goBack()}/>
@@ -129,31 +135,32 @@ return(
 
   <View  >
    
-   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(Make)=>setMake(Make)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Price "   value={Price} onChangeText={(Price)=>setPrice(Price)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(Year)=>setYear(Year)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(Driven)=>setDriven(Driven)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(Condition)=>setCondition(Condition)} style={globalStyles.Formtxtinput}/>
-   <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(Discription)=>setDiscrip(Discription)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Condition i.e Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven / kilometers "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
   </View>
 
-  {/* Picking Image from camera or Gallery */}
-
-  <View style={globalStyles.Adimagecontainer}>
-       
-        <Image
+  {/* Picking Image from camera or Gallery  */}
+  
+  {image===null?<Text>
+      No Image Selected
+    </Text>:
+       <View style={globalStyles.Adimagecontainer}>
+       <Image
           source={{uri:image.uri}}
           style={globalStyles.AdimageStyle}
-        />
-       
-       
-        
-      </View>
-     
+        >
+        </Image>
+       </View>}
+
     
       <FlatButton title="Add Image"  onPress={chooseFile}/>
+
      <View style={{flexDirection:"row" ,justifyContent:"center"}}>
       
 

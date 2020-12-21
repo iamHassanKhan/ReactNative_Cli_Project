@@ -4,8 +4,11 @@ import {globalStyles} from './global';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 export default function SearchButton({title, onPress}) {
+
   return (
+    
     <View style={globalStyles.Searchbuttonview}>
+
       <TouchableOpacity onPress={onPress}>
         
         <Text
@@ -17,8 +20,11 @@ export default function SearchButton({title, onPress}) {
             justifyContent:"center",
             alignContent:"center"
           }}>
+
          <Icon name="search" size={15} color="grey"/> {title}
+
         </Text>
+
       </TouchableOpacity>
     </View>
   );
