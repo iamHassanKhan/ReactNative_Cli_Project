@@ -102,19 +102,19 @@ import { PostAd } from '../Navigation/FirebaseDB';
       })
       .catch(error=>{
 
-        console.log(error)
+        //console.log(error)
         
-        // Alert.alert(
-        //   "Permission Denied",
-        //   "Please Login with Email To Submit Post !",
-        //   [
-        //     {
-        //       text: "Cancel",
-        //     },
-        //     { text: "OK",  }
-        //   ],
+        Alert.alert(
+          "Permission Denied",
+          "Please Login with Email To Submit Post !",
+          [
+            {
+              text: "Cancel",
+            },
+            { text: "OK",  }
+          ],
           
-        // );
+        );
         
       })
     }
@@ -135,11 +135,11 @@ return(
 
   <View  >
    
-   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Condition i.e Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / kilometers "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year i.e 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven / km "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
    <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
@@ -147,9 +147,11 @@ return(
 
   {/* Picking Image from camera or Gallery  */}
   
-  {image===null?<Text>
+  {image===null ? <Text>
+
       No Image Selected
-    </Text>:
+
+    </Text> :
        <View style={globalStyles.Adimagecontainer}>
        <Image
           source={{uri:image.uri}}

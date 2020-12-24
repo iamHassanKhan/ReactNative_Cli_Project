@@ -69,34 +69,26 @@ export const globalStyles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 100,
   },
-  userlogo: {
-    height: 80,
-    width: 80,
-    marginLeft: 1,
-    resizeMode: 'cover',
-    borderRadius: 100,
-    justifyContent: 'flex-start',
-    alignContent: 'center',
+  userImglogo: {
+
+    height: 60,
+    width: 60,
+    borderRadius:80,
+    backgroundColor:"grey"
   },
-  SearcView: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-    alignItems: 'center',
-  },
+  // Touchableopsity Setting user View Styles
+
   userView: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignContent: 'center',
+    justifyContent: "space-around",
     backgroundColor: 'white',
-    borderWidth: 0.5,
     borderColor: 'black',
     marginTop: 10,
-    marginBottom: 10,
-    alignItems: 'center',
+    marginBottom: 20,
+    borderRadius:20,
+    elevation:20
   },
+
   usertext: {
     textAlign: 'center',
     fontSize: 15,
@@ -104,7 +96,8 @@ export const globalStyles = StyleSheet.create({
     margin: 20,
   },
 
-// buttons Styles
+
+//Customize buttons Styles
 
   buttonview: {
     flexDirection: 'row',
@@ -127,18 +120,17 @@ export const globalStyles = StyleSheet.create({
   },
 
   Searchbuttonview: {
+
     flexDirection:"row",
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
     marginTop: 5,
     alignContent:"center",
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor:"black",
+    justifyContent: "center",
     marginBottom: 5,
-    borderWidth:1,
-    width:"70%"
+    width:"80%",
+    elevation:20,
 
   },
   // Style for going to and other page button
@@ -167,6 +159,7 @@ export const globalStyles = StyleSheet.create({
   //textinput Styling fror Login and Signup 
 
   formtxtinputView: {
+
     marginTop: 5,
     marginBottom: 10,
     width: '100%',
@@ -178,6 +171,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'white',
   },
+
   formtxtinput: {
     padding: 10,
     marginTop: 5,
@@ -188,33 +182,38 @@ export const globalStyles = StyleSheet.create({
 
     fontSize: 16,
   },
-  //textinput Styling for Search page
+
+  // Search View and Textinput Styling for Search page
 
   
   SearchtxtinputView: {
+
     marginTop: 5,
     marginBottom: 5,
-    height: 45,
-    borderColor: 'green',
-    borderWidth: 1,
+    height: 50,
     flexDirection: 'row',
-    alignItems: 'center',
-    alignContent:"center",
-    justifyContent:"center",
     backgroundColor: 'white',
+    elevation:30
     
   },
   Searchtxtinput: {
+
     backgroundColor:"white",
     padding: 10,
     width: 300,
     fontSize: 16,
-    alignContent:"center",
-    justifyContent:"center",
-    alignItems:"center"
-    
+    fontWeight:"bold",
+    textAlign:"center",
+ 
   },
 
+  searchiconstyle: {
+
+    padding: 10,
+    height: '100%',
+    width: 50,
+
+  },
   //icon Style for login ,signup and Search pages
 
   formiconstyle: {
@@ -225,86 +224,33 @@ export const globalStyles = StyleSheet.create({
     borderLeftColor: 'grey',
     borderLeftWidth: 1,
     width: 50,
+    
   },
+// Home Search button view Style
 
-  searchiconstyle: {
-    padding: 10,
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:"lightblue",
-    width: 50,
-  },
+SearchViewHome:{
+
+  marginTop:10,
+  alignItems:"center"
+
+},
  
-  //User Profilee setting styles
-
-  usersettingview: {
-    flexDirection: 'row',
-    marginBottom: 5,
-    borderBottomWidth: 0.5,
-    borderTopWidth: 0.5,
-    padding: 10,
-    margin: 10,
-  },
-  usersettingtext: {
-    alignContent: 'center',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 20,
-
-    paddingLeft: 30,
-  },
-
-  //My Adds view Style
-  addsettingview: {
-    marginBottom: 5,
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
-
-    padding: 10,
-    margin: 10,
-  },
-  //image view style
-
-  avatarimage: {
-    borderRadius: 50,
-    width: 100,
-    height: 100,
-    marginLeft: 140,
-    backgroundColor: 'white',
-    marginTop: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  
-
   //CardStyles in Feed from database
 
   cardStyles: {
 
-    
-    borderWidth:1,
     borderRadius:10,
-    marginBottom:5,
-    marginHorizontal:8,
+    marginBottom:8,
+    marginHorizontal:10,
     backgroundColor:"lightblue",
-    justifyContent:"space-around"
+    justifyContent:"space-between",
+    elevation:5,
+    //borderWidth:0.5
     
   },
 
-  //=============//
-
-  postdetailStyles:{
-
-    
-    justifyContent:"center", 
-    width:200,
-    height:200,
-    
-    
-  },
-  posttext:{
+ 
+  Cardtext:{
 
     fontSize:16,
     fontWeight:"bold",
@@ -312,66 +258,44 @@ export const globalStyles = StyleSheet.create({
    },
 
 
-  Postimage:{
+  Cardimage:{
   
   borderRadius:5,
   width:200,
   height:200,
 
   },
- 
-  //======================
-  //make an Add commponent in form styles
-  //======================
-  // addformOpt: {
-  //   borderWidth: 0.5,
-  //   marginTop: 8,
-  //   marginBottom: 5,
-  //   borderRadius: 10,
-  //   marginHorizontal: 20,
-  //   padding: 10,
-  //   justifyContent: 'space-between',
-  //   flexDirection: 'row',
-  //   borderColor: 'green',
-  // },
-  // textinput styles for Ads Form styles
+
+
+  // Textinput styles for Ads Form styles
 
   Formtxtinput: {
+
     width: 350,
-    height: 50,
-    borderWidth: 1,
-    marginTop: 8,
-    marginBottom: 8,
-    borderRadius: 50,
+    height: 60,
+    borderWidth: 0.5,
+    marginTop: 6,
+    marginBottom: 6,
+    borderRadius: 10,
     marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
+    justifyContent: 'center', 
     flexDirection: 'row',
     borderColor: "green",
-    backgroundColor:"white",
-    color:"black"
+    backgroundColor:"lightgrey",
+    elevation:15,
+    textAlign:"center",
+    fontSize:15,
+    fontWeight:"bold",
+    
     
     
   },
 
-  // TxtiNform: {
-  //   marginHorizontal: 20,
-  //   padding: 5,
-  //   fontSize: 15,
-  //   marginBottom: 10,
-  //   color:"red"
-  // },
-  
-  FeeditemImage: {
-    width:400 ,
-    height:200
-    
-  },
+  //Make Ads form page view Styles
+
   AdPostScreen:{
 
     flex:1,
-   // marginBottom:5,
     alignItems:"center"
     
   },
@@ -380,19 +304,19 @@ export const globalStyles = StyleSheet.create({
     height: "100%",
     
   },
-  // 
+  
   Adimagecontainer: {
-    flex:1,
+   flex:1,
    marginTop:5,
-   backgroundColor:"grey",
+   backgroundColor:"lightgrey",
    height:150,
-   width:"100%",
+   width:350,
+   elevation:10,
+
   },
-  AdtextStyle: {
-    padding: 10,
-    color: 'black'
-  },
-  // Page styles
+
+  //Simple  Page Container style
+
   ContainerStyle: {
    flex:1,
    justifyContent:"center",
@@ -402,16 +326,76 @@ export const globalStyles = StyleSheet.create({
    
    
   },
-///
-ImageCategoriestyles:{
-  
-  borderRadius:5,
-  width:300,
-  height:100,
-  marginBottom:5,
-  marginTop:5,
-  marginHorizontal:5,
 
+//image in categeory Styles
+
+
+ImageCategoriestylesView:{
+  
+ marginHorizontal:20,
+ height:100,
+ justifyContent:"center" ,
+ 
+ 
   },
 
+  //my ads Styles
+
+  MyAdsCardStyle:{
+
+   marginHorizontal:10,
+   marginBottom:5,
+   marginTop:5, 
+   backgroundColor:"white",
+   borderRadius:20,
+   elevation:10,
+   borderWidth:0.5
+  }
+
 });
+
+
+ 
+  //User Profilee setting styles
+
+  // usersettingview: {
+  //   flexDirection: 'row',
+  //   marginBottom: 5,
+  //   borderBottomWidth: 0.5,
+  //   borderTopWidth: 0.5,
+  //   padding: 10,
+  //   margin: 10,
+  // },
+
+  // usersettingtext: {
+  //   alignContent: 'center',
+  //   textAlign: 'center',
+  //   fontWeight: 'bold',
+  //   fontSize: 20,
+
+  //   paddingLeft: 30,
+  // },
+
+  // //My Ads view Style
+
+  // addsettingview: {
+  //   marginBottom: 5,
+  //   borderTopWidth: 0.5,
+  //   borderBottomWidth: 0.5,
+
+  //   padding: 10,
+  //   margin: 10,
+  // },
+
+  //image view style
+
+  // avatarimage: {
+  //   borderRadius: 50,
+  //   width: 100,
+  //   height: 100,
+  //   marginLeft: 140,
+  //   backgroundColor: 'white',
+  //   marginTop: 5,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },

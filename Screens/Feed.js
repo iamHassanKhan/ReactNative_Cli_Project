@@ -117,15 +117,7 @@ export default class Feed extends Component {
   render() {
 
 
-   
-   //////////////////////////////////////
-
-   // console.log(this.state)
-    
-      
-     // const databaseAds = this.state.MyAdsList.map(item =>{
-
-  ////////////////////////////////////////
+  
 
   /////      Condition Below if There is a ( UserAds ) data in Database or Else
 
@@ -149,19 +141,23 @@ export default class Feed extends Component {
 
         <CardItem style={globalStyles.cardStyles}>
         
-        <Image source={require('../assets/car.jpg')} style={globalStyles.Postimage}/>
+       <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
         
 
-        <Right style={globalStyles.postdetailStyles}>
+        <Right >
 
-        
+        <View  style={globalStyles.CardIcon}>
+
         <Icon active name="heart" size={30} color={this.state.Like} onPress={this.LikeAd} />
+       
+        </View>
+        
         
       
         
-        <Text style={globalStyles.posttext}>{item.Make}</Text>
+        <Text style={globalStyles.Cardtext}>{item.Make}</Text>
               
-        <Text style={globalStyles.posttext}>{item.Price}</Text>
+        <Text style={globalStyles.Cardtext}>{item.Price}</Text>
                  
         <Text >{item.Condition}</Text>
 
@@ -197,31 +193,5 @@ export default class Feed extends Component {
 
   }}
 
-  
-  /////////////////////////////////////////////
-   
-
-    //return(
-
-        {/* <View style={{flex:1}}>
-  
-         <Text style={globalStyles.text2}>
-          Explore Feeds
-         </Text> 
-
-  
-       <Card>
-
-       {databaseAds}
-
-       </Card>     
-    
-        
-        </View>
-      )
-   
-};
-}
-     */}
-/////////////////////////////////////////////////////
+  ////////////// ///////////
 

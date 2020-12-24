@@ -15,16 +15,15 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
-
 import FlatButton from '../SharedFunctions/button';
-
+import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import {globalStyles} from '../SharedFunctions/global';
 import FlatButton2 from '../SharedFunctions/button2';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 
 
 //=====================================//
+
 const posts = [ 
   {
     id: '1',
@@ -154,10 +153,11 @@ const posts = [
   },
 ];
 
+
 const Category = ({navigation}) => {
+
   return (
-    <View
-      style={globalStyles.ContainerStyle}>
+    <View >
      <HeaderButtonsTab icon="angle-left" coler="blue"  title1="Home" 
     onPress={()=>{
       navigation.goBack()
@@ -166,23 +166,11 @@ const Category = ({navigation}) => {
        Car Categories will shown here
      </Text>
 
-    <ScrollView>
+  
 
-    <TouchableOpacity>
-     
-    <Image source={require('../assets/car.jpg')} style={globalStyles.ImageCategoriestyles}/>
-    <Image source={require('../assets/car1.jpg')} style={globalStyles.ImageCategoriestyles}/>
-    <Image source={require('../assets/car2.png')} style={globalStyles.ImageCategoriestyles}/>
-    <Image source={require('../assets/car3.jpg')} style={globalStyles.ImageCategoriestyles}/>
-    <Image source={require('../assets/car4.jpg')} style={globalStyles.ImageCategoriestyles}/>
-
-    </TouchableOpacity>
-
-    </ScrollView>
-    
-
-    </View>
+  </View>
   );
+ 
 };
 
 export default Category;

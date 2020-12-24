@@ -28,18 +28,18 @@ const Setting = ({navigation}) => {
     Alert.alert(
       "Signout",
       "Signout Sucessfully!!",
-      [
-        
+      [    
         logout()
       ],
-      //{ cancelable: false }
+      
     );
-    //alert("Signout Sucessfully" , logout())
+   
   }
 
 
 
   return (
+
     <View
       style={{
         flex: 1,
@@ -58,7 +58,7 @@ const Setting = ({navigation}) => {
        <TouchableOpacity>
         <View style={globalStyles.userView}>
           <Image
-            style={globalStyles.userlogo}
+            style={globalStyles.userImglogo}
             source={require('../assets/defaultImg.png')}
           />
           <Text style={globalStyles.usertext}>Login as  {user.email} </Text>

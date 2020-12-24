@@ -21,7 +21,7 @@ export default function SearchtxtInput({
         value={valuetxt}
         onChangeText={ontextChnage}
         placeholder={placeholdertxt}
-        placeholderTextColor="lightgrey"
+        placeholderTextColor="grey"
         numberOfLines={1}
         style={globalStyles.Searchtxtinput}
        

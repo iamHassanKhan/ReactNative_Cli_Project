@@ -29,7 +29,7 @@ export default class SearchResult extends React.Component {
           flex: 1,
           alignItems: 'center',
         }}>
-        <Text style={globalStyles.text2}>Search Something</Text>
+        <Text style={globalStyles.text2}>Search Ads</Text>
 
         <View >
 

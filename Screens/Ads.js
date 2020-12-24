@@ -13,7 +13,6 @@ import {
 import {globalStyles} from '../SharedFunctions/global';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-import FlatButton from '../SharedFunctions/button';
 import database, { firebase } from '@react-native-firebase/database';
 
 //Auth Context imported for checking Authentice  User
@@ -24,7 +23,7 @@ const Ads = ({navigation}) => {
 
 const deleteAd = (item) =>{
 
-  database().ref('Ads/' +item.key)
+  database().ref('Ads/' +item.Id)
   .remove()
   .then(()=>{
 
@@ -57,14 +56,16 @@ useEffect(()=>{
     <ScrollView
       style={{
         flex: 1,
-        
+        marginHorizontal:10,
       }}>
       <Text style={globalStyles.text}>My Ads </Text>
+
       <View>
+        
         {Ads.map((item,index) =>(
 
 
-<Card>
+<Card style={globalStyles.MyAdsCardStyle}>
 <Card.Cover source={require('../assets/car.jpg')} />
 <Card.Content>
   <Title>{item.Make}</Title>

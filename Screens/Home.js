@@ -39,7 +39,7 @@ const Home = ({navigation}) => {
         onPress={() => navigation.jumpTo('Setting')}
       />
      
-        <View style={globalStyles.SearcView}>
+        <View style={globalStyles.SearchViewHome}>
           
            <SearchButton
              title="Search Cars"
@@ -63,7 +63,7 @@ const Home = ({navigation}) => {
 
            <View>
 
-           {/* <Feed/> */}
+           <Feed/>
 
            </View>
 
