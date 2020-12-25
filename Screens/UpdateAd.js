@@ -10,7 +10,7 @@ import FlatButton from '../SharedFunctions/button';
 
 const UpdateAd = ({navigation,route}) => {
 
-  const {Id,Make ,Price,Discription, Driven ,Year,Condition} =  route.params;
+  const {Id,Make ,Price,Discription, Driven ,Year,Condition,Location} =  route.params;
   
   const [ItmId,setId] = useState();
   const [ItmMake,setMake] = useState();
@@ -19,7 +19,7 @@ const UpdateAd = ({navigation,route}) => {
   const [ItmDriven,setDriven] = useState();
   const [ItmCondition,setCondition] = useState();
   const [ItmDiscription,setDiscrip] = useState();
-
+  const [ItmLocation,setLocation] = useState();
   //Function for Edit or Delete Ads
 
   const [Ads,setAds] =useState([]);
@@ -59,16 +59,19 @@ const UpdateAd = ({navigation,route}) => {
       navigation.goBack()
     }}/>
 
-    <ScrollView>
-    <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(ItmMake)=>setMake(ItmMake)} style={globalStyles.Formtxtinput}/>
+  <ScrollView>
+
+  <TextInput placeholder="Sahiwal,punjab,Pakistan"  value={Location} onChangeText={(ItmLocation)=>setMake(ItmLocation)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(ItmMake)=>setMake(ItmMake)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Price "   value={Price} onChangeText={(ItmPrice)=>setPrice(ItmPrice)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Year 2000"   value={Year} onChangeText={(ItmYear)=>setYear(ItmYear)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(ItmDriven)=>setDriven(ItmDriven)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(ItmCondition)=>setCondition(ItmCondition)} style={globalStyles.Formtxtinput}/>
    <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(ItmDiscription)=>setDiscrip(ItmDiscription)} style={globalStyles.Formtxtinput}/>
+
     </ScrollView>
     <View>
-    <FlatButton title="Post Ad" 
+    <FlatButton title="Update Ad" 
      
      
      //Send file and ad data in database

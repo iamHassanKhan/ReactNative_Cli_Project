@@ -71,7 +71,7 @@ export default class Feed extends Component {
 
    state ={
      
-     Like:"grey",
+     Like:"white",
      MyAdsList:[]
     
    }
@@ -143,12 +143,15 @@ export default class Feed extends Component {
         
        <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
         
+      
 
         <Right >
-
+        
         <View  style={globalStyles.CardIcon}>
 
-        <Icon active name="heart" size={30} color={this.state.Like} onPress={this.LikeAd} />
+        <Icon active name="share" size={25} color="grey"  />
+
+        <Icon active name="heart" size={25} color={this.state.Like} onPress={this.LikeAd} />
        
         </View>
         
@@ -165,8 +168,9 @@ export default class Feed extends Component {
          
          <Text >{item.Driven}</Text>
          
-         
-         <Text style={{color:"black",fontSize:12}}>{new Date(item.Time).toDateString()}</Text>
+         <Text ><Icon name="location-arrow" size={15}/>{'  '}{item.Location}</Text>
+
+         <Text style={{color:"black",fontSize:11}}>{new Date(item.Time).toDateString()}</Text>
 
         </Right>     
         

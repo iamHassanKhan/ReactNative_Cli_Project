@@ -70,12 +70,13 @@ useEffect(()=>{
 <Card.Content>
   <Title>{item.Make}</Title>
   <Paragraph>{item.Discription}</Paragraph>
+  <Paragraph>{item.Location}</Paragraph>
 </Card.Content>
 <Card.Actions>
   <Button
   style={{backgroundColor:"lightgrey",width:100 ,marginRight:20}}
   onPress={()=>{
-    navigation.navigate("UpdateAd",{Id: item.Id,Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition} );
+    navigation.navigate("UpdateAd",{Id: item.Id,Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition,Location:item.Location} );
   }}
   >
   Edit

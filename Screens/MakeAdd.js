@@ -29,6 +29,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
   const [Driven,setDriven] = useState('');
   const [Condition,setCondition] = useState('');
   const [Discription,setDiscrip] = useState('');
+  const [Location,setLocation] = useState('');
   const [image,setImage] = useState(null);
   
   
@@ -64,7 +65,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
 
   const submitAd = () =>{
 
-    if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription=='')
+    if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription==''||Location=='')
     {
       Alert.alert(
         "Unable to Submit Ad",
@@ -77,7 +78,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
         
       );
     } else{
-      PostAd(Id,Make,Price,Year,Condition,Driven,Discription)
+      PostAd(Id,Make,Price,Year,Condition,Driven,Discription,Location)
       .then(result=>{
     
         setId(null);
@@ -87,6 +88,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
         setDriven('');
         setCondition('');
         setDiscrip('');
+        setLocation('');
         //setImage(null);
     
         Alert.alert(
@@ -134,7 +136,7 @@ return(
   </Text>
 
   <View  >
-   
+  <TextInput placeholder="lahore,punjab,pakistan "  value={Location} onChangeText={(text)=>setLocation(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Year i.e 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>

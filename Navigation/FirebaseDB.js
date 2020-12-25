@@ -31,7 +31,7 @@ export const uploadPhotosync = async uri =>{
 
 
 
-export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription) => {
+export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Location) => {
      
     //const remoteUri = await  this.uploadPhotosync(localUri)
     return new Promise(function(resolve ,reject) {
@@ -47,6 +47,7 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription) =>
     let Addata={
         Id:key,
         Make:Make,
+        Location:Location,
         Price:Price,
         Year:Year,
         Condition:Condition,
