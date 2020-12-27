@@ -28,50 +28,48 @@ const HeaderButtonsTab = ({
     <View
       style={{
         flexDirection: 'row',
-        borderRadius: 0,
-        borderColor: 'grey',
-        borderWidth: 0.5,
+        alignItems:"center",
+        
+        width:"100%"
       }}>
       <TouchableOpacity onPress={onPress}>
         <View
           style={{
-            width: 90,
+            width: 100,
             height: 50,
             flexDirection: 'row',
-            justifyContent: "flex-start",
-            alignContent: 'center',
-            marginLeft: 10,
-            alignItems: 'center',
+            justifyContent:"space-evenly",
+            alignItems: "center",
+          
+            
           }}>
-          <Icon name={icon} color={coler} size={25} />
+          <Icon name={icon} color={coler} size={20} />
           <Text style={{color: 'blue', fontSize: 20}}>{title1}</Text>
         </View>
       </TouchableOpacity>
 
       <View
         style={{
-          width: 180,
+          width: 200,
           height: 50,
-          marginHorizontal: 5,
           flexDirection: 'row',
           justifyContent: 'center',
-          alignContent: 'center',
-          alignItems: 'center',
+          alignContent:"center",
+          
         }}>
         <Text style={{color: 'blue', fontSize: 24}}>{title2} </Text>
       </View>
       <TouchableOpacity onPress={onPress2}>
         <View
           style={{
-            width: 90,
+            width: 100,
             height: 50,
             flexDirection: 'row',
-            justifyContent: "flex-end",
-            alignContent: 'center',
-            alignItems: 'center',
-            marginRight: 10,
+            justifyContent:"space-evenly",
+            alignItems: "center",
+            
           }}>
-          <Icon name={icon2} color={coler2} size={25} />
+          <Icon name={icon2} color={coler2} size={20} />
           <Text style={{color: 'blue', fontSize: 20}}>{title3}</Text>
         </View>
       </TouchableOpacity>

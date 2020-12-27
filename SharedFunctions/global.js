@@ -20,7 +20,7 @@ export const globalStyles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     marginTop: 5,
-    marginBottom: 5,
+    marginBottom: 15,
     flexDirection:"row",
     
   },
@@ -29,6 +29,15 @@ export const globalStyles = StyleSheet.create({
     marginTop:5,
     textAlign: 'center',
     fontSize: 18,
+    color: 'black',
+    flexDirection:"row",
+    
+  },
+  text3: {
+    marginBottom:5,
+    marginTop:5,
+    textAlign: 'center',
+    fontSize: 25,
     color: 'black',
     flexDirection:"row",
     
@@ -65,10 +74,11 @@ export const globalStyles = StyleSheet.create({
 
   //logo styles for UserLogin and user Setting view
   logo: {
-    height: 150,
-    width: 150,
-    resizeMode: 'cover',
-    borderRadius: 100,
+    height: 100,
+    width: 100,
+    borderRadius: 80,
+    resizeMode:"contain",
+    
   },
   userImglogo: {
 

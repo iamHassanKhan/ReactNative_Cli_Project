@@ -28,7 +28,7 @@ const Login = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const {user,login, guestuser ,googleLogin} = useContext(AuthContext);
+  const {login, guestuser ,googleLogin} = useContext(AuthContext);
  
   //If Email and Password hasn't wrriten by user
   
@@ -38,18 +38,29 @@ const Login = ({navigation}) => {
     {
       Alert.alert(
         "Login Failed",
-        "Please Enter Email and Password Correctly !!",
+        "Please Enter Required Email and Password Feilds!",
         [
           
           { text: "OK",  }
         ],
-        //{ cancelable: false }
+        
       );
      
     }else
     {
       
-     alert("Well come back Again!!",login(email, password));
+     login(email, password).then(function(){
+      Alert.alert(
+        "Login Successfully",
+        " Well come back Again",
+        [ 
+
+          { text: "OK",  }
+
+        ],
+        
+      );
+     })
       
     }
   }
@@ -59,16 +70,35 @@ const Login = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 20,
+        alignItems:"center",
+        justifyContent:"center",
+        //backgroundColor:"lightgrey"
+        
       }}>
+        
+        <View>
 
-      <Image style={globalStyles.logo} source={require('../assets/car1.jpg')} />
-      <Text style={globalStyles.text}>CarFinder</Text>
+        <Text style={globalStyles.text3}>Well come to </Text>
 
+        </View>
+        
+       <View style={{flexDirection:"row",
+       alignContent:"space-around", 
+       
+       }}>
+
+       <Text style={globalStyles.text}>CarFinder</Text>
+       <TouchableOpacity>
+       <Image style={globalStyles.logo} source={require('../assets/carlogo.png')} />
+       </TouchableOpacity>
+       
+ 
+       </View>
     
-      
+       <View style={{ alignItems: 'center',
+        justifyContent: 'center',
+        marginHorizontal: 20,}}>
+
       <Forminput
         valuetxt={email}
         ontextChnage={ (userEmail) =>setEmail(userEmail)}
@@ -89,25 +119,22 @@ const Login = ({navigation}) => {
       />
 
       <FlatButton title="Sign In" 
-      
       onPress={ () => inputdata()
-        // login(email, password)
+       
       }
     />
 
       <LinkButton
+      
         title="Forget Password ?"
-        onPress={() => {alert('Forget Password function clicked');} 
+        onPress={() => navigation.navigate('ForgetPassword')} 
           
-        }
       />
 
       <FlatButton2
         btnType="chevron-right"
         title="Sign In with Gmail"
-        onPress={() => googleLogin()
-        
-        }
+        onPress={() => googleLogin()  }
       />
 
       {/* <FlatButton2
@@ -125,7 +152,9 @@ const Login = ({navigation}) => {
         title="Don't Have an Account ? Click here"
         onPress={() => navigation.navigate('Signup')}
       />
+
     </View>
+</View>
   );
 };
 

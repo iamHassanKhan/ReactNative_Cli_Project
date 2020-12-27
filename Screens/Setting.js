@@ -43,16 +43,16 @@ const Setting = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        alignContent: 'center',
-        alignContent: 'center',
+        
       }}>
      
       <Text style={globalStyles.text}>Account Details</Text>
 
      {/* <TouchableOpacity onPress={() => navigation.navigate('UserSetting')}> */}
-     
+
        <TouchableOpacity>
         <View style={globalStyles.userView}>
+
           <Image
             style={globalStyles.userImglogo}
 

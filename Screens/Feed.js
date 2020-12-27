@@ -110,6 +110,7 @@ export default class Feed extends Component {
                <FlatList
                 data={this.state.MyAdsList}
                 keyExtractor={(item, index) => index.toString()}
+                showsVerticalScrollIndicator={false}
                 renderItem={({ item, index }) => {
 
      

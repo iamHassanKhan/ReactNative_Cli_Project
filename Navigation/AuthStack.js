@@ -20,6 +20,7 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import firstScreen from '../Screens/firstScreen';
 import Login from '../Screens/Login';
 import Signup from '../Screens/Signup';
+import ForgetPassword from '../Screens/ForgetPassword';
 
 
 
@@ -85,6 +86,11 @@ const AuthStack = () => {
       <Stack.Screen
         name="Signup"
         component={Signup}
+        options={{header: () => null}}
+     />
+      <Stack.Screen
+        name="ForgetPassword"
+        component={ForgetPassword}
         options={{header: () => null}}
      />
 
