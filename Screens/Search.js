@@ -21,7 +21,7 @@ const Search = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        alignItems: 'center',
+        
       }}>
       <HeaderButtonsTab
         icon="angle-left"

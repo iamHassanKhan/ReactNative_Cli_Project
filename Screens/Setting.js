@@ -46,19 +46,18 @@ const Setting = ({navigation}) => {
         alignContent: 'center',
         alignContent: 'center',
       }}>
-      <Header
-        title="Setting"
-        icon="home"
-        coler="white"
-        onPress={() => navigation.jumpTo('Home')}
-      />
-      <Text style={globalStyles.text}>Settings</Text>
+     
+      <Text style={globalStyles.text}>Account Details</Text>
 
      {/* <TouchableOpacity onPress={() => navigation.navigate('UserSetting')}> */}
+     
        <TouchableOpacity>
         <View style={globalStyles.userView}>
           <Image
             style={globalStyles.userImglogo}
+
+            //We can show User imag here 
+
             source={require('../assets/defaultImg.png')}
           />
           <Text style={globalStyles.usertext}>Login as  {user.email} </Text>

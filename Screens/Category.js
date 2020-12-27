@@ -165,6 +165,11 @@ const Category = ({navigation}) => {
      <Text style={globalStyles.text2}>
        Car Categories will shown here
      </Text>
+     <View >
+     <ActivityIndicator size="large" color="blue"/>
+     </View>
+
+    
 
   
 

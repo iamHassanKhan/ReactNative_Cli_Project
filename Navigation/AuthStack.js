@@ -29,31 +29,46 @@ const Stack = createStackNavigator();
 const AuthStack = () => {
 
   const [isfirstlaunch, setisfirstlaunch] = React.useState(null);
+  
   let routeName;
 
   useEffect(() => {
 
     AsyncStorage.getItem('alreadyLaunched').then((value) => {
+
       if (value == null) {
+
         AsyncStorage.setItem('alreadyLaunched', 'true');
+
         setisfirstlaunch(true);
       } else {
+
         setisfirstlaunch(false);
       }
     });
+
     GoogleSignin.configure({
+
       webClientId: '294028485331-18o1o2a6m91eoashkl0c54tbm4ipujdq.apps.googleusercontent.com',
+
     });
   });
   if (isfirstlaunch == null) {
+
     return null;
+
   } else if (isfirstlaunch == true) {
+
     routeName = 'firstScreen';
+
   } else {
+
     routeName = 'Login';
+
   }
 
   return (
+    
     <Stack.Navigator initialRouteName={routeName}>
 
       <Stack.Screen

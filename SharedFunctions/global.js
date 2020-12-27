@@ -31,6 +31,7 @@ export const globalStyles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     flexDirection:"row",
+    
   },
 
   //Search page styles
@@ -350,7 +351,16 @@ ImageCategoriestylesView:{
    borderRadius:20,
    elevation:10,
    borderWidth:0.5
-  }
+  },
+  IndicatorStyle:{
+
+    flex:1,
+    flexDirection:"row",
+    justifyContent:"center",
+    
+
+   
+   }
 
 });
 

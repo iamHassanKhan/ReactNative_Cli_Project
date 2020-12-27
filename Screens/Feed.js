@@ -15,51 +15,10 @@ import database, { firebase } from '@react-native-firebase/database';
 
 import Share from 'react-native-share';
 
-// const posts = [ 
-//   {
-//     id: '1',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it ',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'Used',
-//     year: '2012',
-//     avatar: require('../assets/car2.png'),
-//     addimage: require('../assets/car4.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '2',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'Used',
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
-//   {
-//     id: '3',
-//     name: 'Hassan Khan',
-//     description: 'My Car ,iam Looking forward to sell it',
-//     price: '20,00000',
-//     timestamp: 1122020,
-//     make: 'Farari',
-//     driven: '2000km',
-//     condition: 'Used',
-//     year: '2012',
-//     avatar: require('../assets/car.jpg'),
-//     addimage: require('../assets/car.jpg'),
-//     loction: 'Lahore',
-//   },
+
  
-// ];
+
+ 
 
 
 export default class Feed extends Component {
@@ -81,13 +40,8 @@ export default class Feed extends Component {
     
 
    
-   //Shared Function 
-
    
-  ShareAd =() => {
-
-    alert("Shared");
-  }
+// like Ad
   LikeAd =() => {
 
     this.setState({Like: "red"});   
@@ -113,6 +67,33 @@ export default class Feed extends Component {
     
   }
 
+  //Shared Function 
+
+  ShareAd = async ()  => {
+
+    const shareOptions = {
+
+      message:"Your Title",
+      
+    }
+    try{
+
+      const shareResponse = await Share.open(shareOptions);
+      
+    }catch(err){
+
+      Alert.alert(
+        "Share Canceled",
+        "Didn't want to Share",
+        [ 
+          { text: "OK",  }
+          
+        ],
+        
+      );
+    }
+   }
+    
   
   render() {
 
@@ -124,7 +105,7 @@ export default class Feed extends Component {
 
      return this.state.MyAdsList.length > 0 ?
 
-     <SafeAreaView style={{backgroundColor:"ightgrey"}}>
+     <SafeAreaView >
 
                <FlatList
                 data={this.state.MyAdsList}
@@ -134,29 +115,24 @@ export default class Feed extends Component {
      
        return(
 
-        <TouchableOpacity onPress={()=>{
-          
-        }}
-      >
+       <View>
 
         <CardItem style={globalStyles.cardStyles}>
         
-       <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
+        <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
         
       
 
         <Right >
         
         <View  style={globalStyles.CardIcon}>
-
-        <Icon active name="share" size={25} color="grey"  />
-
+        
+        <Icon active name="share" size={25} color="grey" onPress={this.ShareAd}  />
+        
         <Icon active name="heart" size={25} color={this.state.Like} onPress={this.LikeAd} />
        
         </View>
-        
-        
-      
+           
         
         <Text style={globalStyles.Cardtext}>{item.Make}</Text>
               
@@ -164,19 +140,27 @@ export default class Feed extends Component {
                  
         <Text >{item.Condition}</Text>
 
-         <Text >{item.Discription}</Text>
          
          <Text >{item.Driven}</Text>
-         
+
+         <Text >{item.Discription}</Text>
+
          <Text ><Icon name="location-arrow" size={15}/>{'  '}{item.Location}</Text>
 
          <Text style={{color:"black",fontSize:11}}>{new Date(item.Time).toDateString()}</Text>
-
+         
+         <TouchableOpacity onPress={()=>{
+           alert(item.Id)
+         }}>
+         <Text>Report Ad  <Icon name="edit" size={15}/></Text>
+         </TouchableOpacity>
+        
         </Right>     
         
       </CardItem>
 
-      </TouchableOpacity>          
+      </View>
+              
            
   )
   

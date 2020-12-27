@@ -14,17 +14,16 @@ export default function SearchButton({title, onPress}) {
         <Text
           style={{
             flexDirection: 'row',
-            textAlign: 'justify',
             fontSize: 15,
             color: 'grey',
-            justifyContent:"center",
-            alignContent:"center"
+            
+            
           }}>
 
-         <Icon name="search" size={15} color="grey"/> {title}
+        <Icon name="search" size={15} color="grey"/> {title}
 
         </Text>
-
+       
       </TouchableOpacity>
     </View>
   );

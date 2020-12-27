@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
+ 
   Button,
   Text,
-  StatusBar,
+  
 } from 'react-native';
 import {Appbar, Title} from 'react-native-paper';
 

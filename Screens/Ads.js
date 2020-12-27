@@ -65,7 +65,7 @@ useEffect(()=>{
         {Ads.map((item,index) =>(
 
 
-<Card style={globalStyles.MyAdsCardStyle}>
+<Card style={globalStyles.MyAdsCardStyle} key={index}>
 <Card.Cover source={require('../assets/car.jpg')} />
 <Card.Content>
   <Title>{item.Make}</Title>

@@ -5,6 +5,7 @@ import Firestore from '@react-native-firebase/firestore';
 
 //==== Function to Ad Photo in Storge and getting url to put in Realtime database =====//
 
+
 export const uploadPhotosync = async uri =>{
 
     const path = `Ads/${Date.now() }.jpg`
@@ -33,7 +34,8 @@ export const uploadPhotosync = async uri =>{
 
 export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Location) => {
      
-    //const remoteUri = await  this.uploadPhotosync(localUri)
+    //const remoteUri = await  this.uploadPhotosync(localUri);
+
     return new Promise(function(resolve ,reject) {
     let key;
     if(Id!=null){
@@ -54,9 +56,10 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Loc
         Driven:Driven,
         Discription:Discription,
        
-        Time:Date.now()
+        Time:Date.now(),
 
         // image:remoteUri,
+         
         //image:geturl from above functon
         
     };

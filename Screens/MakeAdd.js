@@ -89,7 +89,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
         setCondition('');
         setDiscrip('');
         setLocation('');
-        //setImage(null);
+       // setImage(null);
     
         Alert.alert(
           "Ad Posted",
@@ -126,7 +126,9 @@ import { PostAd } from '../Navigation/FirebaseDB';
 
 return(
 
-  <ScrollView>
+  <ScrollView
+  showsVerticalScrollIndicator={false}
+  >
 
   <View style={globalStyles.AdPostScreen}>
   <HeaderButtonsTab  icon="angle-left"
@@ -138,11 +140,11 @@ return(
   <View  >
   <TextInput placeholder="lahore,punjab,pakistan "  value={Location} onChangeText={(text)=>setLocation(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput} />
-   <TextInput placeholder="Price "   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year i.e 2000"   value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Price "   value={Price} keyboardType="numeric" onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year i.e 2000"   value={Year} keyboardType="numeric" onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / km "   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven / km "   value={Condition} keyboardType="numeric" onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Detail Discription" multiline value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
   </View>

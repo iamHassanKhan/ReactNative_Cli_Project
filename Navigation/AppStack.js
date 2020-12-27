@@ -33,8 +33,10 @@ const AppStack = () => {
   const FeedStack= () =>{
 
     <Stack.Navigator>
-      <Stack.Screen name="Feed" component={Feed} />
-      <Stack.Screen name="FeedItems" component={FeedItems} />
+      <Stack.Screen name="Feed" component={Feed} 
+      
+      />
+      <Stack.Screen name="ReportAd" component={ReportAds} />
     </Stack.Navigator>
   }
 
