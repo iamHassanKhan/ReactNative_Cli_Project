@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "294028485331-29qdlv0e40h4eeotnagvt879359pq68q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carfinder",
+            "certificate_hash": "9f77698bd68498c4c445305f1f418e69909d39c4"
+          }
+        },
+        {
           "client_id": "294028485331-18o1o2a6m91eoashkl0c54tbm4ipujdq.apps.googleusercontent.com",
           "client_type": 3
         }
