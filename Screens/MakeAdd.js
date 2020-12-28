@@ -132,7 +132,7 @@ return(
 
   <View style={globalStyles.AdPostScreen}>
   <HeaderButtonsTab  icon="angle-left"
-        coler="blue"  onPress={()=> navigation.goBack()}/>
+        coler="blue"  title1="Back" onPress={()=> navigation.goBack()}/>
   <Text style={globalStyles.text}>
    Make your Ad <Icon name="edit" size={30}/>
   </Text>
@@ -144,7 +144,7 @@ return(
    <TextInput placeholder="Year i.e 2000"   value={Year} keyboardType="numeric" onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Driven / km "   value={Condition} keyboardType="numeric" onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Detail Discription" multiline value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Detail Discription i.e (Contact Detail)" multiline value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
   </View>

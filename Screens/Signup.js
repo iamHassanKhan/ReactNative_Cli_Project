@@ -16,6 +16,8 @@ import FlatButton from '../SharedFunctions/button';
 import FlatButton2 from '../SharedFunctions/button2';
 import LinkButton from '../SharedFunctions/linkButton';
 import Forminput from '../SharedFunctions/Forminput';
+import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
+
 import {AuthContext} from '../Navigation/AuthProviders';
 
 const Signup = ({navigation}) => {
@@ -40,10 +42,38 @@ const Signup = ({navigation}) => {
       style={{
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-        marginHorizontal: 20,
+        
+        
       }}>
+
+         <View>
+         <HeaderButtonsTab 
+         icon="chevron-left" title1="Login" coler="blue"
+         onPress={
+             ()=>{
+             navigation.push("Login")
+         }}
+         />
+
+         </View> 
+
+
+         <View style={{flexDirection:"row",
+              alignContent:"space-around", 
+        }}>
+
+       <Text style={globalStyles.text}>CarFinder</Text>
+       <TouchableOpacity>
+       <Image style={globalStyles.logo} source={require('../assets/carlogo.png')} />
+       </TouchableOpacity>
+       
+ 
+       </View>
+
+      <View style={{alignItems:"center" }}>
+
       <Text style={globalStyles.text}>Create an Account</Text>
+
       <Forminput
         valuetxt={username}
         ontextChnage={(userName) => setUername(userName)}
@@ -79,7 +109,7 @@ const Signup = ({navigation}) => {
         title="Have an Account ? Sign In"
         onPress={() => navigation.navigate('Login')}
       />
-
+    
       {/* 
       Term and Condition  */}
 
@@ -99,6 +129,7 @@ const Signup = ({navigation}) => {
           By Signing Up your are Accepting our Term and Conditions
         </Text>
       </View> */}
+      </View>
     </View>
   );
 };

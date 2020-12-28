@@ -75,15 +75,18 @@ export const AuthProviders = ({children}) => {
             
             await auth().signInWithCredential(googleCredential);
            }catch(e){
-            Alert.alert(
-              "Login Failed",
-              "Please Enter Email and Password Correctly !!",
-              [
+
+
+            console.log("Error => ",e)
+            // Alert.alert(
+            //   "Login Failed",
+            //   "Please Enter Email and Password Correctly !!",
+            //   [
                 
-                { text: "OK",  }
-              ],
+            //     { text: "OK",  }
+            //   ],
               
-            );
+            // );
            }
 
          },

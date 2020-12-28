@@ -2,82 +2,83 @@ import React, { useEffect, useState } from 'react';
 import {StyleSheet, View, TouchableOpacity, Text,Alert,TextInput, Image,ScrollView} from 'react-native';
 
 import {globalStyles} from '../SharedFunctions/global';
-import { DellAllAds } from '../Navigation/FirebaseDB';
+// import {  } from '../Navigation/FirebaseDB';
 import database, { firebase } from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 import FlatButton from '../SharedFunctions/button';
 
+import { PostAd } from '../Navigation/FirebaseDB';
 const UpdateAd = ({navigation,route}) => {
 
-  const {Id,Make ,Price,Discription, Driven ,Year,Condition,Location} =  route.params;
-  
-  const [ItmId,setId] = useState();
-  const [ItmMake,setMake] = useState();
-  const [ItmPrice,setPrice] = useState();
-  const [ItmYear,setYear] = useState();
-  const [ItmDriven,setDriven] = useState();
-  const [ItmCondition,setCondition] = useState();
-  const [ItmDiscription,setDiscrip] = useState();
-  const [ItmLocation,setLocation] = useState();
-  //Function for Edit or Delete Ads
-
-  const [Ads,setAds] =useState([]);
-
-  
-  const EditAd =(Id) =>{
-    
-  
-  }
-
+  const {item} =  route.params;
   
 
-  useEffect(()=>{
+   //console.log(item.Id);
 
-  const userRef= database().ref('users');
-  const OnLoadingListener =userRef.on('value',snapshot=>{
-  setAds([]);
-  snapshot.forEach(function(childSnapshot){
-    setAds(Ads=>[...Ads,childSnapshot.val()]);
-  })
 
-  });
-  return()=>{
+  const [Id,setId] = useState();
+  const [Location,setLocation] = useState(item.Location);
+  const [Make,setMake] = useState(item.Make);
+  const [Price,setPrice] = useState(item.Price);
+  const [Year,setYear] = useState(item.Year);
+  const [Driven,setDriven] = useState(item.Driven);
+  const [Condition,setCondition] = useState(item.Condition);
+  const [Discription,setDiscrip] = useState(item.Discription);
+  
 
-    userRef.off('value',OnLoadingListener); 
+  //Function for Edit Ad
 
-  };
-  [] });
- 
+
 
   return (
 
-    <View style={{flex:1,alignItems:"center",backgroundColor:"lightgrey" }}>
+    <ScrollView >
 
     <HeaderButtonsTab icon="angle-left" coler="blue"  title1="MyAds" 
     onPress={()=>{
       navigation.goBack()
     }}/>
+    
+  <View style={{flex:1,alignItems:"center" }}>
+    
+  <Text style={globalStyles.text2}>
+            Update Your Ad
+            </Text>
 
-  <ScrollView>
 
-  <TextInput placeholder="Sahiwal,punjab,Pakistan"  value={Location} onChangeText={(ItmLocation)=>setMake(ItmLocation)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(ItmMake)=>setMake(ItmMake)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Price "   value={Price} onChangeText={(ItmPrice)=>setPrice(ItmPrice)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Year 2000"   value={Year} onChangeText={(ItmYear)=>setYear(ItmYear)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Driven / kilometers"   value={Driven} onChangeText={(ItmDriven)=>setDriven(ItmDriven)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Condition i.e Used or New "   value={Condition} onChangeText={(ItmCondition)=>setCondition(ItmCondition)} style={globalStyles.Formtxtinput}/>
-   <TextInput multiline placeholder="Detail Discription" value={Discription} onChangeText={(ItmDiscription)=>setDiscrip(ItmDiscription)} style={globalStyles.Formtxtinput}/>
+  <TextInput placeholder="Location"  value={Location} onChangeText={(text)=>setLocation(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Make" value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Price"   value={Price} onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Year"  value={Year} onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Driven"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Condition"   value={Condition} onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput multiline placeholder="Discription" value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
-    </ScrollView>
-    <View>
+    </View>
+
+    <View style={{alignItems:"center" }}>
     <FlatButton title="Update Ad" 
      
-     
+     onPress={()=>{
+
+     alert("updated")
+     setMake('');
+     setPrice();
+     setYear(); 
+     setDriven('');
+     setCondition('');
+     setDiscrip('');
+     setLocation('');
+
+
+
+     }}
      //Send file and ad data in database
+
      />
     </View>
-    </View>
+    </ScrollView>
   );
 };
 export default UpdateAd;

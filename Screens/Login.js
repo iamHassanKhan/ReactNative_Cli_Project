@@ -17,9 +17,9 @@ import FlatButton from '../SharedFunctions/button';
 import FlatButton2 from '../SharedFunctions/button2';
 import LinkButton from '../SharedFunctions/linkButton';
 import Forminput from '../SharedFunctions/Forminput';
+
+
 import {AuthContext} from '../Navigation/AuthProviders';
-
-
 
 
 const Login = ({navigation}) => {
@@ -71,11 +71,10 @@ const Login = ({navigation}) => {
       style={{
         flex: 1,
         alignItems:"center",
-        justifyContent:"center",
-        //backgroundColor:"lightgrey"
+        justifyContent:"center"
         
       }}>
-        
+         
         <View>
 
         <Text style={globalStyles.text3}>Well come to </Text>
@@ -125,7 +124,7 @@ const Login = ({navigation}) => {
     />
 
       <LinkButton
-      
+
         title="Forget Password ?"
         onPress={() => navigation.navigate('ForgetPassword')} 
           
@@ -134,14 +133,9 @@ const Login = ({navigation}) => {
       <FlatButton2
         btnType="chevron-right"
         title="Sign In with Gmail"
-        onPress={() => googleLogin()  }
+        onPress={() => googleLogin() }
       />
 
-      {/* <FlatButton2
-        btnType="chevron-right"
-        title="Sign In with Phone No"
-        onPress={() => navigation.navigate("LoginPhoneNo")}
-      />  */}
       
       <FlatButton2
         btnType="chevron-right"

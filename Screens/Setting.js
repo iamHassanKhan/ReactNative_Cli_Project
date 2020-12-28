@@ -23,6 +23,10 @@ const Setting = ({navigation}) => {
 
   const {user, logout} = useContext(AuthContext);
 
+  const [userdata,setUserdata] = useState([user.providerData]);
+
+ //console.log(userdata);
+
   const Signout= ()=>{
 
     Alert.alert(
@@ -67,7 +71,7 @@ const Setting = ({navigation}) => {
       
       <TouchableOpacity >
       <View style={globalStyles.userView}>
-        <Text style={globalStyles.text2}>More Settings</Text>
+        <Text style={globalStyles.text2}>More Detail</Text>
       </View>
       </TouchableOpacity>
      
@@ -81,6 +85,9 @@ const Setting = ({navigation}) => {
         <Text style={globalStyles.text2}>CarFinder</Text>
       </View>
       </TouchableOpacity>
+
+
+
     </View>
   );
 };

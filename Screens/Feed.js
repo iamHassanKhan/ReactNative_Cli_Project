@@ -34,42 +34,12 @@ export default class Feed extends Component {
      MyAdsList:[]
     
    }
+
    //////////////////////////
 
-  
-    
+// Share Ad
 
-   
-   
-// like Ad
-  LikeAd =() => {
-
-    this.setState({Like: "red"});   
-  }
-  
-   componentDidMount(){
-   
-   
-
-    const myAds = firebase.database().ref("Ads");
-
-   
-
-      myAds.on("value",dataSnap=>{
-
-        // console.log(Object.values(dataSnap.val()))
-  
-        this.setState({MyAdsList:Object.values((dataSnap.val()))})
-      }
-      )
-      
-  
-    
-  }
-
-  //Shared Function 
-
-  ShareAd = async ()  => {
+   ShareAd = async ()  => {
 
     const shareOptions = {
 
@@ -93,6 +63,45 @@ export default class Feed extends Component {
       );
     }
    }
+  
+    
+// like Ad
+
+  LikeAd =() => {
+
+    this.setState({Like: "red"});   
+  }
+
+
+  /////////
+  ReportAd =() => {
+
+    alert("Ad Reported")   
+  }
+  
+   componentDidMount(){
+   
+   
+
+    const myAds = firebase.database().ref("Ads");
+
+   
+
+      myAds.on("value",dataSnap=>{
+
+        // console.log(Object.values(dataSnap.val()))
+  
+        this.setState({MyAdsList:Object.values((dataSnap.val()))})
+      }
+      )
+      
+      //Object.values(
+  
+    
+  }
+
+ 
+
     
   
   render() {
@@ -151,7 +160,7 @@ export default class Feed extends Component {
          <Text style={{color:"black",fontSize:11}}>{new Date(item.Time).toDateString()}</Text>
          
          <TouchableOpacity onPress={()=>{
-           alert(item.Id)
+           this.ReportAd()
          }}>
          <Text>Report Ad  <Icon name="edit" size={15}/></Text>
          </TouchableOpacity>

@@ -6,8 +6,9 @@ import {View, Text, Button, TouchableOpacity, Image} from 'react-native';
 
 import Onboarding from 'react-native-onboarding-swiper';
 
-//=========================
 //===================
+//===================
+
 const firstScreen = ({navigation}) => {
   return (
     <Onboarding

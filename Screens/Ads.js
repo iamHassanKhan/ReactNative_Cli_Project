@@ -1,4 +1,4 @@
-import React, {useContext, useState ,useEffect} from 'react';
+import React, {useContext, useState ,useEffect, useRef} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -13,36 +13,55 @@ import {
 import {globalStyles} from '../SharedFunctions/global';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+
 import database, { firebase } from '@react-native-firebase/database';
+
+
 
 //Auth Context imported for checking Authentice  User
 
 const Ads = ({navigation}) => {
 
+
   const [Ads,setAds] = useState([]);
+
+  
 
 const deleteAd = (item) =>{
 
   database().ref('Ads/' +item.Id)
   .remove()
   .then(()=>{
+    Alert.alert(
+      "Deleted",
+      "Ad has been Deleted !",
+      [
+        
+        { text: "OK",  }
+      ],
+      
+    );
 
   }).catch((err)=>{
     console.log(err);
   })
 }
-const UpdateAd = (item) =>{
-  alert(item);
-}
+
 
 useEffect(()=>{
+
   const Adsref = database().ref('/Ads');
+
+  
+
   const OnLoadingAds = Adsref.on('value' ,snapshot =>{
    
     setAds([]);
     
     snapshot.forEach(function (childSnapshot){
+
       setAds(Ads=>[...Ads,childSnapshot.val()])
+
     })
 
   });
@@ -58,7 +77,7 @@ useEffect(()=>{
         flex: 1,
         marginHorizontal:10,
       }}>
-      <Text style={globalStyles.text}>My Ads </Text>
+      <Text style={globalStyles.text}> My Ads </Text>
 
       <View>
         
@@ -66,7 +85,9 @@ useEffect(()=>{
 
 
 <Card style={globalStyles.MyAdsCardStyle} key={index}>
+
 <Card.Cover source={require('../assets/car.jpg')} />
+
 <Card.Content>
   <Title>{item.Make}</Title>
   <Paragraph>{item.Discription}</Paragraph>
@@ -76,9 +97,11 @@ useEffect(()=>{
   <Button
   style={{backgroundColor:"lightgrey",width:100 ,marginRight:20}}
   onPress={()=>{
-    navigation.navigate("UpdateAd",{Id: item.Id,Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition,Location:item.Location} );
+    navigation.navigate("UpdateAd",{item:item});
+    //{Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition,Location:item.Location} 
   }}
   >
+    
   Edit
   </Button>
   <Button style={{backgroundColor:"lightgrey",width:100}}
@@ -87,12 +110,14 @@ useEffect(()=>{
    Delete
   </Button>
 </Card.Actions>
+
 </Card>
-        ))}
+
+ ))}
      
-      </View>
+    </View>
       
-    </ScrollView>
+ </ScrollView>
   );
 };
 

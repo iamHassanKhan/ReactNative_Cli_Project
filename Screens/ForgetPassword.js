@@ -32,7 +32,7 @@ const ForgetPassword = ({navigation}) => {
       {
         Alert.alert(
             "Email is Required",
-            "Please Enter Required Email Feild!",
+            "Please Enter Email First!",
             [
               
               { text: "OK",  }
@@ -48,7 +48,7 @@ const ForgetPassword = ({navigation}) => {
       {
         Alert.alert(
           "Sent",
-          "Email has sent Successfully ",
+          "Email has been sent to you Successfully.",
           [ 
 
             { text: "OK",  }
@@ -93,7 +93,7 @@ const ForgetPassword = ({navigation}) => {
      <View style={{alignItems:"center"}}>
 
     
-     <Text style={globalStyles.text2}> Please Enter your authentic Email (Gmail ,Yahoo) etc </Text>
+     <Text style={globalStyles.text2}> Please Enter your authentic Email for New Password.</Text>
 
      <TextInput style={globalStyles.Formtxtinput}
      placeholder="Enter  i.e   example@gmail.com"
