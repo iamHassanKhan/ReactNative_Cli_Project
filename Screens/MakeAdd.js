@@ -17,7 +17,8 @@ import FlatButton from '../SharedFunctions/button';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 import ImagePicker from 'react-native-image-picker';
 import { PostAd } from '../Navigation/FirebaseDB';
-
+import storage from '@react-native-firebase/storage';
+import database, { firebase } from '@react-native-firebase/database';
 // Add your Post data in here  ....
 
  const  MakeAdd = ({navigation}) =>{
@@ -30,11 +31,16 @@ import { PostAd } from '../Navigation/FirebaseDB';
   const [Condition,setCondition] = useState('');
   const [Discription,setDiscrip] = useState('');
   const [Location,setLocation] = useState('');
+
   const [image,setImage] = useState(null);
   
-  
+  /////////////////////////////////////////////////
+
+  //Image Picking from Library or camera Code Below
 
   const chooseFile = () => {
+
+
     let options = {
       title: 'Select Image',
       
@@ -43,8 +49,8 @@ import { PostAd } from '../Navigation/FirebaseDB';
         path: 'images',
       },
     };
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
+    ImagePicker.showImagePicker(options, (response) =>
+     {
 
       if (response.didCancel) {
         alert('Cancelled Image');
@@ -52,16 +58,16 @@ import { PostAd } from '../Navigation/FirebaseDB';
         alert('Error : ', response.error)
       }
        else {
-        let source = response;
-        setImage({uri:source.uri});
+        const source ={uri: response.uri};
+        console.log(source);
+        setImage(source);
       }
     });
   };
 
- //==========//
+////////////////////////////////////////////////////
+// Ad data Sbmit to realTime database 
 
-
-  //==/=======//
 
   const submitAd = () =>{
 
@@ -78,9 +84,11 @@ import { PostAd } from '../Navigation/FirebaseDB';
         
       );
     } else{
+      
       PostAd(Id,Make,Price,Year,Condition,Driven,Discription,Location)
+      
       .then(result=>{
-    
+
         setId(null);
         setMake('');
         setPrice();
@@ -89,8 +97,7 @@ import { PostAd } from '../Navigation/FirebaseDB';
         setCondition('');
         setDiscrip('');
         setLocation('');
-       // setImage(null);
-    
+        
         Alert.alert(
           "Ad Posted",
           "Your Ad is Submmited !",
@@ -104,8 +111,9 @@ import { PostAd } from '../Navigation/FirebaseDB';
       })
       .catch(error=>{
 
-        //console.log(error)
+        console.log(error)
         
+
         Alert.alert(
           "Permission Denied",
           "Please Login with Email To Submit Post !",
@@ -121,8 +129,44 @@ import { PostAd } from '../Navigation/FirebaseDB';
       })
     }
   
-
 };
+////////////////////////////////////
+// Image upload on firebase Storage Code below
+
+const uploadImage = async () => {
+
+  const { uri } = image;
+  const filename = uri.substring(uri.lastIndexOf('/') + 1);
+  const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+ 
+  const task = storage()
+    .ref(filename)
+    .putFile(uploadUri);
+  // set progress state
+  task.on('state_changed', snapshot => {
+       //console.log("Image uploaded")
+  });
+  try {
+    await task;
+  } catch (e) {
+    console.error(e);
+  }
+ 
+  // 
+  console.log("Image uploaded")
+  setImage(null);
+};
+/////////////////////////////////////
+const AddPost = () =>{
+
+  submitAd();
+  uploadImage();
+}
+
+// Function Above for Adding Ad data in Database
+//===================================//
+
+
 
 return(
 
@@ -171,8 +215,8 @@ return(
       
 
     <FlatButton title="Post Ad" 
-     
-     onPress={submitAd}
+       //onPress={PostAd}
+       onPress={AddPost}
      //Send file and ad data in database
      />
     </View>  
@@ -184,11 +228,43 @@ return(
 }
 
 
-
 export default MakeAdd;
 
 
+/////////////////////////////////////////
 
+  //upload Image in Firebase Storage
 
+  // const uploadImage = async (imageUri) => {
 
+  //   const { uri } = image;
+  //   const filename = uri.substring(uri.lastIndexOf('/') + 1);
+  //   const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+   
+  //   const task = storage()
+  //     .ref(filename)
+  //     .putFile(uploadUri);
+    
+  //   task.on('state_changed', snapshot => {
+      
+  //     //console.log("image Uploaded");
 
+  //   })
+    
+
+  //   // try {
+     
+  //   //    await task;
+
+  //   //   //console.log(imageUri);
+
+  //   // } catch (e) {
+
+  //   //   console.error("Error => ",e);
+
+  //   // }
+    
+  //   setImage(null);
+  
+  // }
+//////////////////////////////////////////////////////

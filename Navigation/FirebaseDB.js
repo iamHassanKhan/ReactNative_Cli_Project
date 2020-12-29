@@ -6,35 +6,34 @@ import Firestore from '@react-native-firebase/firestore';
 //==== Function to Ad Photo in Storge and getting url to put in Realtime database =====//
 
 
-export const uploadPhotosync = async uri =>{
+//  uploadPhotosync = async uri =>{
 
-    const path = `Ads/${Date.now() }.jpg`
-    return new Promise (async(res,rej)=>{
+//     const path = `Ads/${Date.now() }.jpg`
+//     return new Promise (async(res,rej)=>{
 
-        const response = await fetch(uri)
-        const file = await response.blob()
+//         const response = await fetch(uri)
+//         const file = await response.blob()
 
-        let upload = storage().ref(path).put(file)
-        upload.on('state_changed' , snapshot=>{
+//         let upload = storage().ref(path).put(file)
+//         upload.on('state_changed' , snapshot=>{
 
-        }),err=>{
-            rej(err)
-        },async()=>{
-            const url = await upload.snapshot.ref.getDownloadURL()
-            res(url)
-        }
-    })
-}
-
-
-
-//==== Function to Ad Post in Database =====//
+//         }),err=>{
+//             rej(err)
+//         },async()=>{
+//             const url = await upload.snapshot.ref.getDownloadURL()
+//            return  res(url)
+//         }
+//     })
+// }
 
 
+// const remoteUri = await  uploadPhotosync(localUri);
+//==== Function to Ad Post in Database =====//  
 
-export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Location) => {
+
+
+export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Location,localUri) => {
      
-    //const remoteUri = await  this.uploadPhotosync(localUri);
 
     return new Promise(function(resolve ,reject) {
     let key;
@@ -58,9 +57,8 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Loc
        
         Time:Date.now(),
 
-        // image:remoteUri,
+        //image:localUri,
          
-        //image:geturl from above functon
         
     };
     database()
@@ -75,7 +73,7 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Loc
 });
 }
 
-//===========================//
+//======================================//
  
 
 
@@ -86,7 +84,6 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Loc
 
 
 
-//==== Function to fetch data and show in feed ====//
 
 
 //====================================================//
@@ -94,34 +91,4 @@ export const PostAd = async (Id,Make,Price,Year,Driven,Condition,Discription,Loc
   ///==== Function To Report an Ad =====/////
 
 
-export const ReportAd =(Id,ComplainMsg) => {
 
-    return new Promise(function(resolve ,reject) {
-    let key;
-    if(Id!=null){
-        key=Id;
-    }else{
-        key=database()
-        .ref()
-        .push().key;  
-        
-    }
-    let Report={
-        //Id:key,
-        ComplainMsg:ComplainMsg,
-        Time:Date.now()
-        
-    };
-    database()
-    .ref('Reports/')
-    .push(Report)
-    .then(snapshot=>{
-    resolve(snapshot);
-    })
-    .catch(error =>{
-    reject(error);
-    });
-});
-}
-
-//=====================///

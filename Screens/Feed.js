@@ -87,16 +87,20 @@ export default class Feed extends Component {
 
    
 
-      myAds.on("value",dataSnap=>{
-
+      myAds.on("value",dataSnap=>
+      {
         // console.log(Object.values(dataSnap.val()))
   
-        this.setState({MyAdsList:Object.values((dataSnap.val()))})
-      }
-      )
-      
-      //Object.values(
+          this.setState(
+          {  
+            MyAdsList:Object.values(
+               ( dataSnap.val() ) ) 
+          })  
+      } )
+
   
+
+
     
   }
 
