@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   FlatList,
   TextInput,
-  Text,
   Modal,
   Image,
   StatusBar,

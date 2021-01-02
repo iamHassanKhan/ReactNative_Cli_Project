@@ -29,10 +29,11 @@ export default class SearchResult extends Component{
     Like:"white",
     MySearchList:[],
     Like:"white",
-    searchAds:"",
-    adlocation:"",
+    searchCars:"",
+    addLocation:"",
    
   }
+  
 //liked function
   LikeAd =() => {
 
@@ -63,7 +64,40 @@ export default class SearchResult extends Component{
       );
     }
    }
+  //Report Ads
+
+   ReportAd =() => {
+
+    Alert.alert(
+      "Report ",
+      "Want to Report Ad",
+      [
+        {
+          text: "Yes",
+          onPress: ()=> alert("Reported")
+        },
+        {
+          text: "No",
+          onPress: () => console.log("Report Cancel"),
+          style: "cancel"
+        },
+       
+      ],
+      
+    )  
+  }
+  
+  SearchCar =() =>{
+   
+  
+  }
+
+  Adlocation =() =>{
     
+  }
+
+
+
   componentDidMount(){
 
   const myAds = firebase.database().ref("Ads");
@@ -82,14 +116,7 @@ export default class SearchResult extends Component{
 
 }
 
-  SearchCar =() =>{
-   
-  
-  }
-
-  Adlocation =() =>{
-    
-  }
+ 
 
 
   render() {
@@ -99,15 +126,16 @@ export default class SearchResult extends Component{
     <SafeAreaView >
 
       <View style={{marginHorizontal:15}} >
+
       <Text style={globalStyles.text2}>Search Ads</Text>
       <SearchtxtInput iconType="search"  placeholdertxt="Find Cars" onPress={() => {
       alert("Search Button Clicked")
        }} />
-
+{/* 
       <SearchtxtInput iconType="location" placeholdertxt="Lahore, Punjab, Pakistan" iconType2="location" 
       onPress={() => {
        alert("Add Location")
-       }} />
+       }} /> */}
 
       </View>
        
@@ -151,7 +179,12 @@ export default class SearchResult extends Component{
          <Text ><Icon name="location-arrow" size={15}/>{'  '}{item.Location}</Text>
 
          <Text style={{color:"black",fontSize:11}}>{new Date(item.Time).toDateString()}</Text>
-
+          
+         <TouchableOpacity onPress={()=>{
+           this.ReportAd()
+         }}>
+         <Text>Report Ad  <Icon name="edit" size={15}/></Text>
+         </TouchableOpacity>
         </Right>     
         
       </CardItem>

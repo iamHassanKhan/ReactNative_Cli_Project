@@ -23,14 +23,9 @@ export default function SearchtxtInput({
         placeholder={placeholdertxt}
         placeholderTextColor="grey"
         numberOfLines={1}
-        style={globalStyles.Searchtxtinput}
        
       />
-      <View style={globalStyles.searchiconstyle}>
-
         <Icon name={iconType} size={25} color="black" onPress={onPress} />
-
-      </View>
     </View>
   );
 }

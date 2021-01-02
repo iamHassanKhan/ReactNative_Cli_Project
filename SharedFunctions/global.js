@@ -134,7 +134,7 @@ export const globalStyles = StyleSheet.create({
 
     flexDirection:"row",
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 40,
     padding: 10,
     marginTop: 5,
     alignContent:"center",
@@ -170,13 +170,13 @@ export const globalStyles = StyleSheet.create({
   //textinput Styling fror Login and Signup 
 
   formtxtinputView: {
-
+   
     marginTop: 5,
     marginBottom: 10,
     width: '100%',
     height: windowHeight / 15,
     borderColor: 'grey',
-    borderRadius: 3,
+    borderRadius: 30,
     borderWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -184,8 +184,8 @@ export const globalStyles = StyleSheet.create({
   },
 
   formtxtinput: {
-    padding: 10,
-    marginTop: 5,
+
+    marginTop:5,
     marginBottom: 10,
     width: windowWidth / 1.5,
     height: windowHeight / 15,
@@ -200,40 +200,24 @@ export const globalStyles = StyleSheet.create({
   SearchtxtinputView: {
 
     marginTop: 5,
-    marginBottom: 5,
+    marginBottom: 10,
     height: 50,
     flexDirection: 'row',
     backgroundColor: 'white',
-    elevation:30
+    elevation:30,
+    alignItems:"center",
+    justifyContent:"space-around",
+    borderRadius:40,
+    
     
   },
-  Searchtxtinput: {
 
-    backgroundColor:"white",
-    padding: 10,
-    width: 300,
-    fontSize: 16,
-    fontWeight:"bold",
-    textAlign:"center",
- 
-  },
-
-  searchiconstyle: {
-
-    padding: 10,
-    height: '100%',
-    width: 50,
-
-  },
   //icon Style for login ,signup and Search pages
 
   formiconstyle: {
     padding: 10,
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-    borderLeftColor: 'grey',
-    borderLeftWidth: 1,
     width: 50,
     
   },
@@ -285,15 +269,13 @@ SearchViewHome:{
     width: 350,
     height: 60,
     borderWidth: 0.5,
-    marginTop: 6,
-    marginBottom: 6,
+    marginTop: 5,
+    marginBottom: 5,
     borderRadius: 10,
-    marginHorizontal: 5,
     justifyContent: 'center', 
     flexDirection: 'row',
-    borderColor: "green",
     backgroundColor:"lightgrey",
-    elevation:15,
+    elevation:150,
     textAlign:"center",
     fontSize:15,
     fontWeight:"bold",

@@ -64,9 +64,32 @@ export default class Feed extends Component {
 
 //Reprt Ad
 
+
+
+
+
   ReportAd =() => {
 
-    alert("Ad Reported")   
+    
+      Alert.alert(
+        "Report ",
+        "Want to Report Ad",
+        [
+          {
+            text: "Yes",
+            onPress: ()=> alert("Reported")
+          },
+          {
+            text: "No",
+            onPress: () => console.log("Report Cancel"),
+            style: "cancel"
+          },
+         
+        ],
+        
+      )
+     
+     
   }
   
   
@@ -112,9 +135,11 @@ export default class Feed extends Component {
      <SafeAreaView >
 
                <FlatList
+               
                 data={this.state.MyAdsList}
                 keyExtractor={(item, index) => index.toString()}
                 showsVerticalScrollIndicator={false}
+                
                 renderItem={({ item, index }) => {
 
      

@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
+  Text,Alert,
   StatusBar,
   Image,
   TextInput,
@@ -105,7 +105,29 @@ useEffect(()=>{
   Edit
   </Button>
   <Button style={{backgroundColor:"lightgrey",width:100}}
-  onPress={()=> deleteAd(item)
+  onPress={ 
+
+   ()=>{
+     
+    Alert.alert(
+      "Delete Ad",
+      "This can't be undone ?",
+      [
+        {
+          text: "Yes",
+          onPress: ()=> deleteAd(item)
+        },
+        {
+          text: "No",
+          onPress: () => console.log("Delete Canceled"),
+          style: "cancel"
+        },
+       
+      ],
+      
+    )
+   }
+               //()=> deleteAd(item)
   }>
    Delete
   </Button>

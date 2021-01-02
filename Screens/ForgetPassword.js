@@ -20,9 +20,6 @@ import auth, { firebase } from '@react-native-firebase/auth';
 
 const ForgetPassword = ({navigation}) => {
 
-  //calling function and user values from Auth context
-
-  const {user, logout} = useContext(AuthContext);
 
   const [email,setEmail] =useState('');
 
