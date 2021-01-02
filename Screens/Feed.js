@@ -7,19 +7,10 @@ import {
   TextInput,TouchableOpacity,Button,
 } from 'react-native';
 import { globalStyles } from '../SharedFunctions/global';
-
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
-
 import database, { firebase } from '@react-native-firebase/database';
-
 import Share from 'react-native-share';
-
-
- 
-
- 
-
 
 export default class Feed extends Component {
 
@@ -35,7 +26,6 @@ export default class Feed extends Component {
     
    }
 
-   //////////////////////////
 
 // Share Ad
 
@@ -72,12 +62,13 @@ export default class Feed extends Component {
     this.setState({Like: "red"});   
   }
 
+//Reprt Ad
 
-  /////////
   ReportAd =() => {
 
     alert("Ad Reported")   
   }
+  
   
    componentDidMount(){
    

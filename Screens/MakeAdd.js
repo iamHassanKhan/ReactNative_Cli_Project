@@ -59,7 +59,7 @@ import database, { firebase } from '@react-native-firebase/database';
       }
        else {
         const source ={uri: response.uri};
-        console.log(source);
+        //console.log(source);
         setImage(source);
       }
     });
@@ -138,13 +138,12 @@ const uploadImage = async () => {
   const { uri } = image;
   const filename = uri.substring(uri.lastIndexOf('/') + 1);
   const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
- 
   const task = storage()
     .ref(filename)
     .putFile(uploadUri);
-  // set progress state
+  
   task.on('state_changed', snapshot => {
-       //console.log("Image uploaded")
+       
   });
   try {
     await task;
@@ -152,11 +151,13 @@ const uploadImage = async () => {
     console.error(e);
   }
  
-  // 
-  console.log("Image uploaded")
+ // console.log("Image uploaded")
   setImage(null);
 };
+
 /////////////////////////////////////
+
+//Posted Ad function By calling Both Functions
 const AddPost = () =>{
 
   submitAd();
@@ -164,8 +165,7 @@ const AddPost = () =>{
 }
 
 // Function Above for Adding Ad data in Database
-//===================================//
-
+///////////////////////////////////////////
 
 
 return(

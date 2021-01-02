@@ -47,8 +47,8 @@ const ForgetPassword = ({navigation}) => {
       .then(function()
       {
         Alert.alert(
-          "Sent",
-          "Email has been sent to you Successfully.",
+          "Email Sent",
+          "Check your Inbox for Password Link !",
           [ 
 
             { text: "OK",  }

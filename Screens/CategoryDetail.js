@@ -19,14 +19,47 @@ import FlatButton from '../SharedFunctions/button';
 import {globalStyles} from '../SharedFunctions/global';
 import FlatButton2 from '../SharedFunctions/button2';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
-import database, { firebase } from '@react-native-firebase/database';
-import Share from 'react-native-share';
 
 
-const Category = ({navigation}) => {
+
+const CategoryDetail = ({navigation,route}) => {
+
+// Share Ad
+
+ShareAd = async ()  => {
+
+    const shareOptions = {
+
+      message:"Your Title",
+      
+    }
+    try{
+
+      const shareResponse = await Share.open(shareOptions);
+      
+    }catch(err){
+
+      Alert.alert(
+        "Share Canceled",
+        "Didn't want to Share",
+        [ 
+          { text: "OK",  }
+          
+        ],
+        
+      );
+    }
+   }
+  
+    
+// like Ad
+
+  LikeAd =() => {
+
+    this.setState({Like: "red"});   
+  }
 
 
- // console.log(Object.values(dataSnap.val()))
 
   return (
     <View >
@@ -37,9 +70,6 @@ const Category = ({navigation}) => {
      <Text style={globalStyles.text2}>
        Car Categories will shown here
      </Text>
-     <View >
-     <ActivityIndicator size="large" color="blue"/>
-     </View>
      <View>
 
         <CardItem style={globalStyles.cardStyles}>
@@ -51,27 +81,30 @@ const Category = ({navigation}) => {
         <Right >
         
         <View  style={globalStyles.CardIcon}>
+        
+        <Icon active name="share" size={25} color="grey" onPress={this.ShareAd}  />
+        
+        <Icon active name="heart" size={25} color={this.state.Like} onPress={this.LikeAd} />
        
         </View>
            
         
-        <Text style={globalStyles.Cardtext}>text</Text>
+        <Text style={globalStyles.Cardtext}>Text</Text>
               
-        <Text style={globalStyles.Cardtext}>text</Text>
+        <Text style={globalStyles.Cardtext}>Text</Text>
                  
-        <Text >text</Text>
+        <Text >Text</Text>
 
          
-         <Text >text</Text>
+         <Text >Text</Text>
 
-         <Text >text</Text>
+         <Text >Text</Text>
 
-         <Text ><Icon name="location-arrow" size={15}/>text</Text>
+         <Text ><Icon name="location-arrow" size={15}/>Text</Text>
 
-         <Text style={{color:"black",fontSize:11}}>text</Text>
+         <Text style={{color:"black",fontSize:11}}>Hassan</Text>
          
-         <TouchableOpacity onPress={()=>{
-         }}>
+         <TouchableOpacity onPress={()=>{}}>
          <Text>Report Ad  <Icon name="edit" size={15}/></Text>
          </TouchableOpacity>
         
@@ -80,6 +113,7 @@ const Category = ({navigation}) => {
       </CardItem>
 
       </View>
+
     
 
   
@@ -89,4 +123,4 @@ const Category = ({navigation}) => {
  
 };
 
-export default Category;
+export default CategoryDetail;
