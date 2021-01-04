@@ -18,6 +18,8 @@ import Header from '../SharedFunctions/Header';
 
 import {AuthContext} from '../Navigation/AuthProviders';
 
+
+
 const Setting = ({navigation}) => {
   //calling function and user values from Auth context
 

@@ -118,10 +118,7 @@ export default class Feed extends Component {
     
   }
 
- 
-
-    
-  
+     
   render() {
 
 

@@ -20,8 +20,10 @@ import auth, { firebase } from '@react-native-firebase/auth';
 
 const ForgetPassword = ({navigation}) => {
 
+  
 
   const [email,setEmail] =useState('');
+
 
   const inputdata =() => {
 
@@ -36,6 +38,7 @@ const ForgetPassword = ({navigation}) => {
             ],
             
           );
+       
 
       } else
       {
@@ -64,6 +67,7 @@ const ForgetPassword = ({navigation}) => {
           
   }}
 
+  
   //Function Above for Sending password Link to Email
 
   return (
@@ -73,7 +77,8 @@ const ForgetPassword = ({navigation}) => {
         flex: 1,
         alignContent:"center"
       }}>
-
+     
+     
      <View>
          <HeaderButtonsTab 
          icon="chevron-left" title1="Back" coler="blue"
@@ -84,25 +89,26 @@ const ForgetPassword = ({navigation}) => {
          />
 
      </View>
-
+     
       <Text style={globalStyles.text}>Forget Password</Text>
 
      <View style={{alignItems:"center"}}>
 
-    
-     <Text style={globalStyles.text2}> Please Enter your authentic Email for New Password.</Text>
-
+      <Text style={globalStyles.text2}>Pleaes Enter Verified Email. </Text>
+     
      <TextInput style={globalStyles.Formtxtinput}
      placeholder="Enter  i.e   example@gmail.com"
      value={email}
      onChangeText={(text)=>setEmail(text)}
      />
-     
+    
      <FlatButton title="Send Email"
 
       onPress={ () => inputdata()}
     />
-       </View>
+    
+    
+    </View>
      </View>
   );
 };
