@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -25,8 +25,6 @@ import Share from 'react-native-share';
 const Category = ({navigation}) => {
 
 
- // console.log(Object.values(dataSnap.val()))
-
   return (
     <View >
      <HeaderButtonsTab icon="angle-left" coler="blue"  title1="Home" 
@@ -37,7 +35,7 @@ const Category = ({navigation}) => {
        Car Categories will shown here
      </Text>
      <View >
-     <ActivityIndicator size="large" color="blue"/>
+     
      </View>
      <View>
 

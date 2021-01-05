@@ -130,11 +130,11 @@ const Login = ({navigation}) => {
           
       />
 
-      <FlatButton2
+      {/* <FlatButton2
         btnType="chevron-right"
         title="Sign In with Gmail"
         onPress={() => googleLogin() }
-      />
+      /> */}
 
       
       <FlatButton2

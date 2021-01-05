@@ -29,10 +29,12 @@ export default class SearchResult extends Component{
     Like:"white",
     MySearchList:[],
     Like:"white",
-    searchCars:"",
-    addLocation:"",
+    FilterCars:[],
+   // addLocation:"",
    
   }
+
+
   
 //liked function
   LikeAd =() => {
@@ -87,10 +89,12 @@ export default class SearchResult extends Component{
     )  
   }
   
-  SearchCar =() =>{
-   
+  //Search car Function By Location
+  SearchCar =(textSearch) =>{
+     
+    alert(textSearch)
   
-  }
+    }
 
   Adlocation =() =>{
     
@@ -102,8 +106,6 @@ export default class SearchResult extends Component{
 
   const myAds = firebase.database().ref("Ads");
 
-   
-
   myAds.on("value",dataSnap=>{
 
     this.setState({MySearchList:Object.values((dataSnap.val()))})
@@ -111,7 +113,13 @@ export default class SearchResult extends Component{
   }
 
   )
-  
+
+  ////////////////////////////////
+  //Search Filter functions below
+ 
+
+ 
+
 
 
 }
@@ -121,17 +129,23 @@ export default class SearchResult extends Component{
 
   render() {
 
-    return this.state.MySearchList.length > 0 ?
+   { return this.state.MySearchList.length > 0 ?
 
     <SafeAreaView >
 
       <View style={{marginHorizontal:15}} >
 
       <Text style={globalStyles.text2}>Search Ads</Text>
-      <SearchtxtInput iconType="search"  placeholdertxt="Find Cars" onPress={() => {
-      alert("Search Button Clicked")
-       }} />
-{/* 
+
+      <SearchtxtInput iconType="search"  placeholdertxt="Find Cars" 
+      ontextChnage={text=>{this.SearchCar(text)}}
+      // onPress={() => {
+      // alert("Search Button Clicked")
+      //  }}
+      
+      />
+
+       {/* 
       <SearchtxtInput iconType="location" placeholdertxt="Lahore, Punjab, Pakistan" iconType2="location" 
       onPress={() => {
        alert("Add Location")
@@ -206,8 +220,9 @@ export default class SearchResult extends Component{
     
     <Text style={globalStyles.text}>No Ads Found in database</Text>
   
-    </View>
+    </View> }
 
- }}
+ }
+}
 
 //===================================//
