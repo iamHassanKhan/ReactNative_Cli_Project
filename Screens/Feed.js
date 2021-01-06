@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
 import database, { firebase } from '@react-native-firebase/database';
 import Share from 'react-native-share';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class Feed extends Component {
 
@@ -144,7 +145,7 @@ export default class Feed extends Component {
 
        <View>
 
-        <CardItem style={globalStyles.cardStyles}>
+        <CardItem style={globalStyles.cardStyles} key={index}>
         
         <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
         
@@ -196,7 +197,7 @@ export default class Feed extends Component {
   }
   />
   
-    {/* ); FlatList Closed above */}
+    {/*  FlatList Closed above */}
   
     </SafeAreaView>  :
 

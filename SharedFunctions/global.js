@@ -239,8 +239,7 @@ SearchViewHome:{
     marginHorizontal:10,
     backgroundColor:"lightblue",
     justifyContent:"space-between",
-    elevation:5,
-    //borderWidth:0.5
+   // elevation:5,
     
   },
 

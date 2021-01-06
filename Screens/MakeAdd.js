@@ -132,7 +132,22 @@ import database, { firebase } from '@react-native-firebase/database';
 };
 ////////////////////////////////////
 // Image upload on firebase Storage Code below
+const imageUpload =() =>{
 
+  if(image==null){
+
+    Alert.alert(
+      "Unable to Submit Ad",
+      "Please Fill All required Fields !",
+      [
+        
+        { text: "OK",  }
+
+      ],
+      
+    );
+
+  }else{
 const uploadImage = async () => {
 
   const { uri } = image;
@@ -153,15 +168,17 @@ const uploadImage = async () => {
  
  // console.log("Image uploaded")
   setImage(null);
-};
+   };
+}
 
+};
 /////////////////////////////////////
 
 //Posted Ad function By calling Both Functions
 const AddPost = () =>{
 
   submitAd();
-  uploadImage();
+  imageUpload();
 }
 
 // Function Above for Adding Ad data in Database

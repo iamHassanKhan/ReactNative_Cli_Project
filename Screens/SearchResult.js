@@ -17,7 +17,6 @@ import database, { firebase } from '@react-native-firebase/database';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import Share from 'react-native-share';
 
-
 export default class SearchResult extends Component{
 
   constructor(props){
@@ -26,8 +25,6 @@ export default class SearchResult extends Component{
 
   state ={
      
-    Like:"white",
-    MySearchList:[],
     Like:"white",
     FilterCars:[],
    // addLocation:"",
@@ -90,11 +87,13 @@ export default class SearchResult extends Component{
   }
   
   //Search car Function By Location
-  SearchCar =(textSearch) =>{
-     
-    alert(textSearch)
+
+  SearchCar =(searchquery) =>{
+    
   
-    }
+
+  
+  }
 
   Adlocation =() =>{
     
@@ -104,32 +103,29 @@ export default class SearchResult extends Component{
 
   componentDidMount(){
 
+  
+
   const myAds = firebase.database().ref("Ads");
 
-  myAds.on("value",dataSnap=>{
+  
+  myAds.orderByChild("Location").equalTo("Sahiwal").on("value",dataSnap=>{
 
-    this.setState({MySearchList:Object.values((dataSnap.val()))})
+  this.setState({FilterCars:Object.values((dataSnap.val()))})
 
   }
 
   )
 
-  ////////////////////////////////
-  //Search Filter functions below
- 
-
- 
-
+  
 
 
 }
 
  
 
-
   render() {
 
-   { return this.state.MySearchList.length > 0 ?
+   { return this.state.FilterCars.length > 0 ?
 
     <SafeAreaView >
 
@@ -138,10 +134,14 @@ export default class SearchResult extends Component{
       <Text style={globalStyles.text2}>Search Ads</Text>
 
       <SearchtxtInput iconType="search"  placeholdertxt="Find Cars" 
+
       ontextChnage={text=>{this.SearchCar(text)}}
-      // onPress={() => {
-      // alert("Search Button Clicked")
-      //  }}
+
+      onPress={() => {
+                        alert("Searched Clicked")
+                     }
+    
+      }
       
       />
 
@@ -149,12 +149,13 @@ export default class SearchResult extends Component{
       <SearchtxtInput iconType="location" placeholdertxt="Lahore, Punjab, Pakistan" iconType2="location" 
       onPress={() => {
        alert("Add Location")
-       }} /> */}
+       }} /> 
+       */}
 
       </View>
        
               <FlatList
-               data={this.state.MySearchList}
+               data={this.state.FilterCars}
                keyExtractor={(item, index) => index.toString()}
                renderItem={({ item, index }) => {
 
@@ -212,11 +213,11 @@ export default class SearchResult extends Component{
  }
  />
  
-   {/* ); FlatList Closed above */}
+   {/* FlatList Closed above  */}
  
    </SafeAreaView>  :
 
-   <View  style={{backgroundColor:"lightblue",alignItems:"center"}}>
+    <View   style={{backgroundColor:"lightblue",alignItems:"center"}} >
     
     <Text style={globalStyles.text}>No Ads Found in database</Text>
   

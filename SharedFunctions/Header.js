@@ -12,10 +12,12 @@ export default function Header({title, icon, onPress, coler}) {
     <Appbar.Header
       theme={{
         colors: {
-          primary: 'skyblue',
+          primary: 'lightblue',
           justifyContent: 'center',
           textAlign: 'center',
+          
         },
+        
       }}>
       <Title
         style={{
@@ -35,6 +37,7 @@ export default function Header({title, icon, onPress, coler}) {
         icon={icon}
         color={coler}
         onPress={onPress}
+        
       />
     </Appbar.Header>
   );

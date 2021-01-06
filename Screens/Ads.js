@@ -98,6 +98,7 @@ useEffect(()=>{
   style={{backgroundColor:"lightgrey",width:100 ,marginRight:20}}
   onPress={()=>{
     navigation.navigate("UpdateAd",{item:item});
+    
     //{Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition,Location:item.Location} 
   }}
   >

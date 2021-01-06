@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -24,22 +24,59 @@ import Share from 'react-native-share';
 
 const Category = ({navigation}) => {
 
+  const [Ads,setAds] = useState([]);
+
+
+  useEffect(()=>{
+
+    const Adsref = database().ref('Categories/');
+  
+    
+  
+    const OnLoadingAds = Adsref.on('value' ,snapshot =>{
+     
+        setAds([]);
+      
+      snapshot.forEach(function (childSnapshot){
+
+        setAds(Ads=>[...Ads,childSnapshot.val()])
+  
+      })
+  
+    });
+    return() =>{
+      Adsref.off('value' ,OnLoadingAds);
+    };
+  
+  },[]);
+  
+
+
 
   return (
+
     <View >
+
      <HeaderButtonsTab icon="angle-left" coler="blue"  title1="Home" 
     onPress={()=>{
       navigation.goBack()
     }}/>
      <Text style={globalStyles.text2}>
-       Car Categories will shown here
+       Categories Added  by Admin
      </Text>
      <View >
      
      </View>
-     <View>
+ 
+     
+    <ScrollView>
+      
+     {Ads.map((item,index) =>(
 
-        <CardItem style={globalStyles.cardStyles}>
+     
+           
+
+        <CardItem style={globalStyles.cardStyles} key={index} >
         
         <Image source={require('../assets/car.jpg')} style={globalStyles.Cardimage}/>
         
@@ -52,34 +89,24 @@ const Category = ({navigation}) => {
         </View>
            
         
-        <Text style={globalStyles.Cardtext}>text</Text>
+        <Text style={globalStyles.Cardtext}>{item.Make}</Text>
               
-        <Text style={globalStyles.Cardtext}>text</Text>
                  
-        <Text >text</Text>
-
+        <Text >{item.Price}</Text>
          
-         <Text >text</Text>
+         <Text >{item.Discription}</Text>  
 
-         <Text >text</Text>
+         <Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
 
-         <Text ><Icon name="location-arrow" size={15}/>text</Text>
-
-         <Text style={{color:"black",fontSize:11}}>text</Text>
-         
-         <TouchableOpacity onPress={()=>{
-         }}>
-         <Text>Report Ad  <Icon name="edit" size={15}/></Text>
-         </TouchableOpacity>
         
         </Right>     
         
       </CardItem>
 
-      </View>
-    
+      
+     ))}
+    </ScrollView> 
 
-  
 
   </View>
   );
