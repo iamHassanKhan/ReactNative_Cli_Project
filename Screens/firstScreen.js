@@ -17,19 +17,19 @@ const firstScreen = ({navigation}) => {
       pages={[
         {
           backgroundColor: 'lightblue',
-          image: <Image source={require('../assets/car1.jpg')} />,
+          image: <Image source={require('../assets/f2.jpg')} />,
           title: 'Wellcome',
           subtitle: 'to CarFinder',
         },
         {
-          backgroundColor: 'lightblue',
-          image: <Image source={require('../assets/car1.jpg')} />,
+          backgroundColor: 'grey',
+          image: <Image source={require('../assets/f01.jpg')} />,
           title: ' Easy to find',
           subtitle: 'Easy to Find Your Desired Cars at your nearest Place.',
         },
         {
-          backgroundColor: 'lightblue',
-          image: <Image source={require('../assets/car1.jpg')} />,
+          backgroundColor: 'lightpink',
+          image: <Image source={require('../assets/f0.jpg')} />,
           title: 'Time Saving',
           subtitle: 'Find Desired Cars with no Time ',
         },

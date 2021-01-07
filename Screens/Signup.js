@@ -1,12 +1,9 @@
 import React, {Component, useContext, useState} from 'react';
 import {
   SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
+  View,Alert,
   Text,
   Image,
-  StatusBar,
   Button,
   TouchableOpacity,
 } from 'react-native';
@@ -34,9 +31,18 @@ const Signup = ({navigation}) => {
     }else
     {
       register(email, password)
+      Alert.alert(
+        "Login Successfully",
+        " Well come to CarFinder",
+        [ 
+
+          { text: "OK",  }
+
+        ],
+        
+      );
     }
   }
-   
   return (
     <View
       style={{

@@ -115,8 +115,19 @@ const uploadImage = async () => {
 
    }
     catch (e) {
+    
+      Alert.alert(
+        "You Can't Post",
+        "Please Login with Email and Password to Submit Post!",
+        [
+          
+          { text: "OK",  }
+        ],
+        
+      );
+      
+   
 
-   console.error(e);
     return null;
    }
 
@@ -130,8 +141,6 @@ const uploadImage = async () => {
 //Final Ads Post Code with Ads detail here below
 
 const AddPost = async () => {
-
-
 
 
       if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription==''||Location=='')
@@ -179,9 +188,28 @@ firestore()
         setCondition(null);
         setDiscrip(null);
         setLocation(null);
+
+        Alert.alert(
+          "Ads Submitted",
+          "Ads Posted Successfully!",
+          [
+            
+            { text: "OK",  }
+          ],
+          
+        );
 })
 .catch((err) =>{
-  console.log("Error => ",err)
+  
+  Alert.alert(
+    "You Can't Post",
+    "Please Login with Email and Password to Submit Post!",
+    [
+      
+      { text: "OK",  }
+    ],
+    
+  );
 
 });
  }

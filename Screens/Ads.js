@@ -6,142 +6,146 @@ import {
   View,
   Text,Alert,
   StatusBar,
-  Image,
+  Image,FlatList,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
 import {globalStyles} from '../SharedFunctions/global';
 import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
-
-import database, { firebase } from '@react-native-firebase/database';
-
-
-
+import firestore from '@react-native-firebase/firestore';
+import {AuthContext} from '../Navigation/AuthProviders';
 //Auth Context imported for checking Authentice  User
 
 const Ads = ({navigation}) => {
 
+  const [myAds,setMyAds] = useState([]); 
+  const {register} = useContext(AuthContext);
+  /////////////////
 
-  const [Ads,setAds] = useState([]);
+useEffect( ()=>{
+ 
+  const GetAds = async () => {
 
-  
+    try{
 
-const deleteAd = (item) =>{
+    const MyAdsList = [];
 
-  database().ref('Ads/' +item.Id)
-  .remove()
-  .then(()=>{
-    Alert.alert(
-      "Deleted",
-      "Ad has been Deleted !",
-      [
-        
-        { text: "OK",  }
-      ],
-      
-    );
+   await firestore()
+    .collection('userAds')
+    .get()
+    .then((querySnapshot)=> {
 
-  }).catch((err)=>{
-    console.log(err);
-  })
-}
+      // console.log("Total Post  => ",querySnapshot.size);
+
+     querySnapshot.forEach( doc =>{
+     
+     const  {Make,Year,Price,Driven,Discription,Condition,Time,Location,ImageUrl }= doc.data();
+     
+     MyAdsList.push({
+
+      id:doc.id,
+      Time:Time,
+      Make,
+      Price,
+      Year,
+      Condition,
+      Discription,
+      Driven,
+      Location,
+      ImageUrl,
 
 
-useEffect(()=>{
-
-  const Adsref = database().ref('/Ads');
-
-  
-
-  const OnLoadingAds = Adsref.on('value' ,snapshot =>{
-   
-    setAds([]);
-    
-    snapshot.forEach(function (childSnapshot){
-
-      setAds(Ads=>[...Ads,childSnapshot.val()])
+     }); 
 
     })
 
-  });
-  return() =>{
-    Adsref.off('value' ,OnLoadingAds);
-  };
+  })
+
+
+  setMyAds(MyAdsList);
+
+
+
+
+    } catch(err){
+
+      console.log(err)
+
+    }
+
+  }
+
+  GetAds();
 
 },[]);
 
+  //Getting data/Ads from fireStore code Above
+  
+
+
   return (
-    <ScrollView
+    <View
       style={{
         flex: 1,
         marginHorizontal:10,
       }}>
       <Text style={globalStyles.text}> My Ads </Text>
 
-      <View>
-        
-        {Ads.map((item,index) =>(
+      <SafeAreaView >
 
 
+<FlatList
+  
+ data={myAds}
+ keyExtractor={(item, index) => index.toString()}
+ showsVerticalScrollIndicator={false}
+ 
+ renderItem={({ item, index }) => {
+
+
+return(
+
+<View>
 <Card style={globalStyles.MyAdsCardStyle} key={index}>
 
-<Card.Cover source={require('../assets/car.jpg')} />
+<Card.Cover source={{uri:item.ImageUrl}} style={globalStyles.MyAdsCardImageStyle}/>
 
 <Card.Content>
   <Title>{item.Make}</Title>
   <Paragraph>{item.Discription}</Paragraph>
   <Paragraph>{item.Location}</Paragraph>
 </Card.Content>
-<Card.Actions>
-  <Button
-  style={{backgroundColor:"lightgrey",width:100 ,marginRight:20}}
-  onPress={()=>{
-    navigation.navigate("UpdateAd",{item:item});
-    
-    //{Price:item.Price ,Discription:item.Discription,Driven:item.Driven,Make:item.Make,Year:item.Year,Condition:item.Condition,Location:item.Location} 
-  }}
-  >
-    
-  Edit
-  </Button>
-  <Button style={{backgroundColor:"lightgrey",width:100}}
-  onPress={ 
 
-   ()=>{
-     
-    Alert.alert(
-      "Delete Ad",
-      "This can't be undone ?",
-      [
-        {
-          text: "Yes",
-          onPress: ()=> deleteAd(item)
-        },
-        {
-          text: "No",
-          onPress: () => console.log("Delete Canceled"),
-          style: "cancel"
-        },
-       
-      ],
-      
-    )
-   }
-               //()=> deleteAd(item)
-  }>
-   Delete
-  </Button>
-</Card.Actions>
+ <View style={{justifyContent:"space-around",flexDirection:"row",marginBottom:5}}>
 
-</Card>
+<TouchableOpacity>
+<Text><Icon name="edit" size={25} />Edit</Text>
+</TouchableOpacity>
+ 
+<TouchableOpacity>
+ <Text><Icon name="trash" size={25} />Delete</Text>
+ </TouchableOpacity>
+ 
+ </View>
+ 
+</Card> 
 
- ))}
-     
+</View>
+
+
+)
+ 
+} }
+
+  /> 
+
+{/*  FlatList Closed above */}
+
+</SafeAreaView>
+
     </View>
-      
- </ScrollView>
-  );
-};
+)};
 
 export default Ads;
+

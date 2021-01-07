@@ -32,7 +32,7 @@ export const AuthProviders = ({children}) => {
 
             Alert.alert(
               "Login Failed",
-              "Please Enter Valid Email and Password !!",
+              "Something went Wrong Try again with valid Email & Password!!",
               [
                 
                 { text: "OK",  }
@@ -54,9 +54,8 @@ export const AuthProviders = ({children}) => {
           } catch (e) {
             Alert.alert(
               "Registration Failed",
-              "Please Use Vaalid Email and Password !!",
-              [
-                
+              "Something went Wrong ,Email already been Registed!!"
+              [    
                 { text: "OK",  }
               ],
               
@@ -78,15 +77,7 @@ export const AuthProviders = ({children}) => {
 
 
             console.log("Error => ",e)
-            // Alert.alert(
-            //   "Login Failed",
-            //   "Please Enter Email and Password Correctly !!",
-            //   [
-                
-            //     { text: "OK",  }
-            //   ],
-              
-            // );
+           
            }
 
          },
@@ -101,7 +92,7 @@ export const AuthProviders = ({children}) => {
           } catch (e) {
             Alert.alert(
               "Signout Failed",
-              "Database Error!!",
+              "Something went Wrong!!"
               [
                 
                 { text: "OK",  }
@@ -118,7 +109,7 @@ export const AuthProviders = ({children}) => {
           } catch (e) {
             Alert.alert(
               "Login Failed",
-              "Database Error",
+              "Something went Wrong Try Again!!"
               [
                 
                 { text: "OK",  }

@@ -49,7 +49,7 @@ const Login = ({navigation}) => {
     }else
     {
       
-     login(email, password).then(function(){
+     login(email, password).then( function(){
       Alert.alert(
         "Login Successfully",
         " Well come back Again",

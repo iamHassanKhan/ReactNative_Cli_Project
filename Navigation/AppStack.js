@@ -13,7 +13,6 @@ import UpdateAd from '../Screens/UpdateAd';
 import SearchResult from '../Screens/SearchResult';
 import FeedItems from '../Screens/FeedItems';
 import Category from '../Screens/Category';
-import Feed from '../Screens/Feed';
 import ReportAds from '../Screens/ReportAds';
 
 import {createStackNavigator} from '@react-navigation/stack';
@@ -30,29 +29,16 @@ const FeedStack = createStackNavigator();
 
 const AppStack = () => {
  
-  const FeedStack= () =>{
-
-    <Stack.Navigator>
-      <Stack.Screen name="Feed" component={Feed} 
-      
-      />
-      <Stack.Screen name="ReportAd" component={ReportAds} />
-    </Stack.Navigator>
-  }
 
   return (
 
     <Stack.Navigator headerMode="none">
 
       <Stack.Screen name="Hometabs" component={HomeTabs} />
-      <Stack.Screen name="FeedTabs" component={FeedStack} />
-
-      {/*   Feed and Feed Item are called in FeedStack function above
-      <Stack.Screen name="Feed" children={Feed} />
-      <Stack.Screen name="FeedItems" component={FeedItems}/>
-     */}
+     
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
+      <Stack.Screen name="ReportAd" component={ReportAds} />
       <Stack.Screen name="UpdateAd" component={UpdateAd} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="SearchResult" component={SearchResult} />

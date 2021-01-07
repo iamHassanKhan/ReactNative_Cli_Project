@@ -91,7 +91,7 @@ export const globalStyles = StyleSheet.create({
 
   userView: {
     flexDirection: 'row',
-    justifyContent: "space-around",
+    justifyContent: "space-evenly",
     backgroundColor: 'white',
     borderColor: 'black',
     marginTop: 10,
@@ -337,11 +337,17 @@ ImageCategoriestylesView:{
 
    marginHorizontal:10,
    marginBottom:5,
-   marginTop:5, 
    backgroundColor:"white",
-   borderRadius:20,
+   borderRadius:0,
    elevation:10,
-   borderWidth:0.5
+   
+  },
+  MyAdsCardImageStyle:{
+
+     height:200,
+     width:350,
+
+
   },
   IndicatorStyle:{
 

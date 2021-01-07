@@ -7,7 +7,7 @@ import {
   FlatList,
   StatusBar,
   Button,
-  Image,
+  Image,Alert,
   TouchableOpacity,
 } from 'react-native';
 import Header from '../SharedFunctions/Header';
@@ -18,13 +18,71 @@ import FlatButton from '../SharedFunctions/button';
 import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
 import LinkButton from '../SharedFunctions/linkButton';
 import firestore from '@react-native-firebase/firestore';
-
-// import Feed from './Feed';
+import Share from 'react-native-share';
 
 const Home = ({navigation}) => {
 
   const [userAds,setUserAds] = useState([]); 
-  
+  const [like,setLike] = useState("grey");
+// Share Ad
+
+const ShareAd = async ()  => {
+
+
+  const shareOptions = {
+
+    message:"Your Title",
+    
+  }
+  try{
+
+    const shareResponse = await Share.open(shareOptions);
+    
+  }catch(err){
+
+    Alert.alert(
+      "Share Canceled",
+      "Didn't want to Share",
+      [ 
+        { text: "OK",  }
+        
+      ],
+      
+    );
+  }
+ }
+
+///////////////////
+//Reprt Ad
+
+
+
+
+
+const ReportAd =() => {
+
+    
+  Alert.alert(
+    "Report ",
+    "Want to Report Ad",
+    [
+      {
+        text: "Yes",
+        onPress: ()=> alert("Reported")
+      },
+      {
+        text: "No",
+        onPress: () => console.log("Report Cancel"),
+        style: "cancel"
+      },
+     
+    ],
+    
+  )
+ 
+ 
+}
+/////////////////
 
 useEffect( ()=>{
  
@@ -147,9 +205,14 @@ return(
 
 <View  style={globalStyles.CardIcon}>
 
-<Icon active name="share" size={25} color="grey" />
+<Icon active name="share" size={25} color="grey" onPress={ShareAd} />
 
-<Icon active name="heart" size={25}  color="grey"/>
+<Icon active name="heart" size={25}  color={like} onPress={
+ ()=>{
+
+    setLike("red");
+ }
+} />
 
 </View>
 
@@ -167,11 +230,9 @@ return(
 
 <Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
 
-<Text style={{color:"black",fontSize:11}}>Time</Text>
+<Text style={{color:"black",fontSize:9}}>{Date(item.Time)}</Text>
 
-<TouchableOpacity onPress={()=>{
-
-}}>
+<TouchableOpacity onPress={ReportAd}>
 <Text>Report Ad  <Icon name="edit" size={15}/></Text>
 </TouchableOpacity>
 
