@@ -16,25 +16,27 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import FlatButton from '../SharedFunctions/button';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 import ImagePicker from 'react-native-image-picker';
-import { PostAd } from '../Navigation/FirebaseDB';
 import storage from '@react-native-firebase/storage';
-import database, { firebase } from '@react-native-firebase/database';
-// Add your Post data in here  ....
+import firestore from '@react-native-firebase/firestore';
+import {AuthContext} from '../Navigation/AuthProviders';
 
- const  MakeAdd = ({navigation}) =>{
+
+ const  MakeAdd = ({navigation}) => {
+
    
   const [Id,setId] = useState();
-  const [Make,setMake] = useState('');
+  const [Make,setMake] = useState(null);
   const [Price,setPrice] = useState(null);
   const [Year,setYear] = useState(null);
-  const [Driven,setDriven] = useState('');
-  const [Condition,setCondition] = useState('');
-  const [Discription,setDiscrip] = useState('');
-  const [Location,setLocation] = useState('');
+  const [Driven,setDriven] = useState(null);
+  const [Condition,setCondition] = useState(null);
+  const [Discription,setDiscrip] = useState(null);
+  const [Location,setLocation] = useState(null);
 
   const [image,setImage] = useState(null);
   
-  /////////////////////////////////////////////////
+  const {user} = useContext(AuthContext);
+  
 
   //Image Picking from Library or camera Code Below
 
@@ -59,80 +61,18 @@ import database, { firebase } from '@react-native-firebase/database';
       }
        else {
         const source ={uri: response.uri};
+
         //console.log(source);
+
         setImage(source);
       }
     });
   };
 
-////////////////////////////////////////////////////
-// Ad data Sbmit to realTime database 
 
-
-  const submitAd = () =>{
-
-    if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription==''||Location=='')
-    {
-      Alert.alert(
-        "Unable to Submit Ad",
-        "Please Fill All required Fields !",
-        [
-          
-          { text: "OK",  }
-
-        ],
-        
-      );
-    } else{
-      
-      PostAd(Id,Make,Price,Year,Condition,Driven,Discription,Location)
-      
-      .then(result=>{
-
-        setId(null);
-        setMake('');
-        setPrice();
-        setYear(); 
-        setDriven('');
-        setCondition('');
-        setDiscrip('');
-        setLocation('');
-        
-        Alert.alert(
-          "Ad Posted",
-          "Your Ad is Submmited !",
-          [
-            
-            { text: "OK",  }
-          ],
-          
-        );
-    
-      })
-      .catch(error=>{
-
-        console.log(error)
-        
-
-        Alert.alert(
-          "Permission Denied",
-          "Please Login with Email To Submit Post !",
-          [
-            {
-              text: "Cancel",
-            },
-            { text: "OK",  }
-          ],
-          
-        );
-        
-      })
-    }
-  
-};
-////////////////////////////////////
 // Image upload on firebase Storage Code below
-const imageUpload =() =>{
+
+const uploadImage = async () => {
 
   if(image==null){
 
@@ -147,43 +87,106 @@ const imageUpload =() =>{
       
     );
 
+
   }else{
-const uploadImage = async () => {
 
   const { uri } = image;
   const filename = uri.substring(uri.lastIndexOf('/') + 1);
+
   const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-  const task = storage()
-    .ref(filename)
-    .putFile(uploadUri);
-  
-  task.on('state_changed', snapshot => {
-       
-  });
-  try {
-    await task;
-  } catch (e) {
-    console.error(e);
+
+  const storageRef = storage().ref(`photos/${filename}`);
+  const task =  storageRef.putFile(uploadUri);
+
+   task.on('state_changed', snapshot => {
+
+    });
+
+   try {
+
+   await task;
+    
+   const Imageurl = await storageRef.getDownloadURL();
+   console.log("Image uploaded")
+
+   setImage(null);
+
+   return Imageurl;
+
+   }
+    catch (e) {
+
+   console.error(e);
+    return null;
+   }
+
   }
+
+  
+ };
  
- // console.log("Image uploaded")
-  setImage(null);
-   };
+
+      
+//Final Ads Post Code with Ads detail here below
+
+const AddPost = async () => {
+
+
+
+
+      if(Make==''||Price==''||Year==''||Condition==''||Driven==''||Discription==''||Location=='')
+    {
+      Alert.alert(
+        "Unable to Submit Ad",
+        "Please Fill All required Fields !",
+        [
+          
+          { text: "OK",  }
+
+        ],
+        
+      );
+    } else{
+
+ const Getimageurl =  await uploadImage();
+
+//  console.log('Image url=>' ,Getimageurl);
+
+firestore()
+.collection('userAds')
+.add({
+
+  Id:user.uid,
+  Make:Make,
+  Price:Price,
+  Year:Year,
+  Condition:Condition,
+  Driven:Driven,
+  Discription:Discription,
+  Location:Location,
+  ImageUrl:Getimageurl,
+  Time:firestore.Timestamp.fromDate(new Date()),
+  likes:null,
+
+})
+.then(()=>{
+  console.log("Ads Added in databse =>")
+        
+        setMake(null);
+        setPrice(null);
+        setYear(null); 
+        setDriven(null);
+        setCondition(null);
+        setDiscrip(null);
+        setLocation(null);
+})
+.catch((err) =>{
+  console.log("Error => ",err)
+
+});
+ }
+
 }
-
-};
-/////////////////////////////////////
-
-//Posted Ad function By calling Both Functions
-const AddPost = () =>{
-
-  submitAd();
-  imageUpload();
-}
-
-// Function Above for Adding Ad data in Database
-///////////////////////////////////////////
-
 
 return(
 
@@ -206,12 +209,12 @@ return(
    <TextInput placeholder="Year i.e 2000"   value={Year} keyboardType="numeric" onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Used or New"   value={Driven} onChangeText={(text)=>setDriven(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Driven / km "   value={Condition} keyboardType="numeric" onChangeText={(text)=>setCondition(text)} style={globalStyles.Formtxtinput}/>
-   <TextInput placeholder="Detail Discription i.e (Contact Detail)" multiline value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
+   <TextInput placeholder="Detail Discription i.e (Contact Detail)" multiline numberOfLines={3} value={Discription} onChangeText={(text)=>setDiscrip(text)} style={globalStyles.Formtxtinput}/>
 
 
   </View>
-
-  {/* Picking Image from camera or Gallery  */}
+ 
+ {/* showing Image if Picked from library or camera */}
   
   {image===null ? <Text>
 
@@ -233,56 +236,19 @@ return(
       
 
     <FlatButton title="Post Ad" 
-       //onPress={PostAd}
+      
        onPress={AddPost}
-     //Send file and ad data in database
+    
      />
     </View>  
   
    
   </View>
  </ScrollView>
-)
-}
-
+ 
+ 
+);
+ 
+};
 
 export default MakeAdd;
-
-
-/////////////////////////////////////////
-
-  //upload Image in Firebase Storage
-
-  // const uploadImage = async (imageUri) => {
-
-  //   const { uri } = image;
-  //   const filename = uri.substring(uri.lastIndexOf('/') + 1);
-  //   const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-   
-  //   const task = storage()
-  //     .ref(filename)
-  //     .putFile(uploadUri);
-    
-  //   task.on('state_changed', snapshot => {
-      
-  //     //console.log("image Uploaded");
-
-  //   })
-    
-
-  //   // try {
-     
-  //   //    await task;
-
-  //   //   //console.log(imageUri);
-
-  //   // } catch (e) {
-
-  //   //   console.error("Error => ",e);
-
-  //   // }
-    
-  //   setImage(null);
-  
-  // }
-//////////////////////////////////////////////////////

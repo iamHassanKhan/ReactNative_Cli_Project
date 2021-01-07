@@ -4,7 +4,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,FlatList,
+  FlatList,
   StatusBar,
   Button,
   Image,
@@ -14,18 +14,81 @@ import Header from '../SharedFunctions/Header';
 import {globalStyles} from '../SharedFunctions/global';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import SearchButton from '../SharedFunctions/SearchButton';
-import {Card,Title,Paragraph,} from 'react-native-paper';
 import FlatButton from '../SharedFunctions/button';
+import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
 import LinkButton from '../SharedFunctions/linkButton';
+import firestore from '@react-native-firebase/firestore';
 
-import Feed from './Feed';
-
-import database, { firebase } from '@react-native-firebase/database';
-
+// import Feed from './Feed';
 
 const Home = ({navigation}) => {
+
+  const [userAds,setUserAds] = useState([]); 
   
 
+useEffect( ()=>{
+ 
+  const GetAds = async () => {
+
+    try{
+
+    const AdsList = [];
+
+   await firestore()
+    .collection('userAds')
+    .get()
+    .then((querySnapshot)=> {
+
+      //How much ads are available in database in console
+
+      console.log("Total Post  => ",querySnapshot.size);
+
+     querySnapshot.forEach( doc =>{
+     
+     const  {Make,Year,Price,Driven,Discription,Condition,Time,Location,ImageUrl }= doc.data();
+     
+     AdsList.push({
+
+      id:doc.id,
+      Time:Time,
+      Make,
+      Price,
+      Year,
+      Condition,
+      Discription,
+      Driven,
+      Location,
+      ImageUrl,
+
+
+     }); 
+
+    })
+
+  })
+
+
+  setUserAds(AdsList);
+
+  // console.log('AdsList    => ' , AdsList);
+  // console.log('userAds array =>' ,userAds );
+
+
+
+    } catch(err){
+
+      console.log(err)
+
+    }
+
+  }
+
+  GetAds();
+
+},[]);
+
+  //Getting data/Ads from fireStore code Above
+  
   return (
     <View
         style={{
@@ -58,18 +121,79 @@ const Home = ({navigation}) => {
             <LinkButton title="See more" onPress={()=>navigation.push("Category")}/>
 
            </View>
-       
-      {/* caling Feed class in Home */}
 
-           <View>
 
-           <Feed/>
+<SafeAreaView >
 
-           </View>
 
+<FlatList
   
-     </View>
-       );
+ data={userAds}
+ keyExtractor={(item, index) => index.toString()}
+ showsVerticalScrollIndicator={false}
+ 
+ renderItem={({ item, index }) => {
+
+
+return(
+
+<View>
+
+<CardItem style={globalStyles.cardStyles} key={index} >
+
+<Image source={{uri:item.ImageUrl}} style={globalStyles.Cardimage}/>
+
+<Right >
+
+<View  style={globalStyles.CardIcon}>
+
+<Icon active name="share" size={25} color="grey" />
+
+<Icon active name="heart" size={25}  color="grey"/>
+
+</View>
+
+
+<Text style={globalStyles.Cardtext}>{item.Make}</Text>
+
+<Text style={globalStyles.Cardtext}>{item.Year}</Text>
+  
+<Text >{item.Driven}</Text>
+
+
+<Text >{item.Discription}</Text>
+
+<Text >{item.Condition}</Text>
+
+<Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
+
+<Text style={{color:"black",fontSize:11}}>Time</Text>
+
+<TouchableOpacity onPress={()=>{
+
+}}>
+<Text>Report Ad  <Icon name="edit" size={15}/></Text>
+</TouchableOpacity>
+
+</Right>     
+
+</CardItem>
+
+</View>
+
+
+)
+ 
+} }
+
+  /> 
+
+{/*  FlatList Closed above */}
+
+</SafeAreaView>
+
+</View>
+);
 };
 
 export default Home;

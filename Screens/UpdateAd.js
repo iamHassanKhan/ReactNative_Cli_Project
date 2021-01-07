@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 import FlatButton from '../SharedFunctions/button';
 
-import { PostAd } from '../Navigation/FirebaseDB';
+
 const UpdateAd = ({navigation,route}) => {
 
   const {item} =  route.params;

@@ -27,7 +27,7 @@ export default class SearchResult extends Component{
      
     Like:"white",
     FilterCars:[],
-   // addLocation:"",
+    
    
   }
 
@@ -88,12 +88,13 @@ export default class SearchResult extends Component{
   
   //Search car Function By Location
 
-  SearchCar =(searchquery) =>{
-    
-  
+   SearchCar = () =>{
 
-  
+   
+   
+
   }
+
 
   Adlocation =() =>{
     
@@ -104,18 +105,22 @@ export default class SearchResult extends Component{
   componentDidMount(){
 
   
-
-  const myAds = firebase.database().ref("Ads");
-
+    
+    
+      const myAds = firebase.database().ref("Ads");
   
-  myAds.orderByChild("Location").equalTo("Sahiwal").on("value",dataSnap=>{
+      myAds.orderByChild("Location").equalTo("Karachi").on("value",dataSnap=>{
 
-  this.setState({FilterCars:Object.values((dataSnap.val()))})
+      this.setState({FilterCars:Object.values((dataSnap.val()))})
 
   }
 
-  )
+  ) 
+        
 
+         
+  
+   
   
 
 
@@ -135,10 +140,9 @@ export default class SearchResult extends Component{
 
       <SearchtxtInput iconType="search"  placeholdertxt="Find Cars" 
 
-      ontextChnage={text=>{this.SearchCar(text)}}
 
       onPress={() => {
-                        alert("Searched Clicked")
+                      alert("Searched")
                      }
     
       }
