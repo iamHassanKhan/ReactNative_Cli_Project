@@ -53,69 +53,73 @@ const ShareAd = async ()  => {
  }
 
 ///////////////////
-
+//Getting data from Firestore
 /////////////////
 
-useEffect( ()=>{
- 
-  const GetAds = async () => {
+const GetAds = async () => {
 
-    try{
+  try{
 
-    const AdsList = [];
+  const AdsList = [];
 
-   await firestore()
-    .collection('userAds')
-    .get()
-    .then((querySnapshot)=> {
+ await firestore()
+  .collection('userAds')
+  .orderBy('Time','desc')
+  .get()
+  .then((querySnapshot)=> {
 
-      //How much ads are available in database in console
+    //How much ads are available in database in console
 
-      console.log("Total Post  => ",querySnapshot.size);
+   // console.log("Total Post  => ",querySnapshot.size);
 
-     querySnapshot.forEach( doc =>{
-     
-     const  {Make,Year,Price,Driven,Discription,Condition,Time,Location,ImageUrl }= doc.data();
-     
-     AdsList.push({
+   querySnapshot.forEach( doc =>{
+   
+   const  {Make,Year,Price,Driven,Discription,Condition,Time,Location,ImageUrl }= doc.data();
+   
+   AdsList.push({
 
-      id:doc.id,
-      Time:Time,
-      Make,
-      Price,
-      Year,
-      Condition,
-      Discription,
-      Driven,
-      Location,
-      ImageUrl,
+    id:doc.id,
+    Time:Time,
+    Make,
+    Price,
+    Year,
+    Condition,
+    Discription,
+    Driven,
+    Location,
+    ImageUrl,
 
 
-     }); 
-
-    })
+   }); 
 
   })
 
-
-  setUserAds(AdsList);
-
-  // console.log('AdsList    => ' , AdsList);
-  // console.log('userAds array =>' ,userAds );
+})
 
 
+setUserAds(AdsList);
 
-    } catch(err){
+// console.log('AdsList    => ' , AdsList);
+// console.log('userAds array =>' ,userAds );
 
-      console.log(err)
 
-    }
+
+  } catch(err){
+
+    console.log(err)
 
   }
 
+}
+
+//Rendering Data from fireStore
+
+useEffect( ()=>{
+ 
   GetAds();
 
-},[]);
+},[GetAds]);
+
 
   //Getting data/Ads from fireStore code Above
   
@@ -200,10 +204,10 @@ return(
 <Text style={globalStyles.Cardtext}>{item.Year}</Text>
   
 
-<Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
+<Text ><Icon name="location-arrow" size={15}/>{'  '}{item.Location}</Text>
+
 
 <Text style={{color:"black",fontSize:10}}>{Date(item.Time)}</Text>
-
 
 </Right>     
 

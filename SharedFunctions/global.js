@@ -99,6 +99,15 @@ export const globalStyles = StyleSheet.create({
     borderRadius:20,
     elevation:10
   },
+  userView2: {
+    justifyContent: "space-evenly",
+    backgroundColor: 'white',
+    borderColor: 'black',
+    marginTop: 10,
+    marginBottom: 20,
+    borderRadius:20,
+
+  },
 
   usertext: {
     textAlign: 'center',
@@ -261,7 +270,7 @@ SearchViewHome:{
   },
 
 
-  // Textinput styles for Ads Form styles
+  // Textinput styles for Make Ads Form styles
 
   Formtxtinput: {
 
@@ -274,7 +283,7 @@ SearchViewHome:{
     justifyContent: 'center', 
     flexDirection: 'row',
     backgroundColor:"lightgrey",
-    elevation:150,
+    elevation:10,
     textAlign:"center",
     fontSize:15,
     fontWeight:"bold",
@@ -361,8 +370,10 @@ ImageCategoriestylesView:{
 
    AdDetail: {
     marginBottom:5,
-    borderBottomWidth:1,
-    borderBottomColor:"black"
+    borderBottomWidth:0.5,
+    borderBottomColor:"grey",
+    color:"black",
+    fontSize:20,
   },
 
 

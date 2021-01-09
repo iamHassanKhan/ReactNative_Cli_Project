@@ -51,7 +51,6 @@ const ReportAd =() => {
 }
 
 
-
     return(
 
         <View style={{flex:1,alignItems:"center"

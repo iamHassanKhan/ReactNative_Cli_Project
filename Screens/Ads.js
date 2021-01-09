@@ -14,73 +14,149 @@ import { globalStyles } from '../SharedFunctions/global';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 import { AuthContext } from '../Navigation/AuthProviders';
 //Auth Context imported for checking Authentice  User
 
 const Ads = ({ navigation }) => {
 
-  const [myAds, setMyAds] = useState([]);
+  const [myAds, setMyAds] = useState([]); 
+  const [AdsUpdated, setAdUpadated] = useState(true);
   const { user } = useContext(AuthContext);
-  /////////////////
-
-  useEffect(() => {
-
-    const GetAds = async () => {
-
-      try {
-
-        const MyAdsList = [];
-
-        await firestore()
-          .collection('userAds')
-          .get()
-          .then((querySnapshot) => {
-
-            // console.log("Total Post  => ",querySnapshot.size);
-
-            querySnapshot.forEach(doc => {
-
-              const { Make, Year, Price, Driven, Discription, Condition, Time, Location, ImageUrl } = doc.data();
-
-              MyAdsList.push({
-
-                id: doc.id,
-                Time: Time,
-                Make,
-                Price,
-                Year,
-                Condition,
-                Discription,
-                Driven,
-                Location,
-                ImageUrl,
 
 
-              });
+  // Function for getting data from fireStore Below
 
-            })
+  const GetAds = async () => {
+
+    try {
+
+      const MyAdsList = [];
+
+      await firestore()
+        .collection('userAds')
+        .orderBy('Time','desc')
+        .get()
+        .then((querySnapshot) => {
+
+          querySnapshot.forEach(doc => {
+
+            const { Make, Year, Price, Driven, Discription, Condition, Time, Location, ImageUrl,AdId } = doc.data();
+
+            MyAdsList.push({
+
+              id: doc.id,
+              Time: Time,
+              AdId,
+              Make,
+              Price,
+              Year,
+              Condition,
+              Discription,
+              Driven,
+              Location,
+              ImageUrl,
+
+
+            });
 
           })
 
-
-        setMyAds(MyAdsList);
-
+        })
 
 
+      setMyAds(MyAdsList);
 
-      } catch (err) {
 
-        console.log(err)
+    } catch (err) {
 
-      }
+      console.log(err)
 
     }
+
+  }
+
+   //Refresh and Rerender the Getting Ads Function  in App
+
+  useEffect(() => {   
 
     GetAds();
 
   }, []);
 
-  //Getting data/Ads from fireStore code Above
+  //Again rendered Ads after any Edit or Delete function Runs
+
+  useEffect(()=>{
+    GetAds();
+    setAdUpadated(false);
+
+  },[AdsUpdated])
+
+
+
+//Delete Ad Function is Here Below
+
+const deleteAd = (AdId) =>{
+
+console.log(AdId);
+
+firestore()
+.collection('userAds')
+.doc(AdId)
+.get()
+.then(documentSnapshot =>{
+  if(documentSnapshot.exists){
+
+    const {ImageUrl} = documentSnapshot.data();
+    if(ImageUrl!==null){
+      const storageRef = storage().refFromURL(ImageUrl);
+      const imageRef = storage().ref(storageRef.fullPath);
+
+      imageRef
+      .delete().then(
+        ()=>{
+         console.log(`${ImageUrl} has been Deleted Sucessfully ` );
+         deleteAdFirestore(AdId);
+
+         setAdUpadated(true);
+      })
+      .catch(
+        (err) =>{
+         console.log("Error While Deleting Image ",err);
+         
+      })
+    }
+  }
+})
+
+}
+
+const deleteAdFirestore =() =>{
+ 
+  firestore()
+  .collection('userAds')
+  .doc(AdId)
+  .delete()
+  .then(
+    ()=>{
+      Alert.alert(
+        "Ad Deleted",
+        "Ad deleted Successfully  !",
+        [
+          
+          { text: "OK",  }
+
+        ],
+        
+      );
+  })
+  .catch((err) =>{
+    console.log("Error while Deleting Post data  =>", err)
+  })
+
+}
+
+
 
 
 
@@ -123,15 +199,54 @@ const Ads = ({ navigation }) => {
                        
                   {/* Checking if the user can edit or delete his own Ads */}
 
-                  
+                  {user.uid == item.AdId ?
                   <View style={{ justifyContent: "space-around", flexDirection: "row", marginBottom: 5 }}>
+                     
+                     
 
-                      <Text><Icon name="edit" size={25} />Edit</Text>
-        
-                      <Text><Icon name="trash" size={25} />Delete</Text>
-                   
+                       <TouchableOpacity onPress={
+                        ()=>{
+                          Alert.alert(
+                            "Ad Edited",
+                            "Want to  Edit Ad Successfully  !",
+                            [
+                              
+                              { text: "OK",  }
+                    
+                            ],
+                            
+                           );
+                          }}>
+                       <Text><Icon name="edit" size={25} />Edit</Text>
+                       </TouchableOpacity>
+                      
+                    <TouchableOpacity onPress={ 
+                      ()=>
+                      Alert.alert(
+                        "Want to Delete Ad ?",
+                        "This can't be undone !",
+                        [
+                          {
+                            text: "Cancel",
+                            onPress: () => console.log("Ad Deletion cancel !"),
+                            style: "cancel"
+                          },
+                          { text: "OK", onPress: () => deleteAd(item.AdId) }
+                        ],
+                        { cancelable: false }
+
+                       )
+                      
+                      
+                      }
+                    >
+                    <Text><Icon name="trash" size={25} />Delete</Text>
+                    </TouchableOpacity>
+                        
+                     
                   </View>  
 
+                  : null}
 
                 </Card>
 
