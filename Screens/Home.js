@@ -19,6 +19,7 @@ import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
 import LinkButton from '../SharedFunctions/linkButton';
 import firestore from '@react-native-firebase/firestore';
 import Share from 'react-native-share';
+import moment from 'moment';
 
 const Home = ({navigation}) => {
 
@@ -207,7 +208,7 @@ return(
 <Text ><Icon name="location-arrow" size={15}/>{'  '}{item.Location}</Text>
 
 
-<Text style={{color:"black",fontSize:10}}>{Date(item.Time)}</Text>
+<Text style={{color:"black",fontSize:10}}>{moment(item.Time.toDate()).fromNow()}</Text>
 
 </Right>     
 
