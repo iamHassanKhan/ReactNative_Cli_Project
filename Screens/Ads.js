@@ -1,151 +1,157 @@
-import React, {useContext, useState ,useEffect, useRef} from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
-  Text,Alert,
+  Text, Alert,
   StatusBar,
-  Image,FlatList,
+  Image, FlatList,
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {globalStyles} from '../SharedFunctions/global';
-import {Avatar, Button, Card, Title, Paragraph} from 'react-native-paper';
+import { globalStyles } from '../SharedFunctions/global';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
-import {AuthContext} from '../Navigation/AuthProviders';
+import { AuthContext } from '../Navigation/AuthProviders';
 //Auth Context imported for checking Authentice  User
 
-const Ads = ({navigation}) => {
+const Ads = ({ navigation }) => {
 
-  const [myAds,setMyAds] = useState([]); 
-  const {register} = useContext(AuthContext);
+  const [myAds, setMyAds] = useState([]);
+  const { user } = useContext(AuthContext);
   /////////////////
 
-useEffect( ()=>{
- 
-  const GetAds = async () => {
+  useEffect(() => {
 
-    try{
+    const GetAds = async () => {
 
-    const MyAdsList = [];
+      try {
 
-   await firestore()
-    .collection('userAds')
-    .get()
-    .then((querySnapshot)=> {
+        const MyAdsList = [];
 
-      // console.log("Total Post  => ",querySnapshot.size);
+        await firestore()
+          .collection('userAds')
+          .get()
+          .then((querySnapshot) => {
 
-     querySnapshot.forEach( doc =>{
-     
-     const  {Make,Year,Price,Driven,Discription,Condition,Time,Location,ImageUrl }= doc.data();
-     
-     MyAdsList.push({
+            // console.log("Total Post  => ",querySnapshot.size);
 
-      id:doc.id,
-      Time:Time,
-      Make,
-      Price,
-      Year,
-      Condition,
-      Discription,
-      Driven,
-      Location,
-      ImageUrl,
+            querySnapshot.forEach(doc => {
 
+              const { Make, Year, Price, Driven, Discription, Condition, Time, Location, ImageUrl } = doc.data();
 
-     }); 
+              MyAdsList.push({
 
-    })
-
-  })
+                id: doc.id,
+                Time: Time,
+                Make,
+                Price,
+                Year,
+                Condition,
+                Discription,
+                Driven,
+                Location,
+                ImageUrl,
 
 
-  setMyAds(MyAdsList);
+              });
+
+            })
+
+          })
+
+
+        setMyAds(MyAdsList);
 
 
 
 
-    } catch(err){
+      } catch (err) {
 
-      console.log(err)
+        console.log(err)
+
+      }
 
     }
 
-  }
+    GetAds();
 
-  GetAds();
-
-},[]);
+  }, []);
 
   //Getting data/Ads from fireStore code Above
-  
+
 
 
   return (
     <View
       style={{
         flex: 1,
-        marginHorizontal:10,
+        marginHorizontal: 10,
       }}>
       <Text style={globalStyles.text}> My Ads </Text>
 
-      <SafeAreaView >
+       
+      <View >
+       
+
+        <FlatList
+
+          data={myAds}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+
+          renderItem={({ item, index }) => {
 
 
-<FlatList
-  
- data={myAds}
- keyExtractor={(item, index) => index.toString()}
- showsVerticalScrollIndicator={false}
- 
- renderItem={({ item, index }) => {
+            return (
+
+              <View>
 
 
-return(
+                <Card style={globalStyles.MyAdsCardStyle} key={index}>
 
-<View>
-<Card style={globalStyles.MyAdsCardStyle} key={index}>
+                  <Card.Cover source={{ uri: item.ImageUrl }} style={globalStyles.MyAdsCardImageStyle} />
 
-<Card.Cover source={{uri:item.ImageUrl}} style={globalStyles.MyAdsCardImageStyle}/>
+                  <Card.Content>
+                    <Title>{item.Make}</Title>
+                    <Paragraph>{item.Discription}</Paragraph>
+                    <Paragraph>{item.Price}</Paragraph>
 
-<Card.Content>
-  <Title>{item.Make}</Title>
-  <Paragraph>{item.Discription}</Paragraph>
-  <Paragraph>{item.Location}</Paragraph>
-</Card.Content>
+                  </Card.Content>
+                       
+                  {/* Checking if the user can edit or delete his own Ads */}
 
- <View style={{justifyContent:"space-around",flexDirection:"row",marginBottom:5}}>
+                  
+                  <View style={{ justifyContent: "space-around", flexDirection: "row", marginBottom: 5 }}>
 
-<TouchableOpacity>
-<Text><Icon name="edit" size={25} />Edit</Text>
-</TouchableOpacity>
- 
-<TouchableOpacity>
- <Text><Icon name="trash" size={25} />Delete</Text>
- </TouchableOpacity>
- 
- </View>
- 
-</Card> 
-
-</View>
+                      <Text><Icon name="edit" size={25} />Edit</Text>
+        
+                      <Text><Icon name="trash" size={25} />Delete</Text>
+                   
+                  </View>  
 
 
-)
- 
-} }
+                </Card>
 
-  /> 
+                
+              </View>
 
-{/*  FlatList Closed above */}
 
-</SafeAreaView>
+            )
 
+          }}
+
+        />
+
+        {/*  FlatList Closed above */}
+
+      </View>
+      
     </View>
-)};
+  )
+};
 
 export default Ads;
 

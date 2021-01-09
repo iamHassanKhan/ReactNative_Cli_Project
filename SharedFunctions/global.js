@@ -97,7 +97,7 @@ export const globalStyles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     borderRadius:20,
-    elevation:20
+    elevation:10
   },
 
   usertext: {
@@ -355,9 +355,16 @@ ImageCategoriestylesView:{
     flexDirection:"row",
     justifyContent:"center",
     
+   },
 
-   
-   }
+   //Ad detail Page Styles
+
+   AdDetail: {
+    marginBottom:5,
+    borderBottomWidth:1,
+    borderBottomColor:"black"
+  },
+
 
 });
 

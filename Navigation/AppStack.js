@@ -9,12 +9,9 @@ import Setting from '../Screens/Setting';
 import MakeAdd from '../Screens/MakeAdd';
 import Search from '../Screens/Search';
 import UpdateAd from '../Screens/UpdateAd';
-// import UserSetting from '../Screens/UserSetting';
-import SearchResult from '../Screens/SearchResult';
-import FeedItems from '../Screens/FeedItems';
 import Category from '../Screens/Category';
 import ReportAds from '../Screens/ReportAds';
-
+import AdDetail from '../Screens/AdDetail';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -35,13 +32,12 @@ const AppStack = () => {
     <Stack.Navigator headerMode="none">
 
       <Stack.Screen name="Hometabs" component={HomeTabs} />
-     
+      <Stack.Screen name="AdDetail" component={AdDetail} />
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
       <Stack.Screen name="ReportAd" component={ReportAds} />
       <Stack.Screen name="UpdateAd" component={UpdateAd} />
       <Stack.Screen name="Search" component={Search} />
-      <Stack.Screen name="SearchResult" component={SearchResult} />
       <Stack.Screen name="ReprtAds" component={ReportAds} />
       
 

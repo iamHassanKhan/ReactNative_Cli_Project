@@ -53,35 +53,7 @@ const ShareAd = async ()  => {
  }
 
 ///////////////////
-//Reprt Ad
 
-
-
-
-
-const ReportAd =() => {
-
-    
-  Alert.alert(
-    "Report ",
-    "Want to Report Ad",
-    [
-      {
-        text: "Yes",
-        onPress: ()=> alert("Reported")
-      },
-      {
-        text: "No",
-        onPress: () => console.log("Report Cancel"),
-        style: "cancel"
-      },
-     
-    ],
-    
-  )
- 
- 
-}
 /////////////////
 
 useEffect( ()=>{
@@ -197,6 +169,12 @@ return(
 
 <View>
 
+<TouchableOpacity onPress={()=>{
+  navigation.navigate("AdDetail",
+  { item:item}
+  );
+}}>
+
 <CardItem style={globalStyles.cardStyles} key={index} >
 
 <Image source={{uri:item.ImageUrl}} style={globalStyles.Cardimage}/>
@@ -221,24 +199,17 @@ return(
 
 <Text style={globalStyles.Cardtext}>{item.Year}</Text>
   
-<Text >{item.Driven}</Text>
-
-
-<Text >{item.Discription}</Text>
-
-<Text >{item.Condition}</Text>
 
 <Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
 
-<Text style={{color:"black",fontSize:9}}>{Date(item.Time)}</Text>
+<Text style={{color:"black",fontSize:10}}>{Date(item.Time)}</Text>
 
-<TouchableOpacity onPress={ReportAd}>
-<Text>Report Ad  <Icon name="edit" size={15}/></Text>
-</TouchableOpacity>
 
 </Right>     
 
 </CardItem>
+
+</TouchableOpacity>
 
 </View>
 

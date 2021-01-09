@@ -24,7 +24,6 @@ import {AuthContext} from '../Navigation/AuthProviders';
  const  MakeAdd = ({navigation}) => {
 
    
-  const [Id,setId] = useState();
   const [Make,setMake] = useState(null);
   const [Price,setPrice] = useState(null);
   const [Year,setYear] = useState(null);
@@ -165,7 +164,7 @@ firestore()
 .collection('userAds')
 .add({
 
-  Id:user.uid,
+  AdId:user.uid,
   Make:Make,
   Price:Price,
   Year:Year,
