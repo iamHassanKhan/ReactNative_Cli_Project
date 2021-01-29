@@ -59,7 +59,7 @@ import Geocoder from 'react-native-geocoder';
     // }
     intializingValue();
     getLocation();
-    console.log(props.route.params.item)
+    //console.log(props.route.params.item)
   
   }, []);
 
@@ -80,7 +80,7 @@ import Geocoder from 'react-native-geocoder';
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           console.log("You can use the Location");
           Geolocation.getCurrentPosition(async (position) => {
-              console.log(position)
+             // console.log(position)
               var lat = parseFloat(position.coords.latitude)
               var long = parseFloat(position.coords.longitude)
               var lng = parseFloat(position.coords.longitude)
@@ -96,9 +96,9 @@ import Geocoder from 'react-native-geocoder';
                   lat : position.coords.latitude,
                   long : position.coords.longitude
               }
-              console.log(position)
+             // console.log(position)
               // try {
-                  console.log(lat + "      " + long)
+                 // console.log(lat + "      " + long)
                   try {
                       Geocoder.geocodePosition({ lat: lat, lng: long}).then(res =>
                         // alert("Location"),
@@ -114,8 +114,8 @@ import Geocoder from 'react-native-geocoder';
               (error) => alert(JSON.stringify(error)),
               { enableHighAccuracy: true, timeout: 20000 });
       } else {
-          console.log("Location permission denied");
-        alert("kjjkjkjjnk")
+         // console.log("Location permission denied");
+        alert("Permission has Denied ")
 
       }
   } catch (err) {
@@ -189,6 +189,10 @@ const uploadImage = async () => {
         })
       })
 
+    }
+
+  
+  };
 /////
   // const { uri } = image;
   // const filename = uri.substring(uri.lastIndexOf('/') + 1);
@@ -231,11 +235,9 @@ const uploadImage = async () => {
   //   return null;
   //  }
 
-  }
-
   
- };
  // intializing the value send from my Ads
+
  const intializingValue = () =>{
   if(editData == ''){
     setMake(null)
@@ -281,6 +283,15 @@ firestore()
   likes:editData.likes,
 })
 .then(() => {
+
+  setMake(null)
+  setPrice(null)
+  setYear(null)
+  setDriven(null)
+  setCondition(null)
+  setDiscrip(null)
+  setLocation(null)
+  setImage(null)
   alert('Ads updated!');
 });
 }
@@ -326,7 +337,8 @@ firestore()
 
 })
 .then(()=>{
-  console.log("Ads Added in databse =>")
+
+  console.log("Ads Added in databse ")
         
         setMake(null);
         setPrice(null);
@@ -354,7 +366,8 @@ firestore()
     "Please Login with Email and Password to Submit Post!",
     [
       
-      { text: "OK",  }
+      { text: "OK",  },
+      //()=>{alert(err)}
     ],
     
   );
