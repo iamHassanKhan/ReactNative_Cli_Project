@@ -115,13 +115,15 @@ const Home = ({ navigation }) => {
   }
   }
 
-  const ShareAd = async () => {
+  const ShareAd = async (item) => {
 
 
     const shareOptions = {
 
-      message: "Your Title",
-
+      message: "CarFinder",
+      url: item.ImageUrl,
+      title: "Download App to Find Your Desired Car",
+      
     }
     try {
 
@@ -478,7 +480,7 @@ const Home = ({ navigation }) => {
 
                       <View style={globalStyles.CardIcon}>
 
-                        <Icon active name="share" size={25} color="grey" onPress={ShareAd} />
+                        <Icon active name="share" size={25} color="grey" onPress={()=>ShareAd(item)} />
                         <TouchableOpacity  onPress={
                           () => {
                             if (item.fav) {

@@ -146,7 +146,8 @@ const deleteAdFirestore =(docId) =>{
   .delete()
   .then(
     ()=>{
-      GetAds();
+      setAdUpadated(true);
+      
       Alert.alert(
         "Ad Deleted",
         "Ad deleted Successfully  !",
