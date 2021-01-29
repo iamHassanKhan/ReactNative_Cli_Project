@@ -7,10 +7,8 @@ import Sell from '../Screens/Sell';
 import Ads from '../Screens/Ads';
 import Setting from '../Screens/Setting';
 import MakeAdd from '../Screens/MakeAdd';
-import Search from '../Screens/Search';
 import UpdateAd from '../Screens/UpdateAd';
 import Category from '../Screens/Category';
-import ReportAds from '../Screens/ReportAds';
 import AdDetail from '../Screens/AdDetail';
 import About from '../Screens/About';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -36,10 +34,7 @@ const AppStack = () => {
       <Stack.Screen name="AdDetail" component={AdDetail} />
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
-      <Stack.Screen name="ReportAd" component={ReportAds} />
       <Stack.Screen name="UpdateAd" component={UpdateAd} />
-      <Stack.Screen name="Search" component={Search} />
-      <Stack.Screen name="ReprtAds" component={ReportAds} />
       <Stack.Screen name="About" component={About} />
 
 
