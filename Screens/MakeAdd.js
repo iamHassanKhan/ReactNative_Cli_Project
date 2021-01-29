@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -10,6 +10,8 @@ import {
   Image,
   TextInput,
   ActivityIndicator,
+  PermissionsAndroid,
+
 } from 'react-native';
 import {globalStyles} from '../SharedFunctions/global';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
@@ -19,9 +21,12 @@ import ImagePicker from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import {AuthContext} from '../Navigation/AuthProviders';
+import Geolocation from 'react-native-geolocation-service'
+import auth, { firebase } from '@react-native-firebase/auth';
+import Geocoder from 'react-native-geocoder';
 
 
- const  MakeAdd = ({navigation}) => {
+ const  MakeAdd = (props) => {
 
    
   const [Make,setMake] = useState(null);
@@ -31,13 +36,92 @@ import {AuthContext} from '../Navigation/AuthProviders';
   const [Condition,setCondition] = useState(null);
   const [Discription,setDiscrip] = useState(null);
   const [Location,setLocation] = useState(null);
-
-  const [image,setImage] = useState(null);
+  const [city, setCity] = useState('Mauritius')
+  const [editData, setEditData] = useState(props.route.params.item)
   
+  const [image,setImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(false)
   const {user} = useContext(AuthContext);
   
 
   //Image Picking from Library or camera Code Below
+
+  useEffect(() => {
+    // alert(JSON.stringify(editData))
+    // alert(editData.id)
+    // if(editData == ''){
+
+    //   setImage(null)
+    // }
+    // else{
+    //   setImage(editData.ImageUrl)
+
+    // }
+    intializingValue();
+    getLocation();
+    console.log(props.route.params.item)
+  
+  }, []);
+
+  const getLocation = async () => {
+    try {
+      
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "Location Permission",
+          message:
+          "grand a permission to access the locaiton ",
+          buttonNeutral: "Ask Me Later",
+          buttonNegative: "Cancel",
+          buttonPositive: "OK"
+        }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("You can use the Location");
+          Geolocation.getCurrentPosition(async (position) => {
+              console.log(position)
+              var lat = parseFloat(position.coords.latitude)
+              var long = parseFloat(position.coords.longitude)
+              var lng = parseFloat(position.coords.longitude)
+
+              var initialRegion = {
+                  latitude: lat,
+                  longitude: long,
+                  latitudeDelta: 0.0690,
+                  longitudeDelta: 0.0150,
+              }
+
+              var positionLatLong = {
+                  lat : position.coords.latitude,
+                  long : position.coords.longitude
+              }
+              console.log(position)
+              // try {
+                  console.log(lat + "      " + long)
+                  try {
+                      Geocoder.geocodePosition({ lat: lat, lng: long}).then(res =>
+                        // alert("Location"),
+                          // console.log(res[0].locality)
+                        setCity(res[0].locality),
+                        
+                        )
+                   } catch(err) {
+                     alert(err, 'Catch');
+                   }
+
+          },
+              (error) => alert(JSON.stringify(error)),
+              { enableHighAccuracy: true, timeout: 20000 });
+      } else {
+          console.log("Location permission denied");
+        alert("kjjkjkjjnk")
+
+      }
+  } catch (err) {
+      alert(err, "catch 2");
+  }
+  }
 
   const chooseFile = () => {
 
@@ -62,8 +146,8 @@ import {AuthContext} from '../Navigation/AuthProviders';
         const source ={uri: response.uri};
 
         //console.log(source);
-
-        setImage(source);
+        setSelectedImage(true);
+        setImage(response);
       }
     });
   };
@@ -89,53 +173,117 @@ const uploadImage = async () => {
 
   }else{
 
-  const { uri } = image;
-  const filename = uri.substring(uri.lastIndexOf('/') + 1);
+    return new Promise((resolve, reject) => {
+      var imageRef = storage().ref('gs://carfinder-2a672.appspot.com').child(image.fileName);
+      console.log(image.fileName)
+      imageRef.putFile(image.uri)
+        .then((data) => {
+          console.log(data)
+          return imageRef.getDownloadURL()
+        })
+        .then((url) => {
+          resolve(url)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+      })
 
-  const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+/////
+  // const { uri } = image;
+  // const filename = uri.substring(uri.lastIndexOf('/') + 1);
 
-  const storageRef = storage().ref(`photos/${filename}`);
-  const task =  storageRef.putFile(uploadUri);
+  // const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
 
-   task.on('state_changed', snapshot => {
+  // const storageRef = storage().ref(`photos/${filename}`);
+  // const task =  storageRef.putFile(uploadUri);
 
-    });
+  //  task.on('state_changed', snapshot => {
 
-   try {
+  //   });
 
-   await task;
+  //  try {
+
+  //  await task;
     
-   const Imageurl = await storageRef.getDownloadURL();
-   console.log("Image uploaded")
+  //  const Imageurl = await storageRef.getDownloadURL();
+  //  console.log("Image uploaded")
 
-   setImage(null);
+  //  setImage(null);
 
-   return Imageurl;
+  //  return Imageurl;
 
-   }
-    catch (e) {
+  //  }
+  //   catch (e) {
     
-      Alert.alert(
-        "You Can't Post",
-        "Please Login with Email and Password to Submit Post!",
-        [
+  //     Alert.alert(
+  //       "You Can't Post",
+  //       "Please Login with Email and Password to Submit Post!",
+  //       [
           
-          { text: "OK",  }
-        ],
+  //         { text: "OK",  }
+  //       ],
         
-      );
+  //     );
       
    
 
-    return null;
-   }
+  //   return null;
+  //  }
 
   }
 
   
  };
- 
+ // intializing the value send from my Ads
+ const intializingValue = () =>{
+  if(editData == ''){
+    setMake(null)
+    setPrice(null)
+    setYear(null)
+    setDriven(null)
+    setCondition(null)
+    setDiscrip(null)
+    setLocation(null)
+    setImage(null)
+  }
+  else{
+    setMake(editData.Make)
+    setPrice(editData.Price)
+    setYear(editData.Year)
+    setDriven(editData.Driven)
+    setCondition(editData.Condition)
+    setDiscrip(editData.Discription)
+    setLocation(editData.Location)
+    setImage(editData.ImageUrl)
+  }
+ }
+// update code below
 
+const update = async () => {
+  const Getimageurl = image == null || selectedImage  ? await uploadImage() : image;
+  
+firestore()
+.collection('userAds')
+.doc(editData.id)
+.update({
+  AdId:user.uid,
+  Make:Make,
+  Price:Price,
+  Year:Year,
+  Condition:Condition,
+  Driven:Driven,
+  Discription:Discription,
+  Location:city,
+  status: '',
+  ImageUrl: Getimageurl,
+  Time:firestore.Timestamp.fromDate(new Date()),
+  likes:editData.likes,
+})
+.then(() => {
+  alert('Ads updated!');
+});
+}
       
 //Final Ads Post Code with Ads detail here below
 
@@ -163,7 +311,6 @@ const AddPost = async () => {
 firestore()
 .collection('userAds')
 .add({
-
   AdId:user.uid,
   Make:Make,
   Price:Price,
@@ -171,7 +318,8 @@ firestore()
   Condition:Condition,
   Driven:Driven,
   Discription:Discription,
-  Location:Location,
+  Location:city,
+  status: '',
   ImageUrl:Getimageurl,
   Time:firestore.Timestamp.fromDate(new Date()),
   likes:null,
@@ -187,6 +335,7 @@ firestore()
         setCondition(null);
         setDiscrip(null);
         setLocation(null);
+        setImage(null);
 
         Alert.alert(
           "Ads Submitted",
@@ -223,14 +372,14 @@ return(
 
   <View style={globalStyles.AdPostScreen}>
   <HeaderButtonsTab  icon="angle-left"
-        coler="blue"  title1="Back" onPress={()=> navigation.goBack()}/>
+        coler="blue"  title1="Back" onPress={()=>props.navigation.goBack()}/>
   <Text style={globalStyles.text}>
    Make your Ad <Icon name="edit" size={30}/>
   </Text>
 
   <View  >
     
-  <TextInput placeholder="lahore,punjab,pakistan "  value={Location} onChangeText={(text)=>setLocation(text)} style={globalStyles.Formtxtinput} />
+  <TextInput editable = {false} value={city} onChangeText={(text)=>setLocation(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Make i.e Honda"  value={Make} onChangeText={(text)=>setMake(text)} style={globalStyles.Formtxtinput} />
    <TextInput placeholder="Price "   value={Price} keyboardType="numeric" onChangeText={(text)=>setPrice(text)} style={globalStyles.Formtxtinput}/>
    <TextInput placeholder="Year i.e 2000"   value={Year} keyboardType="numeric" onChangeText={(text)=>setYear(text)} style={globalStyles.Formtxtinput}/>
@@ -243,17 +392,26 @@ return(
  
  {/* showing Image if Picked from library or camera */}
   
-  {image===null ? <Text>
+  {image ===null ? <Text>
 
       No Image Selected
-
+      
     </Text> :
        <View style={globalStyles.Adimagecontainer}>
+         {
+           selectedImage == false ?
        <Image
-          source={{uri:image.uri}}
+          source={{ uri: editData.ImageUrl}}
           style={globalStyles.AdimageStyle}
         >
         </Image>
+        :
+        <Image
+          source={{ uri: image.uri}}
+          style={globalStyles.AdimageStyle}
+        >
+        </Image>
+         }
        </View>}
 
     
@@ -262,9 +420,9 @@ return(
      <View style={{flexDirection:"row" ,justifyContent:"center"}}>
       
 
-    <FlatButton title="Post Ad" 
+    <FlatButton title= {editData ? ("Update Ad"): ("Post Ad")} 
       
-       onPress={AddPost}
+       onPress={editData ? (update):(AddPost)}
     
      />
     </View>  

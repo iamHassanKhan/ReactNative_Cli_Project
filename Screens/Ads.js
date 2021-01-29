@@ -16,6 +16,8 @@ import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { AuthContext } from '../Navigation/AuthProviders';
+import auth, { firebase } from '@react-native-firebase/auth';
+
 //Auth Context imported for checking Authentice  User
 
 const Ads = ({ navigation }) => {
@@ -35,13 +37,14 @@ const Ads = ({ navigation }) => {
 
       await firestore()
         .collection('userAds')
-        .orderBy('Time','desc')
+        // .orderBy('Time','desc')
+        .where("AdId", "==", auth().currentUser.uid )
         .get()
         .then((querySnapshot) => {
 
           querySnapshot.forEach(doc => {
 
-            const { Make, Year, Price, Driven, Discription, Condition, Time, Location, ImageUrl,AdId } = doc.data();
+            const { Make, Year, Price, Driven, Discription, Condition, Time, Location, ImageUrl,AdId,likes } = doc.data();
 
             MyAdsList.push({
 
@@ -56,7 +59,7 @@ const Ads = ({ navigation }) => {
               Driven,
               Location,
               ImageUrl,
-
+              likes
 
             });
 
@@ -96,49 +99,54 @@ const Ads = ({ navigation }) => {
 
 //Delete Ad Function is Here Below
 
-const deleteAd = (AdId) =>{
+// const deleteAd = () => {
 
-console.log(AdId);
+// }
 
-firestore()
-.collection('userAds')
-.doc(AdId)
-.get()
-.then(documentSnapshot =>{
-  if(documentSnapshot.exists){
+// const deleteAd = (AdId) =>{
 
-    const {ImageUrl} = documentSnapshot.data();
-    if(ImageUrl!==null){
-      const storageRef = storage().refFromURL(ImageUrl);
-      const imageRef = storage().ref(storageRef.fullPath);
+// console.log(AdId);
 
-      imageRef
-      .delete().then(
-        ()=>{
-         console.log(`${ImageUrl} has been Deleted Sucessfully ` );
-         deleteAdFirestore(AdId);
+// firestore()
+// .collection('userAds')
+// .doc(AdId)
+// .get()
+// .then(documentSnapshot =>{
+//   if(documentSnapshot.exists){
 
-         setAdUpadated(true);
-      })
-      .catch(
-        (err) =>{
-         console.log("Error While Deleting Image ",err);
+//     const {ImageUrl} = documentSnapshot.data();
+//     if(ImageUrl!==null){
+//       const storageRef = storage().refFromURL(ImageUrl);
+//       const imageRef = storage().ref(storageRef.fullPath);
+
+//       imageRef
+//       .delete().then(
+//         ()=>{
+//          console.log(`${ImageUrl} has been Deleted Sucessfully ` );
+//          deleteAdFirestore(AdId);
+
+//          setAdUpadated(true);
+//       })
+//       .catch(
+//         (err) =>{
+//          console.log("Error While Deleting Image ",err);
          
-      })
-    }
-  }
-})
+//       })
+//     }
+//   }
+// })
 
-}
+// }
 
-const deleteAdFirestore =() =>{
+const deleteAdFirestore =(docId) =>{
  
   firestore()
   .collection('userAds')
-  .doc(AdId)
+  .doc(docId)
   .delete()
   .then(
     ()=>{
+      GetAds();
       Alert.alert(
         "Ad Deleted",
         "Ad deleted Successfully  !",
@@ -167,11 +175,6 @@ const deleteAdFirestore =() =>{
         marginHorizontal: 10,
       }}>
       <Text style={globalStyles.text}> My Ads </Text>
-
-       
-      <View >
-       
-
         <FlatList
 
           data={myAds}
@@ -206,16 +209,7 @@ const deleteAdFirestore =() =>{
 
                        <TouchableOpacity onPress={
                         ()=>{
-                          Alert.alert(
-                            "Ad Edited",
-                            "Want to  Edit Ad Successfully  !",
-                            [
-                              
-                              { text: "OK",  }
-                    
-                            ],
-                            
-                           );
+                            navigation.navigate('MakeAdd', {item: item})
                           }}>
                        <Text><Icon name="edit" size={25} />Edit</Text>
                        </TouchableOpacity>
@@ -231,13 +225,11 @@ const deleteAdFirestore =() =>{
                             onPress: () => console.log("Ad Deletion cancel !"),
                             style: "cancel"
                           },
-                          { text: "OK", onPress: () => deleteAd(item.AdId) }
+                          { text: "OK", onPress: () =>deleteAdFirestore(item.id) }
                         ],
                         { cancelable: false }
 
                        )
-                      
-                      
                       }
                     >
                     <Text><Icon name="trash" size={25} />Delete</Text>
@@ -259,10 +251,6 @@ const deleteAdFirestore =() =>{
           }}
 
         />
-
-        {/*  FlatList Closed above */}
-
-      </View>
       
     </View>
   )

@@ -34,7 +34,7 @@ const Sell = ({navigation}) => {
       <FlatButton
         title="Make Add"
         
-         onPress={() => navigation.navigate('MakeAdd')}
+         onPress={() => navigation.navigate('MakeAdd', {item: ''})}
       />
     </View>
   );

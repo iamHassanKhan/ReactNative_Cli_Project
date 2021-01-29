@@ -14,6 +14,7 @@ import Header from '../SharedFunctions/Header';
 import {globalStyles} from '../SharedFunctions/global';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {Card, CardItem,Text,Left,Right,Body} from 'native-base';
+import firestore from '@react-native-firebase/firestore';
 import HeaderButtonsTab from '../SharedFunctions/HeaderButtonsTab';
 
 const AdDetail =({navigation,route}) => {
@@ -29,23 +30,37 @@ const AdDetail =({navigation,route}) => {
 const ReportAd =() => {
 
     
+firestore()
+.collection('ReportedAds')
+.add({
+  AdId : item.AdId,
+  Report:'reported'
+})
+.then(()=>{
+  console.log("Ads Added in databse =>")
+        Alert.alert(
+          "Ad Report",
+          "Ad Reported Successfully!",
+          [
+            
+            { text: "OK",  }
+          ],
+          
+        );
+})
+.catch((err) =>{
+  
   Alert.alert(
-    "Report ",
-    "Want to Report Ad",
+    "You Can't Report",
+    "Please Login with Email and Password to Submit Post!",
     [
-      {
-        text: "Yes",
-        onPress: ()=> alert("Reported")
-      },
-      {
-        text: "No",
-        onPress: () => console.log("Report Cancel"),
-        style: "cancel"
-      },
-     
+      
+      { text: "OK",  }
     ],
     
-  )
+  );
+
+});
  
  
 }
@@ -62,7 +77,7 @@ const ReportAd =() => {
 
         <Text style={globalStyles.text}>This is Ad detail Page</Text>
         
-
+        <ScrollView>
         <View>
 
         <Image source={{uri:item.ImageUrl}} 
@@ -83,7 +98,7 @@ const ReportAd =() => {
          </TouchableOpacity>
 
         </View>
-
+        </ScrollView>
         </View>
     )
 }

@@ -14,11 +14,20 @@ export default function SearchtxtInput({
 }) {
   return (
 
-    <View style={globalStyles.SearchtxtinputView}>
+    <View style={{
+
+      marginTop: 5,
+      marginBottom: 10,
+      height: 50,
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      elevation:30,
+      alignItems:"center",
+      justifyContent:"space-around",
+      borderRadius:40,
+    }}>
         
       <TextInput
-    
-        value={valuetxt}
         onChangeText={ontextChnage}
         placeholder={placeholdertxt}
         placeholderTextColor="grey"
