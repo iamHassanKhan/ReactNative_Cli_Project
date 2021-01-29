@@ -7,7 +7,6 @@ import Sell from '../Screens/Sell';
 import Ads from '../Screens/Ads';
 import Setting from '../Screens/Setting';
 import MakeAdd from '../Screens/MakeAdd';
-import UpdateAd from '../Screens/UpdateAd';
 import Category from '../Screens/Category';
 import AdDetail from '../Screens/AdDetail';
 import About from '../Screens/About';
@@ -34,7 +33,6 @@ const AppStack = () => {
       <Stack.Screen name="AdDetail" component={AdDetail} />
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="MakeAdd" component={MakeAdd} />
-      <Stack.Screen name="UpdateAd" component={UpdateAd} />
       <Stack.Screen name="About" component={About} />
 
 
