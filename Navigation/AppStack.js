@@ -12,6 +12,7 @@ import UpdateAd from '../Screens/UpdateAd';
 import Category from '../Screens/Category';
 import ReportAds from '../Screens/ReportAds';
 import AdDetail from '../Screens/AdDetail';
+import About from '../Screens/About';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -39,7 +40,7 @@ const AppStack = () => {
       <Stack.Screen name="UpdateAd" component={UpdateAd} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="ReprtAds" component={ReportAds} />
-      
+      <Stack.Screen name="About" component={About} />
 
 
       {/* <Stack.Screen name="UserSetting" component={UserSetting} /> */}

@@ -82,7 +82,7 @@ const Setting = ({navigation}) => {
         <FlatButton title="Sign out" onPress={() => Signout()} />
       </View>
 
-      <TouchableOpacity >
+      <TouchableOpacity onPress={()=>navigation.navigate("About")}>
       <View style={globalStyles.userView}>
         <Text style={globalStyles.text2}>CarFinder</Text>
       </View>
