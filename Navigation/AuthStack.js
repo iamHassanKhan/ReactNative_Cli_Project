@@ -29,7 +29,7 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
 
-  const [isfirstlaunch, setisfirstlaunch] = React.useState(null);
+  const [isfirstlaunch, setisfirstlaunch] = useState(null);
   
   let routeName;
 

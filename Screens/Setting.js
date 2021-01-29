@@ -66,9 +66,10 @@ const Setting = ({navigation}) => {
 
             source={require('../assets/defaultImg.png')}
           />
-          {user.email ?<Text style={globalStyles.usertext}>Login as  {user.email} </Text>
+          {
+          user.email ?<Text style={globalStyles.usertext}>Login as  {user.email} </Text>
           :<Text style={globalStyles.usertext}> Login as Guest user</Text>
-        }
+          }
           
         </View>
       </TouchableOpacity>
