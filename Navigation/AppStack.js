@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
-const FeedStack = createStackNavigator();
+
 
 
 const AppStack = () => {
@@ -27,7 +27,8 @@ const AppStack = () => {
 
   return (
 
-    <Stack.Navigator headerMode="none">
+    <Stack.Navigator headerMode="none"
+    >
 
       <Stack.Screen name="Hometabs" component={HomeTabs} />
       <Stack.Screen name="AdDetail" component={AdDetail} />
