@@ -36,8 +36,6 @@ const AppStack = () => {
       <Stack.Screen name="About" component={About} />
 
 
-      {/* <Stack.Screen name="UserSetting" component={UserSetting} /> */}
-
     </Stack.Navigator>
   );
 };
