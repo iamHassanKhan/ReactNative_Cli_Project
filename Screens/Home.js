@@ -120,9 +120,10 @@ const Home = ({ navigation }) => {
 
     const shareOptions = {
 
-      message: "CarFinder",
+      title:"CarFinder" ,
+      message: "Download App to Find Your Desired Car",
       url: item.ImageUrl,
-      title: "Download App to Find Your Desired Car",
+     
       
     }
     try {
