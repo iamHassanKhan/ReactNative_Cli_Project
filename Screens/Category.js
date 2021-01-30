@@ -61,12 +61,12 @@ const Category = ({navigation}) => {
     onPress={()=>{
       navigation.goBack()
     }}/>
-     <Text style={globalStyles.text2}>
-       Categories Added  by Admin
+
+    <View style={{backgroundColor:"yellow" ,marginBottom:10}}>
+    <Text style={globalStyles.text2}>
+       Featured Ads
      </Text>
-     <View >
-     
-     </View>
+    </View>
  
      
     <ScrollView>
@@ -92,12 +92,10 @@ const Category = ({navigation}) => {
         <Text style={globalStyles.Cardtext}>{item.Make}</Text>
               
                  
-        <Text >{item.Price}</Text>
-         
-         <Text >{item.Discription}</Text>  
+        <Text >{item.Price}</Text>  
 
-         <Text ><Icon name="location-arrow" size={15}/>{item.Location}</Text>
-
+         <Text ><Icon name="location-arrow" size={15}/>{' '}{item.Location}</Text>
+         <Text >{item.Discription}</Text>
         
         </Right>     
         
