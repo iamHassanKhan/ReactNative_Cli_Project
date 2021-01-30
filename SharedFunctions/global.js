@@ -42,6 +42,15 @@ export const globalStyles = StyleSheet.create({
     flexDirection:"row",
     
   },
+  AboutText: {
+    marginBottom:5,
+    marginTop:5,
+    textAlign: 'center',
+    marginHorizontal:20,
+    fontSize: 20,
+    color: 'grey',
+    
+  },
 
   //Search page styles
 
@@ -82,10 +91,10 @@ export const globalStyles = StyleSheet.create({
   },
   userImglogo: {
 
-    height: 60,
-    width: 60,
+    height: 70,
+    width: 70,
     borderRadius:80,
-    backgroundColor:"grey"
+    backgroundColor:"red"
   },
   // Touchableopsity Setting user View Styles
 

@@ -87,7 +87,7 @@ const Setting = ({navigation}) => {
 
       <TouchableOpacity onPress={()=>navigation.navigate("About")}>
       <View style={globalStyles.userView}>
-        <Text style={globalStyles.text2}>CarFinder</Text>
+        <Text style={globalStyles.text2}>About CarFinder</Text>
       </View>
       </TouchableOpacity>
 
