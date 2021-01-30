@@ -64,7 +64,7 @@ const Setting = ({navigation}) => {
 
             //We can show User imag here 
 
-            source={require('../assets/defaultImg.png')}
+            source={require('../assets/user.png')}
           />
           {
           user.email ?<Text style={globalStyles.usertext}>Login as  {user.email} </Text>

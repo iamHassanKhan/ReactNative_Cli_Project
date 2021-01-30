@@ -1,11 +1,11 @@
-import React, {createContext, useEffect, useState} from 'react';
+import React, {createContext, useState} from 'react';
 import {
   Alert,
   
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-import { GoogleSignin } from '@react-native-community/google-signin';
+// import { GoogleSignin } from '@react-native-community/google-signin';
 
 export const AuthContext = createContext();
 
@@ -65,22 +65,22 @@ export const AuthProviders = ({children}) => {
 
         //Google login
 
-         googleLogin: async () =>{
-           try{
-            const { idToken } = await GoogleSignin.signIn();
+        //  googleLogin: async () =>{
+        //    try{
+        //     const { idToken } = await GoogleSignin.signIn();
 
-            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+        //     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
           
             
-            await auth().signInWithCredential(googleCredential);
-           }catch(e){
+        //     await auth().signInWithCredential(googleCredential);
+        //    }catch(e){
 
 
-            console.log("Error => ",e)
+        //     console.log("Error => ",e)
            
-           }
+        //    }
 
-         },
+        //  },
 
 
        // Logout function

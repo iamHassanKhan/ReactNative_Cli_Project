@@ -17,7 +17,6 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { AuthContext } from '../Navigation/AuthProviders';
 import auth, { firebase } from '@react-native-firebase/auth';
-
 //Auth Context imported for checking Authentice  User
 
 const Ads = ({ navigation }) => {
@@ -138,11 +137,11 @@ const Ads = ({ navigation }) => {
 
 // }
 
-const deleteAdFirestore =(docId) =>{
+const deleteAdFirestore =(AdId) =>{
  
   firestore()
   .collection('userAds')
-  .doc(docId)
+  .doc(AdId)
   .delete()
   .then(
     ()=>{

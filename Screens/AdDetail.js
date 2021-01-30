@@ -29,42 +29,51 @@ const AdDetail =({navigation,route}) => {
 
 const ReportAd =() => {
 
-    
-firestore()
-.collection('ReportedAds')
-.add({
-  AdId : item.AdId,
-  Report:'reported'
-})
-.then(()=>{
-  console.log("Ads Added in databse =>")
-        Alert.alert(
-          "Ad Report",
-          "Ad Reported Successfully!",
-          [
-            
-            { text: "OK",  }
-          ],
-          
-        );
-})
-.catch((err) =>{
-  
-  Alert.alert(
-    "You Can't Report",
-    "Please Login with Email and Password to Submit Post!",
+   Alert.alert(
+  "Want to Report Ad ?",
+  "This Can't be Undone!",
     [
-      
-      { text: "OK",  }
-    ],
-    
-  );
+   {
+     text: "Cancel",
+     onPress: () => console.log("Ad Deletion cancel !"),
+     style: "cancel"
+   },
+   { text: "OK", 
+      onPress: () => firestore()
+      .collection('ReportedAds')
+      .add({
+       AdId : item.AdId,
+       Report:'reported'
+      })
+     .then(()=>{
+    //console.log("Ads Added in databse =>")
+      Alert.alert(
+              "Ad Report",
+              "Ad Reported Successfully!",
+              [                      
+                 { text: "OK",  }
+              ],
+                   );
+               })
+              .catch((err) =>{
+                            
+              Alert.alert(
+                 "You Can't Report",
+                 "Please Login with Email and Password to Submit Post!",
+                      [             
+                       { text: "OK",  }
+                      ],
+                              
+                    );
+                          
+                 })}
+                ],
+              { cancelable: false }
 
-});
- 
+               )
  
 }
-
+//Report Ads Function Above
 
     return(
 

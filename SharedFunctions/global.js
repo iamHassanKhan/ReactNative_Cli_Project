@@ -340,22 +340,22 @@ ImageCategoriestylesView:{
  
   },
 
-  //my ads Styles
+  //my Ads Styles
 
   MyAdsCardStyle:{
 
    marginHorizontal:10,
    marginBottom:5,
    backgroundColor:"white",
-   borderRadius:0,
+   borderRadius:20,
    elevation:10,
    
   },
   MyAdsCardImageStyle:{
 
      height:200,
-     width:350,
-
+     width:352,
+     borderTopEndRadius:20
 
   },
   IndicatorStyle:{
@@ -374,6 +374,7 @@ ImageCategoriestylesView:{
     borderBottomColor:"grey",
     color:"black",
     fontSize:20,
+    padding:5,
   },
 
 

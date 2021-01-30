@@ -462,7 +462,7 @@ const Home = ({ navigation }) => {
 
           renderItem={({item, index}) => {
 
-            console.log(item)
+            //console.log(item)
             return (
               // item.selectedValue ?
               <View>
