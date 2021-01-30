@@ -45,7 +45,7 @@ const Home = ({ navigation }) => {
      a = await search.filter(x => {
         return (x.Make.toLowerCase().indexOf(val.toLowerCase()) !== -1);
     });
-    console.log(a);
+   // console.log(a);
     let tempAds = []
     a.map((data,index) => {
       if (city == data.Location) {
@@ -71,9 +71,9 @@ const Home = ({ navigation }) => {
         }
         );
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log("You can use the Location");
+         // console.log("You can use the Location");
           Geolocation.getCurrentPosition(async (position) => {
-              console.log(position)
+             // console.log(position)
               var lat = parseFloat(position.coords.latitude)
               var long = parseFloat(position.coords.longitude)
               var lng = parseFloat(position.coords.longitude)
@@ -89,9 +89,9 @@ const Home = ({ navigation }) => {
                   lat : position.coords.latitude,
                   long : position.coords.longitude
               }
-              console.log(position)
+             // console.log(position)
               // try {
-                  console.log(lat + "      " + long)
+                  //console.log(lat + "      " + long)
                   try {
                       Geocoder.geocodePosition({ lat: lat, lng: long}).then(res =>
                         // alert("Location"),
@@ -107,7 +107,8 @@ const Home = ({ navigation }) => {
               (error) => alert(JSON.stringify(error)),
               { enableHighAccuracy: true, timeout: 20000 });
       } else {
-          console.log("Location permission denied");
+          //console.log("Location permission denied");
+          alert("Location Permission Denied");
 
       }
   } catch (err) {
@@ -173,7 +174,7 @@ const Home = ({ navigation }) => {
 
         })
 
-      console.log('tempFavorites    => ' , tempFavorite);
+     // console.log('tempFavorites    => ' , tempFavorite);
       // console.log('userAds array =>' ,userAds );
       setFavorites(tempFavorite);
       GetAds(tempFavorite);
@@ -258,7 +259,7 @@ const Home = ({ navigation }) => {
               })
             }
           })
-        console.log(tempAds)
+       // console.log(tempAds)
       setUserAds(tempAds);
       setSearch(tempAds);
 
@@ -295,7 +296,7 @@ const Home = ({ navigation }) => {
       .where("uid", "==", auth().currentUser.uid)
       .where("DocId", "==", AdId)
       .get()
-    console.log(favData, "sldksfjldkflsajdlj;aslkdfliki")
+    //console.log(favData, "sldksfjldkflsajdlj;aslkdfliki")
     if (favData && favData._docs.length == 0) {
       firestore()
         .collection('favorites')
@@ -305,7 +306,7 @@ const Home = ({ navigation }) => {
         })
 
         .then(response => {
-          console.log(response);
+         // console.log(response);
           const a = Object.assign([], userAds);
           a[index] = {
             id: data.id,
@@ -381,7 +382,7 @@ const Home = ({ navigation }) => {
   const unFavClick = async (id,data,index) => {
 
     let tempLike = data.likes;
-    console.log(data)
+    //console.log(data)
     tempLike.splice(data.likes.indexOf(auth().currentUser.uid),1);
   firestore()
   .collection('userAds')
